@@ -8,7 +8,7 @@ musiqplus.about = {
   version: '0.0.1',
 }
 
-musiqplus.settings = new Settings(); //TODO
+musiqplus.settings = new Settings();
 musiqplus.main = function () {
   getUser = function (cb) {
     musiqplus.User = $('.user').html();
@@ -16,7 +16,7 @@ musiqplus.main = function () {
   }
   initialFuncs = function () {
     musiqplus.settings.init();
-    require('./settings-list')();
+    require('./gui')();
   }
   $(function () {
       getUser(function () {
@@ -25,5 +25,4 @@ musiqplus.main = function () {
       })
   })
 }
-
 musiqplus.main();
