@@ -1,5 +1,4 @@
 var settings = require('./settings');
-var storage = require('./storage');
 var $ = require('jquery');
 var feature = require("./features");
 var chat = require('./chat');
@@ -9,28 +8,20 @@ musiqplus.about = {
   version: '0.0.1',
 }
 
-musiqplus.setorage = new Storage(); //TODO
 musiqplus.settings = new Settings(); //TODO
-
 musiqplus.main = function () {
-  var getChannel = function () {
-
+  getUser = function (cb) {
+    musiqplus.User = $('.user').html();
+    cb();
   }
-
-  var loadUser = function (cb) {
-
-
+  initialFuncs = function () {
+    musiqplus.settings.init();
+    require('./settings-list')();
   }
-
-  var initialFuncs = function () {
-
-  }
-
   $(function () {
-      loadUser(function () {
-        feature.createSettings(); //TODO
+      getUser(function () {
         console.debug('Sucessfully loaded Musiqplus v' + musiqplus.about.version + "!");
-        initialFuncs(); //TODO
+        initialFuncs();
       })
   })
 }
