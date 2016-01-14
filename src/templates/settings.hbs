@@ -1,0 +1,110 @@
+<style>
+#mqplussettings {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -350px;
+  margin-left: -425px;
+  color: rgb(255, 255, 255);
+  width: 900px;
+  height: 700px;
+  z-index: 100;
+  background-color: rgba(0, 0, 2, 0.96);
+  -webkit-filter: drop-shadow(0px 3px 30px 1px);
+}
+#mqplussettings #mqplushead {
+  background-color: #1C1C1F;
+  height: 60px;
+  border-bottom: 5px solid #6951A9;
+}
+#mqplussettings #mqpluscontent {
+  height: calc(100% - 80px);
+}
+#mqplussettings #mqplusfooter {
+  height: 20px;
+}
+#mqplussettings h1 {
+  display: inline-block;
+  margin: 0;
+  font-family: lobster;
+  font-size: 38px;
+  padding-left: 8px;
+  padding-top: 7px;
+  opacity: 0.8;
+}
+#mqplussettings h2 {
+  display: inline-block;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 38px;
+  padding-left: 8px;
+  padding-top: 7px;
+  opacity: 0.8;
+}
+#mqplussettings a {
+  text-decoration: none;
+  color: #A7A7A7;
+}
+#mqplussettings a:hover {
+  color: white;
+}
+#mqplussettings h1:hover,
+#mqplussettings h1:hover {
+  opacity: 1;
+}
+
+.mqplusclose {
+  font-size: 40px;
+  float: right;
+  right: 20px;
+  top: 0px;
+  position: absolute;
+  color: #fff;
+  text-shadow: 0 1px 0 #000;
+  opacity: 0.2;
+}
+#mqplussettings .mqplusclose:hover,
+#mqplussettings .mqplusclose:focus
+ {
+  opacity: 1;
+  color: white;
+  cursor: pointer;
+}
+#mqpluscontent div {
+  display: none;
+}
+
+#mqpluscontent .mqplusactive {
+  display: block;
+}
+#mqplussettings .mqplusactive {
+  color: white;
+}
+</style>
+<div id="mqplussettings">
+  <div id="mqplushead">
+    <h1>
+      Musiqplus
+    </h1>
+    <h2 id="mqplusnav">
+      <a href="#" class="mqplusactive">Settings</a>
+      <a href="#">About</a>
+      <a href="#">Changelog</a>
+    </h2>
+    <span class="mqplusclose">×</span>
+  </div>
+  <div id="mqpluscontent">
+    <div id="mqpSettings" class="mqplusactive">
+
+    </div>
+    <div id="mqpAbout">
+      test
+    </div>
+    <div id="mqpChangelog">
+      SoonTM!
+    </div>
+  </div>
+  <div id="mqplusfooter">
+  </div>
+</div>

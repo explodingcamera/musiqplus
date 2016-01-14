@@ -1,1 +1,1 @@
-exports.createSettings = require('./features/createSettings');
+exports.loadFonts = require('./features/loadFonts');
