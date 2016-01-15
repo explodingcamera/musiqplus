@@ -9,7 +9,9 @@ Planned features:
 
 - Autolike
 - Autojoin
-- Permanently remove Elements from the Page (Like Banners, Adds, ...)
-- Chat filter
+- Permanently remove Elements from the Page (Like Banners, Ads, ...)
+- Chat filters
 - Custom Avatars
 - (Twitch)Emotes
+- Custom Themes (You'll be able to upload your own)
+- Cross-Browser Support (Firefox + Chrome Extension, Userscript, via Bookmark)
