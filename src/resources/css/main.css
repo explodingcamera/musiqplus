@@ -1,0 +1,106 @@
+@import url(./inputs.css);
+#mqplussettings {
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -350px;
+	margin-left: -425px;
+	color: #fff;
+	width: 900px;
+	height: 700px;
+	z-index: 100;
+	background-color: rgba(0,0,2,0.96);
+	-webkit-filter: drop-shadow(0px 3px 30px 1px);
+}
+
+#mqplussettings #mqplushead {
+	background-color: #1C1C1F;
+	height: 60px;
+	border-bottom: 5px solid #6951A9;
+}
+
+#mqplussettings #mqpluscontent {
+	height: calc(100% - 80px);
+}
+
+#mqplussettings #mqplusfooter {
+	height: 20px;
+}
+
+#mqplussettings h1 {
+	display: inline-block;
+	margin: 0;
+	font-family: lobster;
+	font-size: 38px;
+	padding-left: 8px;
+	padding-top: 7px;
+	opacity: .8;
+}
+
+#mqplussettings h2 {
+	display: inline-block;
+	margin: 0;
+	font-family: 'Open Sans',sans-serif;
+	font-size: 38px;
+	padding-left: 8px;
+	padding-top: 7px;
+	opacity: .8;
+}
+
+#mqplussettings a {
+	text-decoration: none;
+	color: #A7A7A7;
+}
+
+#mqplussettings a:hover {
+	color: #fff;
+}
+
+#mqplussettings h1:hover,#mqplussettings h1:hover {
+	opacity: 1;
+}
+
+.mqplusclose {
+	font-size: 40px;
+	float: right;
+	right: 20px;
+	top: 0;
+	position: absolute;
+	color: #fff;
+	text-shadow: 0 1px 0 #000;
+	opacity: .2;
+}
+
+#mqplussettings .mqplusclose:hover,#mqplussettings .mqplusclose:focus {
+	opacity: 1;
+	color: #fff;
+	cursor: pointer;
+}
+
+#mqpluscontent.div {
+	display: none;
+}
+
+#mqpluscontent .mqplusactive {
+	display: block;
+}
+
+#mqplussettings .mqplusactive {
+	color: #fff;
+}
+
+#mqplussettings .mqpsetting {
+  padding-left: 10px;
+  padding-bottom: 5px;
+}
+
+#mqplussettings .mqpsetting:nth-child(2n) {
+  background-color: #6951A9;
+}
+.mqplusinput {
+  float: right;
+  position: relative;
+  top: -30px;
+  right: 10px;
+}

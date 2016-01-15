@@ -7,12 +7,13 @@ var buffer = require('vinyl-buffer');
 var gutil = require('gulp-util');
 var sourcemaps = require('gulp-sourcemaps');
 var hbsfy = require('hbsfy');
+var browserifycss = require('browserify-css');
 
 gulp.task('browserify', function () {
   var b = browserify({
     entries: './src/main.js',
     debug: true,
-    transform: [hbsfy]
+    transform: [hbsfy, browserifycss]
   });
 
   return b.bundle()
