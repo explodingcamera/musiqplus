@@ -8,8 +8,30 @@ global.$ = $;
 global.musiqplus = {};
 
 musiqplus.about = {
-	version: '0.0.2',
+	version: '0.1.0',
 }
+
+//Just for testing
+if(typeof API == 'undefined')
+	var API = {
+		chat: {
+			system: function (y) {
+				console.debug(y)
+			},
+			log: function (x ,y) {
+				console.debug(y, x);
+			}
+		},
+		room: {
+			isLoggedIn: function () {
+				return true;
+			},
+			getUser: function () {
+				return "TestUser";
+			}
+		}
+	}
+	global.API = API;
 
 musiqplus.settings = new Settings();
 
@@ -40,7 +62,8 @@ musiqplus.main = function() {
 		});
 	}
 	getUser = function(cb) {
-		musiqplus.User = $('.user').html();
+		if(API.room.isLoggedIn)
+			musiqplus.User = API.room.getUser();
 		cb();
 	}
 	initialFuncs = function() {
@@ -51,7 +74,7 @@ musiqplus.main = function() {
 	}
 	$(function() {
 		getUser(function() {
-			console.debug('Sucessfully loaded Musiqplus v' + musiqplus.about.version + "!");
+			API.chat.system('Sucessfully loaded Musiqplus v' + musiqplus.about.version + "!");
 			initialFuncs();
 		})
 	})

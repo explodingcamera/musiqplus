@@ -11235,8 +11235,30 @@ global.$ = $;
 global.musiqplus = {};
 
 musiqplus.about = {
-	version: '0.0.2',
+	version: '0.1.0',
 }
+
+//Just for testing
+if(typeof API == 'undefined')
+	var API = {
+		chat: {
+			system: function (y) {
+				console.debug(y)
+			},
+			log: function (x ,y) {
+				console.debug(y, x);
+			}
+		},
+		room: {
+			isLoggedIn: function () {
+				return true;
+			},
+			getUser: function () {
+				return "TestUser";
+			}
+		}
+	}
+	global.API = API;
 
 musiqplus.settings = new Settings();
 
@@ -11267,7 +11289,8 @@ musiqplus.main = function() {
 		});
 	}
 	getUser = function(cb) {
-		musiqplus.User = $('.user').html();
+		if(API.room.isLoggedIn)
+			musiqplus.User = API.room.getUser();
 		cb();
 	}
 	initialFuncs = function() {
@@ -11278,7 +11301,7 @@ musiqplus.main = function() {
 	}
 	$(function() {
 		getUser(function() {
-			console.debug('Sucessfully loaded Musiqplus v' + musiqplus.about.version + "!");
+			API.chat.system('Sucessfully loaded Musiqplus v' + musiqplus.about.version + "!");
 			initialFuncs();
 		})
 	})
@@ -11289,7 +11312,7 @@ var lol = require("./resources/css/main.css");
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
 },{"./chat":24,"./features":25,"./gui":29,"./resources/css/main.css":31,"./settings":33,"hbsfy/runtime":22,"jquery":23}],31:[function(require,module,exports){
-var css = ".checkboxwrapper {\n  float: right;\n  max-width: 300px;\n  padding-top: 2px;\n  text-align: center;\n  padding-right: 10px;\n}\ninput.mqpluscheckbox {\n  max-height: 0;\n  max-width: 0;\n  opacity: 0;\n}\ninput.mqpluscheckbox + label {\n  display: inline-block;\n  position: relative;\n  box-shadow: inset 0 0 0px 1px #d5d5d5;\n  text-indent: -5000px;\n  height: 30px;\n  width: 50px;\n  border-radius: 15px;\n}\ninput.mqpluscheckbox + label:before {\n  content: \"\";\n  position: absolute;\n  display: block;\n  height: 30px;\n  width: 30px;\n  top: 0;\n  left: 0;\n  border-radius: 15px;\n  background: rgba(19, 191, 17, 0);\n  -moz-transition: .25s ease-in-out;\n  -webkit-transition: .25s ease-in-out;\n  transition: .25s ease-in-out;\n}\ninput.mqpluscheckbox + label:after {\n  content: \"\";\n  position: absolute;\n  display: block;\n  height: 30px;\n  width: 30px;\n  top: 0;\n  left: 0px;\n  border-radius: 15px;\n  background: white;\n  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.2);\n  -moz-transition: .25s ease-in-out;\n  -webkit-transition: .25s ease-in-out;\n  transition: .25s ease-in-out;\n}\ninput.mqpluscheckbox:checked + label:before {\n  width: 50px;\n  background: #13bf11;\n}\ninput.mqpluscheckbox:checked + label:after {\n  left: 20px;\n  box-shadow: inset 0 0 0 1px #13bf11, 0 2px 4px rgba(0, 0, 0, 0.2);\n}\n#mqplussettings {\n  margin: 0;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  margin-top: -350px;\n  margin-left: -425px;\n  color: #fff;\n  width: 900px;\n  height: 700px;\n  z-index: 100;\n  background-color: rgba(0,0,2,0.96);\n  -webkit-filter: drop-shadow(0px 3px 30px 1px);\n}\n#mqplussettings #mqplushead {\n  background-color: #1C1C1F;\n  height: 60px;\n  border-bottom: 5px solid #6951A9;\n}\n#mqplussettings #mqpluscontent {\n  height: calc(100% - 80px);\n}\n#mqplussettings #mqplusfooter {\n  height: 20px;\n}\n#mqplussettings h1 {\n  display: inline-block;\n  margin: 0;\n  font-family: lobster;\n  font-size: 38px;\n  padding-left: 8px;\n  padding-top: 7px;\n  opacity: .8;\n}\n#mqplussettings h2 {\n  display: inline-block;\n  margin: 0;\n  font-family: 'Open Sans',sans-serif;\n  font-size: 38px;\n  padding-left: 8px;\n  padding-top: 7px;\n  opacity: .8;\n}\n#mqplussettings a {\n  text-decoration: none;\n  color: #A7A7A7;\n}\n#mqplussettings a:hover {\n  color: #fff;\n}\n#mqplussettings h1:hover,\n#mqplussettings h1:hover {\n  opacity: 1;\n}\n.mqplusclose {\n  font-size: 40px;\n  float: right;\n  right: 20px;\n  top: 0;\n  position: absolute;\n  color: #fff;\n  text-shadow: 0 1px 0 #000;\n  opacity: .2;\n}\n#mqplussettings .mqplusclose:hover,\n#mqplussettings .mqplusclose:focus {\n  opacity: 1;\n  color: #fff;\n  cursor: pointer;\n}\n#mqpluscontent.div {\n  display: none;\n}\n#mqpluscontent .mqplusactive {\n  display: block;\n}\n#mqplussettings .mqplusactive {\n  color: #fff;\n}\n#mqplussettings .mqpsetting {\n  padding-left: 10px;\n  padding-bottom: 5px;\n}\n#mqplussettings .mqpsetting:nth-child(2n) {\n  background-color: #6951A9;\n}\n.mqplusinput {\n  float: right;\n  position: relative;\n  top: -30px;\n  right: 10px;\n}\n"; (require("browserify-css").createStyle(css, { "href": "src\\resources\\css\\main.css"})); module.exports = css;
+var css = ".checkboxwrapper {\n  float: right;\n  max-width: 300px;\n  padding-top: 2px;\n  text-align: center;\n  padding-right: 10px;\n}\ninput.mqpluscheckbox {\n  max-height: 0;\n  max-width: 0;\n  opacity: 0;\n}\ninput.mqpluscheckbox + label {\n  display: inline-block;\n  position: relative;\n  box-shadow: inset 0 0 0px 1px #d5d5d5;\n  text-indent: -5000px;\n  height: 30px;\n  width: 50px;\n  border-radius: 15px;\n}\ninput.mqpluscheckbox + label:before {\n  content: \"\";\n  position: absolute;\n  display: block;\n  height: 30px;\n  width: 30px;\n  top: 0;\n  left: 0;\n  border-radius: 15px;\n  background: rgba(19, 191, 17, 0);\n  -moz-transition: .25s ease-in-out;\n  -webkit-transition: .25s ease-in-out;\n  transition: .25s ease-in-out;\n}\ninput.mqpluscheckbox + label:after {\n  content: \"\";\n  position: absolute;\n  display: block;\n  height: 30px;\n  width: 30px;\n  top: 0;\n  left: 0px;\n  border-radius: 15px;\n  background: white;\n  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.2);\n  -moz-transition: .25s ease-in-out;\n  -webkit-transition: .25s ease-in-out;\n  transition: .25s ease-in-out;\n}\ninput.mqpluscheckbox:checked + label:before {\n  width: 50px;\n  background: #13bf11;\n}\ninput.mqpluscheckbox:checked + label:after {\n  left: 20px;\n  box-shadow: inset 0 0 0 1px #13bf11, 0 2px 4px rgba(0, 0, 0, 0.2);\n}\n#mqplussettings {\n  display: none;\n  margin: 0;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  margin-top: -350px;\n  margin-left: -425px;\n  color: #fff;\n  width: 900px;\n  height: 700px;\n  z-index: 100;\n  background-color: rgba(0,0,2,0.96);\n  -webkit-filter: drop-shadow(0px 3px 30px 1px);\n}\n#mqplussettings #mqplushead {\n  background-color: #1C1C1F;\n  height: 60px;\n  border-bottom: 5px solid #6951A9;\n}\n#mqplussettings #mqpluscontent {\n  height: calc(100% - 80px);\n}\n#mqplussettings #mqplusfooter {\n  height: 20px;\n}\n#mqplussettings h1 {\n  display: inline-block;\n  margin: 0;\n  font-family: lobster;\n  font-size: 38px;\n  padding-left: 8px;\n  padding-top: 7px;\n  opacity: .8;\n}\n#mqplussettings h2 {\n  display: inline-block;\n  margin: 0;\n  font-family: 'Open Sans',sans-serif;\n  font-size: 38px;\n  padding-left: 8px;\n  padding-top: 7px;\n  opacity: .8;\n}\n#mqplussettings a {\n  text-decoration: none;\n  color: #A7A7A7;\n}\n#mqplussettings a:hover {\n  color: #fff;\n}\n#mqplussettings h1:hover,\n#mqplussettings h1:hover {\n  opacity: 1;\n}\n.mqplusclose {\n  font-size: 40px;\n  float: right;\n  right: 20px;\n  top: 0;\n  position: absolute;\n  color: #fff;\n  text-shadow: 0 1px 0 #000;\n  opacity: .2;\n}\n#mqplussettings .mqplusclose:hover,\n#mqplussettings .mqplusclose:focus {\n  opacity: 1;\n  color: #fff;\n  cursor: pointer;\n}\n#mqpluscontent.div {\n  display: none;\n}\n#mqpluscontent .mqplusactive {\n  display: block;\n}\n#mqplussettings .mqplusactive {\n  color: #fff;\n}\n#mqplussettings .mqpsetting {\n  padding-left: 10px;\n  padding-bottom: 5px;\n}\n#mqplussettings .mqpsetting:nth-child(2n) {\n  background-color: #6951A9;\n}\n.mqplusinput {\n  float: right;\n  position: relative;\n  top: -30px;\n  right: 10px;\n}\n"; (require("browserify-css").createStyle(css, { "href": "src\\resources\\css\\main.css"})); module.exports = css;
 },{"browserify-css":1}],32:[function(require,module,exports){
 var feature = require('./features');
 module.exports = function (cb) {
@@ -11343,6 +11366,14 @@ module.exports = function (cb) {
       }
     },
   });*/
+
+  /* Emote Menu */
+
+  /* Custom Emotes (serverside) */
+
+  /* Double-Click Translation */
+
+  /* Don't show up online */
   cb();
 }
 
@@ -11353,7 +11384,7 @@ module.exports = Settings = function() {
 
 Settings.prototype.init = function() {
 	require('./settings-list')(function() {
-		if (cookie.get('mqp') == undefined)
+		if (typeof cookie.get('mqp') == 'undefined')
 			musiqplus.settings.create();
 		else if (JSON.parse(cookie.get('mqp')).version != musiqplus.about.version)
 			musiqplus.settings.upgrade();
@@ -11436,9 +11467,9 @@ module.exports = HandlebarsCompiler.template({"1":function(container,depth0,help
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return "<div id=\"mqplussettings\">\r\n	<div id=\"mqplushead\">\r\n		<h1>Musiqplus</h1>\r\n		<h2 id=\"mqplusnav\">\r\n      <a class=\"mqplusactive\" href=\"#\">Settings</a>\r\n      <a href=\"#\">About</a> <a href=\"#\">Changelog</a>\r\n    </h2>\r\n    <span class=\"mqplusclose\" onclick=\"musiqplus.toggleSettings()\">×</span>\r\n	</div>\r\n	<div id=\"mqpluscontent\">\r\n		<div class=\"mqplusactive\" id=\"mqpSettings\">\r\n"
+  return "<div id=\"mqplussettings\">\r\n	<div id=\"mqplushead\">\r\n		<h1>Musiqplus</h1>\r\n		<h2 id=\"mqplusnav\">\r\n      <a class=\"mqplusactive\" href=\"#\">Settings</a>\r\n      <a href=\"#\">Theme</a> <a href=\"#\">Shortcuts</a>\r\n    </h2>\r\n    <span class=\"mqplusclose\" onclick=\"musiqplus.toggleSettings()\">×</span>\r\n	</div>\r\n	<div id=\"mqpluscontent\">\r\n		<div class=\"mqplusactive\" id=\"mqpSettings\">\r\n"
     + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.setting : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    </div>\r\n		<div id=\"mqpAbout\">\r\n\r\n		</div>\r\n		<div id=\"mqpChangelog\">\r\n\r\n		</div>\r\n	</div>\r\n	<div id=\"mqplusfooter\"></div>\r\n</div>\r\n";
+    + "    </div>\r\n		<div id=\"mqpTheme\">\r\n\r\n		</div>\r\n		<div id=\"mqpShortcuts\">\r\n\r\n		</div>\r\n	</div>\r\n	<div id=\"mqplusfooter\"></div>\r\n</div>\r\n";
 },"useData":true});
 
 },{"hbsfy/runtime":22}]},{},[30])

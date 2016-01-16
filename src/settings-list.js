@@ -50,5 +50,13 @@ module.exports = function (cb) {
       }
     },
   });*/
+
+  /* Emote Menu */
+
+  /* Custom Emotes (serverside) */
+
+  /* Double-Click Translation */
+
+  /* Don't show up online */
   cb();
 }
