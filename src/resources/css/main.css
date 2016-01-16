@@ -1,5 +1,6 @@
 @import url(./inputs.css);
 #mqplussettings {
+	display: none;
 	margin: 0;
 	position: absolute;
 	top: 50%;
