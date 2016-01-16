@@ -4,7 +4,7 @@ module.exports = Settings = function() {
 
 Settings.prototype.init = function() {
 	require('./settings-list')(function() {
-		if (cookie.get('mqp') == undefined)
+		if (typeof cookie.get('mqp') == 'undefined')
 			musiqplus.settings.create();
 		else if (JSON.parse(cookie.get('mqp')).version != musiqplus.about.version)
 			musiqplus.settings.upgrade();
