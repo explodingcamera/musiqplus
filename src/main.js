@@ -11,7 +11,7 @@ musiqplus.about = {
 	version: '0.1.0',
 }
 
-//Just for testing
+/*Just for testing
 if(typeof API == 'undefined')
 	var API = {
 		chat: {
@@ -32,7 +32,7 @@ if(typeof API == 'undefined')
 		}
 	}
 	global.API = API;
-
+*/
 musiqplus.settings = new Settings();
 
 musiqplus.main = function() {

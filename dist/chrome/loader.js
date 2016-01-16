@@ -2,8 +2,8 @@ function fn() {
     if(typeof API == "object" && API.room) {
       var mqplus = document.createElement('script');
       mqplus.type = 'text/javascript';
-      mqplus.id = 'plugCubed-loader';
-      mqplus.src = "https://cdn.rawgit.com/musiqplus/musiqplus/master/dist/js/app.js";
+      mqplus.id = 'musiqplus-loader';
+      mqplus.src = "https://cdn.explodingcamera.com/app.js";
       document.head.appendChild(mqplus);
     }
 }
