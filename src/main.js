@@ -8,7 +8,7 @@ require('./resources/css/main.css');
 global.musiqplus = {};
 
 musiqplus.about = {
-	version: '0.1.9',
+	version: '0.2.4',
 }
 
 musiqplus.settings = new Settings();
@@ -66,4 +66,4 @@ musiqplus.main = function() {
 		})
 	})
 }
-checkForAPI();
+musiqplus.main();

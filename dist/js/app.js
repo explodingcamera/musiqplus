@@ -11168,44 +11168,65 @@ exports.loadFonts = require('./features/loadFonts');
 exports.AutoLike = require('./features/AutoLike');
 exports.AutoJoin = require('./features/AutoJoin');
 exports.clearConsole = require('./features/AutoClear');
+exports.changeTheme = require('./features/changeTheme');  
 
-},{"./features/AutoClear":26,"./features/AutoJoin":27,"./features/AutoLike":28,"./features/loadFonts":29}],26:[function(require,module,exports){
+},{"./features/AutoClear":26,"./features/AutoJoin":27,"./features/AutoLike":28,"./features/changeTheme":29,"./features/loadFonts":30}],26:[function(require,module,exports){
 (function (global){
-module.exports = function () {
+module.exports = function (val) {
+  var timeout = setTimeout(function (){}, 0);
   global.console.log = function(x){return;}
   var clearConsole = function () {
     console.clear();
-    setTimeout(clearConsole, 1000 * 60  )
+    timeOut = setTimeout(clearConsole, 1000 * 60);
     console.debug("Console cleared.");
   }
+  if(val == true)
   clearConsole();
+  else
+    clearTimeout(timeout);
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
 },{}],27:[function(require,module,exports){
 var $ = require('jquery');
-module.exports = function () {
+module.exports = function (val) {
+  var timeout = setTimeout(function (){}, 0);
   var join = function () {
     if($('.btn-join').attr('title') == "Join DJ Queue")
       API.queue.join();
-    setTimeout(join, 1000)
+    timeout = setTimeout(join, 1000)
   }
-  join();
+  if(val == true)
+    join();
+  else
+    clearTimeout(timeout);
 }
 
 },{"jquery":23}],28:[function(require,module,exports){
 var $ = require('jquery');
-module.exports = function () {
+module.exports = function (val) {
+  var timeout = setTimeout(function (){}, 0);
   var like = function () {
     if(!$('.btn-upvote').hasClass('active'))
       $('.btn-upvote').click()
-    setTimeout(like, 1000);
+    timeout = setTimeout(like, 1000);
   }
-  like();
+  if(val == true)
+    like();
+  else
+    clearTimeout(timeout);
 }
 
 },{"jquery":23}],29:[function(require,module,exports){
+var $ = require('jquery');
+module.exports = function (theme) {
+  $("#mqpluscustomstyle").remove();
+  $('head').append('<link id="mqpluscustomstyle" rel="stylesheet" href="'+ musiqplus.settingByTitle['ChangeTheme'].options[theme].url +'" media="screen" title="no title" charset="utf-8">')
+  console.debug(musiqplus.settingByTitle['ChangeTheme'].options[theme]);
+}
+
+},{"jquery":23}],30:[function(require,module,exports){
 module.exports = function (fonts) {
   WebFontConfig = {
     google: { families: fonts }
@@ -11221,13 +11242,18 @@ module.exports = function (fonts) {
   })();
 }
 
-},{}],30:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 var $ = require('jquery');
+
 var gui = function () {
   $('.logo-dash').append(require('./templates/icon.hbs'));
   $('body').append(require('./templates/settings.hbs')({
-    setting: musiqplus.settingById,
+    setting: musiqplus.settingById
   }));
+  $('.option-mqpChangeTheme .mqplusinput').append(require('./templates/select.hbs')({
+    theme: musiqplus.settingByTitle['ChangeTheme'].options
+  }));
+
   for (var i = 0; i < musiqplus.settingById.length; i++) {
     if(musiqplus.current.ids[i].val == true)
       $("#" + musiqplus.settingById[i].titleNoSpaces).prop('checked', true);
@@ -11235,7 +11261,7 @@ var gui = function () {
   $('#mqplusnav a').click(function () {
     if(!$(this).hasClass('mqplusactive')) {
       $("#mqpluscontent .mqplusactive").fadeOut(300);
-      $(".mqplusactive").delay(300).toggleClass('mqplusactive');
+      $(".mqplusactive").delay(600).toggleClass('mqplusactive');
       $(this).delay(300).toggleClass('mqplusactive');
       $("#mqp" + $(this).html()).toggleClass('mqplusactive').delay(300).fadeIn();
     }
@@ -11248,14 +11274,22 @@ var gui = function () {
     else
       musiqplus.current.ids[musiqplus.settingByTitle[$(this).attr('id')].id].val = false;
     musiqplus.settings.save();
+  });
+  $("#mqpthemeselect").change(function () {
+    console.log($("#mqpthemeselect option:selected").data('theme-url'));
+  });
+  $('#mqpthemeselect').change(function () {
+    musiqplus.current.ids[musiqplus.settingByTitle["ChangeTheme"].id].val = parseInt($('#mqpthemeselect option:selected').attr('data'));
+    require('./features').changeTheme(musiqplus.current.ids[musiqplus.settingByTitle["ChangeTheme"].id].val);
   })
+  $("#mqp"+ musiqplus.settingByTitle["ChangeTheme"].options[musiqplus.current.ids[musiqplus.settingByTitle["ChangeTheme"].id].val].name).attr('selected','selected');
 }
 module.exports = gui;
 musiqplus.toggleSettings = function () {
   $('#mqplussettings').slideToggle()
 }
 
-},{"./templates/icon.hbs":35,"./templates/settings.hbs":36,"jquery":23}],31:[function(require,module,exports){
+},{"./features":25,"./templates/icon.hbs":36,"./templates/select.hbs":37,"./templates/settings.hbs":38,"jquery":23}],32:[function(require,module,exports){
 (function (global){
 var settings = require('./settings');
 var $ = require('jquery');
@@ -11267,7 +11301,7 @@ require('./resources/css/main.css');
 global.musiqplus = {};
 
 musiqplus.about = {
-	version: '0.1.9',
+	version: '0.2.4',
 }
 
 musiqplus.settings = new Settings();
@@ -11325,19 +11359,20 @@ musiqplus.main = function() {
 		})
 	})
 }
-checkForAPI();
+musiqplus.main();
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"./chat":24,"./features":25,"./gui":30,"./resources/css/main.css":32,"./settings":34,"hbsfy/runtime":22,"jquery":23}],32:[function(require,module,exports){
-var css = ".checkboxwrapper {\n  float: right;\n  max-width: 300px;\n  padding-top: 2px;\n  text-align: center;\n  padding-right: 10px;\n}\ninput.mqpluscheckbox {\n  max-height: 0;\n  max-width: 0;\n  opacity: 0;\n}\ninput.mqpluscheckbox + label {\n  display: inline-block;\n  position: relative;\n  box-shadow: inset 0 0 0px 1px #d5d5d5;\n  text-indent: -5000px;\n  height: 30px;\n  width: 50px;\n  border-radius: 15px;\n}\ninput.mqpluscheckbox + label:before {\n  content: \"\";\n  position: absolute;\n  display: block;\n  height: 30px;\n  width: 30px;\n  top: 0;\n  left: 0;\n  border-radius: 15px;\n  background: rgba(19, 191, 17, 0);\n  -moz-transition: .25s ease-in-out;\n  -webkit-transition: .25s ease-in-out;\n  transition: .25s ease-in-out;\n}\ninput.mqpluscheckbox + label:after {\n  content: \"\";\n  position: absolute;\n  display: block;\n  height: 30px;\n  width: 30px;\n  top: 0;\n  left: 0px;\n  border-radius: 15px;\n  background: white;\n  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.2);\n  -moz-transition: .25s ease-in-out;\n  -webkit-transition: .25s ease-in-out;\n  transition: .25s ease-in-out;\n}\ninput.mqpluscheckbox:checked + label:before {\n  width: 50px;\n  background: #13bf11;\n}\ninput.mqpluscheckbox:checked + label:after {\n  left: 20px;\n  box-shadow: inset 0 0 0 1px #13bf11, 0 2px 4px rgba(0, 0, 0, 0.2);\n}\n#mqplussettings {\n  display: none;\n  margin: 0;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  margin-top: -350px;\n  margin-left: -425px;\n  color: #fff;\n  width: 900px;\n  height: 700px;\n  z-index: 100;\n  background-color: rgba(0,0,2,0.96);\n  -webkit-filter: drop-shadow(0px 3px 30px 1px);\n}\n#mqplussettings #mqplushead {\n  background-color: #1C1C1F;\n  height: 60px;\n  border-bottom: 5px solid #6951A9;\n}\n#mqplussettings #mqpluscontent {\n  height: calc(100% - 80px);\n}\n#mqplussettings #mqplusfooter {\n  height: 20px;\n}\n#mqplussettings h1 {\n  display: inline-block;\n  margin: 0;\n  font-family: lobster;\n  font-size: 38px;\n  padding-left: 8px;\n  padding-top: 4px;\n  opacity: .8;\n}\n#mqplussettings h2 {\n  font-weight: 100;\n  display: inline-block;\n  margin: 0;\n  font-family: 'Open Sans',sans-serif;\n  font-size: 38px;\n  padding-left: 8px;\n  padding-top: 4px;\n  opacity: .8;\n}\n#mqplussettings a {\n  text-decoration: none;\n  color: #A7A7A7;\n}\n#mqplussettings a:hover {\n  color: #fff;\n}\n#mqplussettings h1:hover,\n#mqplussettings h1:hover {\n  opacity: 1;\n}\n.mqplusclose {\n  font-size: 50px;\n  float: right;\n  right: 20px;\n  top: 0;\n  position: absolute;\n  color: #fff;\n  text-shadow: 0 1px 0 #000;\n  opacity: .2;\n}\n#mqplussettings .mqplusclose:hover,\n#mqplussettings .mqplusclose:focus {\n  opacity: 1;\n  color: #fff;\n  cursor: pointer;\n}\n#mqpluscontent.div {\n  display: none;\n}\n#mqpluscontent .mqplusactive {\n  display: block;\n}\n#mqplussettings .mqplusactive {\n  color: #fff;\n}\n#mqplussettings .mqpsetting {\n  padding-left: 10px;\n  padding-bottom: 5px;\n}\n#mqplussettings .mqpsetting:nth-child(2n) {\n  background-color: #6951A9;\n}\n.mqplusinput {\n  float: right;\n  position: relative;\n  top: -30px;\n  right: 10px;\n}\n"; (require("browserify-css").createStyle(css, { "href": "src\\resources\\css\\main.css"})); module.exports = css;
-},{"browserify-css":1}],33:[function(require,module,exports){
+},{"./chat":24,"./features":25,"./gui":31,"./resources/css/main.css":33,"./settings":35,"hbsfy/runtime":22,"jquery":23}],33:[function(require,module,exports){
+var css = ".checkboxwrapper {\n  float: right;\n  max-width: 300px;\n  padding-top: 2px;\n  text-align: center;\n  padding-right: 10px;\n}\ninput.mqpluscheckbox {\n  max-height: 0;\n  max-width: 0;\n  opacity: 0;\n}\ninput.mqpluscheckbox + label {\n  display: inline-block;\n  position: relative;\n  box-shadow: inset 0 0 0px 1px #d5d5d5;\n  text-indent: -5000px;\n  height: 30px;\n  width: 50px;\n  border-radius: 15px;\n}\ninput.mqpluscheckbox + label:before {\n  content: \"\";\n  position: absolute;\n  display: block;\n  height: 30px;\n  width: 30px;\n  top: 0;\n  left: 0;\n  border-radius: 15px;\n  background: rgba(19, 191, 17, 0);\n  -moz-transition: .25s ease-in-out;\n  -webkit-transition: .25s ease-in-out;\n  transition: .25s ease-in-out;\n}\ninput.mqpluscheckbox + label:after {\n  content: \"\";\n  position: absolute;\n  display: block;\n  height: 30px;\n  width: 30px;\n  top: 0;\n  left: 0px;\n  border-radius: 15px;\n  background: white;\n  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.2);\n  -moz-transition: .25s ease-in-out;\n  -webkit-transition: .25s ease-in-out;\n  transition: .25s ease-in-out;\n}\ninput.mqpluscheckbox:checked + label:before {\n  width: 50px;\n  background: #13bf11;\n}\ninput.mqpluscheckbox:checked + label:after {\n  left: 20px;\n  box-shadow: inset 0 0 0 1px #13bf11, 0 2px 4px rgba(0, 0, 0, 0.2);\n}\n#mqplussettings select,\n#mqplussettings button {\n  color: black;\n  font-family: 'Open Sans';\n  font-size: 2em;\n  margin-right: 2px;\n}\n#mqplussettings {\n  display: none;\n  margin: 0;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  margin-top: -350px;\n  margin-left: -425px;\n  color: #fff;\n  width: 900px;\n  height: 700px;\n  z-index: 100;\n  background-color: rgba(0,0,2,0.96);\n  -webkit-filter: drop-shadow(0px 3px 30px 1px);\n}\n#mqplussettings #mqplushead {\n  background-color: #1C1C1F;\n  height: 60px;\n  border-bottom: 5px solid #6951A9;\n}\n#mqplussettings #mqpluscontent {\n  height: calc(100% - 80px);\n}\n#mqplussettings #mqplusfooter {\n  height: 20px;\n}\n#mqplussettings h1 {\n  display: inline-block;\n  margin: 0;\n  font-family: lobster;\n  font-size: 38px;\n  padding-left: 8px;\n  padding-top: 4px;\n  opacity: .8;\n}\n#mqplussettings h2 {\n  font-weight: 100;\n  display: inline-block;\n  margin: 0;\n  font-family: 'Open Sans',sans-serif;\n  font-size: 38px;\n  padding-left: 8px;\n  padding-top: 4px;\n  opacity: .8;\n}\n#mqplussettings a {\n  text-decoration: none;\n  color: #A7A7A7;\n}\n#mqplussettings a:hover {\n  color: #fff;\n}\n#mqplussettings h1:hover,\n#mqplussettings h1:hover {\n  opacity: 1;\n}\n.mqplusclose {\n  font-size: 50px;\n  float: right;\n  right: 20px;\n  top: 0;\n  position: absolute;\n  color: #fff;\n  text-shadow: 0 1px 0 #000;\n  opacity: .2;\n}\n#mqplussettings .mqplusclose:hover,\n#mqplussettings .mqplusclose:focus {\n  opacity: 1;\n  color: #fff;\n  cursor: pointer;\n}\n#mqpluscontent .mqpluscontentpart {\n  display: none;\n}\n#mqpluscontent .mqplusactive {\n  display: block !important;\n}\n#mqplussettings .mqplusactive {\n  color: #fff;\n}\n#mqplussettings .mqpsetting {\n  padding-left: 10px;\n  padding-bottom: 5px;\n}\n#mqplussettings .mqpsetting:nth-child(2n) {\n  background-color: #6951A9;\n}\n.mqplusinput {\n  float: right;\n  position: relative;\n  top: -30px;\n  right: 10px;\n}\n#mqplussettings p {\n  font-weight: 100;\n  display: inline-block;\n  margin: 0;\n  font-family: 'Open Sans',sans-serif;\n  font-size: 30px;\n  padding-left: 8px;\n  padding-top: 4px;\n}\n"; (require("browserify-css").createStyle(css, { "href": "src\\resources\\css\\main.css"})); module.exports = css;
+},{"browserify-css":1}],34:[function(require,module,exports){
 var feature = require('./features');
 module.exports = function (cb) {
   musiqplus.settingsN = 0;
   musiqplus.settingById = [];
   musiqplus.settingByTitle = [];
   var Setting = function (data) {
+    this.options = data.options;
     this.title = data.title;
     this.id = musiqplus.settingsN;
     this.type = data.type;
@@ -11347,42 +11382,58 @@ module.exports = function (cb) {
     musiqplus.settingById[this.id] = this;
     this.func = data.function;
     this.defaultVal = data.defaultVal;
-    if(data.invisible)
-      this.hidden = true;
-     musiqplus.settingsN += 1;
+    if(data.visibility == 'visible')
+      this.visible = true;
+    musiqplus.settingsN += 1;
   }
   new Setting({
+    visibility: 'visible',
     title: 'AutoLike',
     description: 'Automatically like every Song!',
     type: 'switch',
     defaultVal: true,
     function: function (val) {
-      if(val == true) {
-        feature.AutoLike()
-      }
+      feature.AutoLike(val);
     },
   });
   new Setting({
+    visibility: 'visible',
     title: 'AutoJoin',
     description: 'Automatically join the waitlist!',
     type: 'switch',
     defaultVal: false,
     function: function (val) {
-      if(val == true) {
-        feature.AutoJoin()
-      }
+      feature.AutoJoin(val)
     },
   });
   new Setting({
+    visibility: 'visible',
     title: 'AutoClear Console',
     description: 'Clears Console every minute for better Performance',
     type: 'switch',
     defaultVal: false,
     function: function (val) {
-      if(val == true) {
-        console.clear();
-        feature.clearConsole();
-      }
+      feature.clearConsole(val);
+    },
+  });
+  new Setting({
+    visibility: 'visible',
+    title: 'Change Theme',
+    description: 'Change the looks of MusiqPad',
+    type: 'select',
+    options: [{
+      name: 'MusiqPlus', //ID 0
+      url: 'https://cdn.explodingcamera.com/mqplus.theme.css',
+      id: 0
+    },
+    {
+      name: 'Classic', //ID 1
+      url: 'https://cdn.explodingcamera.com/classic.theme.css',
+      id: 1
+    }],
+    defaultVal: 1, //Defaut Theme
+    function: function (themeid) {
+       feature.changeTheme(themeid);
     },
   });
   /*new Setting({
@@ -11402,7 +11453,7 @@ module.exports = function (cb) {
   cb();
 }
 
-},{"./features":25}],34:[function(require,module,exports){
+},{"./features":25}],35:[function(require,module,exports){
 var cookie = require('cookies-js');
 module.exports = Settings = function() {
 }
@@ -11422,7 +11473,7 @@ Settings.prototype.load = function(data) {
 	for (var i = 0; i < musiqplus.settingById.length; i++) {
 		musiqplus.settingById[i].func(musiqplus.current.ids[i].val);
 	}
-	console.debug('Settings Successfuly loaded/created!');
+	console.debug('Settings Successfuly loaded!');
 }
 
 Settings.prototype.save = function() {
@@ -11466,45 +11517,70 @@ Settings.prototype.upgrade = function() {
 	musiqplus.settings.load(data);
 }
 
-},{"./settings-list":33,"cookies-js":2}],35:[function(require,module,exports){
+},{"./settings-list":34,"cookies-js":2}],36:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<div class=\"nav logo-btn-mqlussettings\" onclick=\"musiqplus.toggleSettings()\" data-ng-class=\"{'active' : prop.t == 2}\"\r\n title=\"MQPlusSettings\">\r\n    <i class=\"mdi mdi-plus-box\"></i>\r\n</div>\r\n";
 },"useData":true});
 
-},{"hbsfy/runtime":22}],36:[function(require,module,exports){
+},{"hbsfy/runtime":22}],37:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"1":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
-
-  return "        <div class=\"mqpsetting option-mqp"
-    + alias2(alias1((depth0 != null ? depth0.titleNoSpaces : depth0), depth0))
-    + "\">\r\n          <h1>"
-    + alias2(alias1((depth0 != null ? depth0.title : depth0), depth0))
-    + "</h1><br><span>"
-    + ((stack1 = alias1((depth0 != null ? depth0.description : depth0), depth0)) != null ? stack1 : "")
-    + "</span>\r\n          <div class=\"mqplusinput\">\r\n"
-    + ((stack1 = (helpers.ifCond || (depth0 && depth0.ifCond) || helpers.helperMissing).call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.type : depth0),"==","switch",{"name":"ifCond","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "          </div>\r\n        </div>\r\n";
-},"2":function(container,depth0,helpers,partials,data) {
     var alias1=container.lambda, alias2=container.escapeExpression;
 
-  return "            <div class=\"checkboxwrapper\">\r\n              <input type=\"checkbox\" name=\"mqptoggle\" id=\""
-    + alias2(alias1((depth0 != null ? depth0.titleNoSpaces : depth0), depth0))
-    + "\" class=\"mqpluscheckbox\">\r\n              <label for=\""
-    + alias2(alias1((depth0 != null ? depth0.titleNoSpaces : depth0), depth0))
-    + "\"></label>\r\n            </div>\r\n";
+  return "  <option id=\"mqp"
+    + alias2(alias1((depth0 != null ? depth0.name : depth0), depth0))
+    + "\" data=\""
+    + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
+    + "\">"
+    + alias2(alias1((depth0 != null ? depth0.name : depth0), depth0))
+    + "</option>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return "<div id=\"mqplussettings\">\r\n	<div id=\"mqplushead\">\r\n		<h1>Musiqplus</h1>\r\n		<h2 id=\"mqplusnav\">\r\n      <a class=\"mqplusactive\" href=\"#\">Settings</a>\r\n      <a href=\"#\">Theme</a> <a href=\"#\">Shortcuts</a>\r\n    </h2>\r\n    <span class=\"mqplusclose\" onclick=\"musiqplus.toggleSettings()\">×</span>\r\n	</div>\r\n	<div id=\"mqpluscontent\">\r\n		<div class=\"mqplusactive\" id=\"mqpSettings\">\r\n"
-    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.setting : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    </div>\r\n		<div id=\"mqpTheme\">\r\n\r\n		</div>\r\n		<div id=\"mqpShortcuts\">\r\n\r\n		</div>\r\n	</div>\r\n	<div id=\"mqplusfooter\"></div>\r\n</div>\r\n";
+  return "<select id=\"mqpthemeselect\">\r\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.theme : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "</select>\r\n";
 },"useData":true});
 
-},{"hbsfy/runtime":22}]},{},[31])
+},{"hbsfy/runtime":22}],38:[function(require,module,exports){
+// hbsfy compiled Handlebars template
+var HandlebarsCompiler = require('hbsfy/runtime');
+module.exports = HandlebarsCompiler.template({"1":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return ((stack1 = helpers["if"].call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.visible : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+},"2":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "	        <div class=\"mqpsetting option-mqp"
+    + alias2(alias1((depth0 != null ? depth0.titleNoSpaces : depth0), depth0))
+    + "\">\r\n	          <h1>"
+    + alias2(alias1((depth0 != null ? depth0.title : depth0), depth0))
+    + "</h1><br><span>"
+    + ((stack1 = alias1((depth0 != null ? depth0.description : depth0), depth0)) != null ? stack1 : "")
+    + "</span>\r\n	          <div class=\"mqplusinput\">\r\n"
+    + ((stack1 = (helpers.ifCond || (depth0 && depth0.ifCond) || helpers.helperMissing).call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.type : depth0),"==","switch",{"name":"ifCond","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "	          </div>\r\n	        </div>\r\n";
+},"3":function(container,depth0,helpers,partials,data) {
+    var alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "	            <div class=\"checkboxwrapper\">\r\n	              <input type=\"checkbox\" name=\"mqptoggle\" id=\""
+    + alias2(alias1((depth0 != null ? depth0.titleNoSpaces : depth0), depth0))
+    + "\" class=\"mqpluscheckbox\">\r\n	              <label for=\""
+    + alias2(alias1((depth0 != null ? depth0.titleNoSpaces : depth0), depth0))
+    + "\"></label>\r\n	            </div>\r\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "<div id=\"mqplussettings\">\r\n	<div id=\"mqplushead\">\r\n		<h1>Musiqplus</h1>\r\n		<h2 id=\"mqplusnav\">\r\n      <a class=\"mqplusactive\" href=\"#\">Settings</a><!--\r\n      <a href=\"#\">Theme</a> <a href=\"#\">Shortcuts</a>-->\r\n    </h2>\r\n    <span class=\"mqplusclose\" onclick=\"musiqplus.toggleSettings()\">×</span>\r\n	</div>\r\n	<div id=\"mqpluscontent\">\r\n		<div class=\"mqplusactive mqpluscontentpart\" id=\"mqpSettings\">\r\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.setting : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "    </div>\r\n		<div id=\"mqpTheme\" class=\"mqpluscontentpart\">\r\n		</div>\r\n		<div id=\"mqpShortcuts\" class=\"mqpluscontentpart\">\r\n\r\n		</div>\r\n	</div>\r\n	<div id=\"mqplusfooter\"></div>\r\n</div>\r\n";
+},"useData":true});
+
+},{"hbsfy/runtime":22}]},{},[32])
 
 
 //# sourceMappingURL=app.js.map

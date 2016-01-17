@@ -1,9 +1,13 @@
 var $ = require('jquery');
-module.exports = function () {
+module.exports = function (val) {
+  var timeout = setTimeout(function (){}, 0);
   var join = function () {
     if($('.btn-join').attr('title') == "Join DJ Queue")
       API.queue.join();
-    setTimeout(join, 1000)
+    timeout = setTimeout(join, 1000)
   }
-  join();
+  if(val == true)
+    join();
+  else
+    clearTimeout(timeout);
 }

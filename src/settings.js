@@ -17,7 +17,7 @@ Settings.prototype.load = function(data) {
 	for (var i = 0; i < musiqplus.settingById.length; i++) {
 		musiqplus.settingById[i].func(musiqplus.current.ids[i].val);
 	}
-	console.debug('Settings Successfuly loaded/created!');
+	console.debug('Settings Successfuly loaded!');
 }
 
 Settings.prototype.save = function() {

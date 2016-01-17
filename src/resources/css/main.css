@@ -80,12 +80,12 @@
 	cursor: pointer;
 }
 
-#mqpluscontent.div {
+#mqpluscontent .mqpluscontentpart {
 	display: none;
 }
 
 #mqpluscontent .mqplusactive {
-	display: block;
+	display: block !important;
 }
 
 #mqplussettings .mqplusactive {
@@ -105,4 +105,13 @@
   position: relative;
   top: -30px;
   right: 10px;
+}
+#mqplussettings p {
+	font-weight: 100;
+	display: inline-block;
+	margin: 0;
+	font-family: 'Open Sans',sans-serif;
+	font-size: 30px;
+	padding-left: 8px;
+	padding-top: 4px;
 }

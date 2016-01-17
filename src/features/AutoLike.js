@@ -1,9 +1,13 @@
 var $ = require('jquery');
-module.exports = function () {
+module.exports = function (val) {
+  var timeout = setTimeout(function (){}, 0);
   var like = function () {
     if(!$('.btn-upvote').hasClass('active'))
       $('.btn-upvote').click()
-    setTimeout(like, 1000);
+    timeout = setTimeout(like, 1000);
   }
-  like();
+  if(val == true)
+    like();
+  else
+    clearTimeout(timeout);
 }

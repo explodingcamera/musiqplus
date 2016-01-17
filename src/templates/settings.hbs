@@ -2,31 +2,32 @@
 	<div id="mqplushead">
 		<h1>Musiqplus</h1>
 		<h2 id="mqplusnav">
-      <a class="mqplusactive" href="#">Settings</a>
-      <a href="#">Theme</a> <a href="#">Shortcuts</a>
+      <a class="mqplusactive" href="#">Settings</a><!--
+      <a href="#">Theme</a> <a href="#">Shortcuts</a>-->
     </h2>
     <span class="mqplusclose" onclick="musiqplus.toggleSettings()">×</span>
 	</div>
 	<div id="mqpluscontent">
-		<div class="mqplusactive" id="mqpSettings">
+		<div class="mqplusactive mqpluscontentpart" id="mqpSettings">
       {{#each setting}}
-        <div class="mqpsetting option-mqp{{this.titleNoSpaces}}">
-          <h1>{{this.title}}</h1><br><span>{{{this.description}}}</span>
-          <div class="mqplusinput">
-            {{#ifCond this.type '==' 'switch'}}
-            <div class="checkboxwrapper">
-              <input type="checkbox" name="mqptoggle" id="{{this.titleNoSpaces}}" class="mqpluscheckbox">
-              <label for="{{this.titleNoSpaces}}"></label>
-            </div>
-            {{/ifCond}}
-          </div>
-        </div>
+				{{#if this.visible}}
+	        <div class="mqpsetting option-mqp{{this.titleNoSpaces}}">
+	          <h1>{{this.title}}</h1><br><span>{{{this.description}}}</span>
+	          <div class="mqplusinput">
+	            {{#ifCond this.type '==' 'switch'}}
+	            <div class="checkboxwrapper">
+	              <input type="checkbox" name="mqptoggle" id="{{this.titleNoSpaces}}" class="mqpluscheckbox">
+	              <label for="{{this.titleNoSpaces}}"></label>
+	            </div>
+	            {{/ifCond}}
+	          </div>
+	        </div>
+				{{/if}}
       {{/each}}
     </div>
-		<div id="mqpTheme">
-
+		<div id="mqpTheme" class="mqpluscontentpart">
 		</div>
-		<div id="mqpShortcuts">
+		<div id="mqpShortcuts" class="mqpluscontentpart">
 
 		</div>
 	</div>
