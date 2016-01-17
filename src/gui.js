@@ -36,6 +36,7 @@ var gui = function () {
   $('#mqpthemeselect').change(function () {
     musiqplus.current.ids[musiqplus.settingByTitle["ChangeTheme"].id].val = parseInt($('#mqpthemeselect option:selected').attr('data'));
     require('./features').changeTheme(musiqplus.current.ids[musiqplus.settingByTitle["ChangeTheme"].id].val);
+    musiqplus.settings.save();
   })
   $("#mqp"+ musiqplus.settingByTitle["ChangeTheme"].options[musiqplus.current.ids[musiqplus.settingByTitle["ChangeTheme"].id].val].name).attr('selected','selected');
 }
