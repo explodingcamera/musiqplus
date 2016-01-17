@@ -5,6 +5,8 @@
 # Musiqplus
 Some nice new Stuff for Musiqpad!
 
+[DOWNLOAD](https://chrome.google.com/webstore/detail/cdllelmnnfgcnkfmbcnnginopojgkoih) the Chrome Extension!
+
 Planned features:
 
 - Autolike

@@ -11167,15 +11167,45 @@ return jQuery;
 exports.loadFonts = require('./features/loadFonts');
 exports.AutoLike = require('./features/AutoLike');
 exports.AutoJoin = require('./features/AutoJoin');
+exports.clearConsole = require('./features/AutoClear');
 
-},{"./features/AutoJoin":26,"./features/AutoLike":27,"./features/loadFonts":28}],26:[function(require,module,exports){
+},{"./features/AutoClear":26,"./features/AutoJoin":27,"./features/AutoLike":28,"./features/loadFonts":29}],26:[function(require,module,exports){
+(function (global){
 module.exports = function () {
-
+  global.console.log = function(x){return;}
+  var clearConsole = function () {
+    console.clear();
+    setTimeout(clearConsole, 1000 * 60  )
+    console.debug("Console cleared.");
+  }
+  clearConsole();
 }
 
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+
 },{}],27:[function(require,module,exports){
-arguments[4][26][0].apply(exports,arguments)
-},{"dup":26}],28:[function(require,module,exports){
+var $ = require('jquery');
+module.exports = function () {
+  var join = function () {
+    if($('.btn-join').attr('title') == "Join DJ Queue")
+      API.queue.join();
+    setTimeout(join, 1000)
+  }
+  join();
+}
+
+},{"jquery":23}],28:[function(require,module,exports){
+var $ = require('jquery');
+module.exports = function () {
+  var like = function () {
+    if(!$('.btn-upvote').hasClass('active'))
+      $('.btn-upvote').click()
+    setTimeout(like, 1000);
+  }
+  like();
+}
+
+},{"jquery":23}],29:[function(require,module,exports){
 module.exports = function (fonts) {
   WebFontConfig = {
     google: { families: fonts }
@@ -11191,14 +11221,16 @@ module.exports = function (fonts) {
   })();
 }
 
-},{}],29:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
+var $ = require('jquery');
 var gui = function () {
+  $('.logo-dash').append(require('./templates/icon.hbs'));
   $('body').append(require('./templates/settings.hbs')({
     setting: musiqplus.settingById,
   }));
-  for (var i = 1; i < musiqplus.settingById.length + 1; i++) {
+  for (var i = 0; i < musiqplus.settingById.length; i++) {
     if(musiqplus.current.ids[i].val == true)
-      $("#" + musiqplus.settingById[i-1].titleNoSpaces).prop('checked', true);
+      $("#" + musiqplus.settingById[i].titleNoSpaces).prop('checked', true);
   }
   $('#mqplusnav a').click(function () {
     if(!$(this).hasClass('mqplusactive')) {
@@ -11211,10 +11243,10 @@ var gui = function () {
   $('.mqpluscheckbox').change(function () {
     if ($(this).is(":checked")) {
       musiqplus.settingByTitle[$(this).attr('id')].func(true);
-      musiqplus.current.ids[musiqplus.settingByTitle[$(this).attr('id')].id + 1].val = true;
+      musiqplus.current.ids[musiqplus.settingByTitle[$(this).attr('id')].id].val = true;
     }
     else
-      musiqplus.current.ids[musiqplus.settingByTitle[$(this).attr('id')].id + 1].val = false;
+      musiqplus.current.ids[musiqplus.settingByTitle[$(this).attr('id')].id].val = false;
     musiqplus.settings.save();
   })
 }
@@ -11223,43 +11255,21 @@ musiqplus.toggleSettings = function () {
   $('#mqplussettings').slideToggle()
 }
 
-},{"./templates/settings.hbs":34}],30:[function(require,module,exports){
+},{"./templates/icon.hbs":35,"./templates/settings.hbs":36,"jquery":23}],31:[function(require,module,exports){
 (function (global){
 var settings = require('./settings');
 var $ = require('jquery');
 var feature = require("./features");
 var chat = require('./chat');
 var Handlebars = require("hbsfy/runtime");
+require('./resources/css/main.css');
 
-global.$ = $;
 global.musiqplus = {};
 
 musiqplus.about = {
-	version: '0.1.0',
+	version: '0.1.9',
 }
 
-/*Just for testing
-if(typeof API == 'undefined')
-	var API = {
-		chat: {
-			system: function (y) {
-				console.debug(y)
-			},
-			log: function (x ,y) {
-				console.debug(y, x);
-			}
-		},
-		room: {
-			isLoggedIn: function () {
-				return true;
-			},
-			getUser: function () {
-				return "TestUser";
-			}
-		}
-	}
-	global.API = API;
-*/
 musiqplus.settings = new Settings();
 
 musiqplus.main = function() {
@@ -11288,11 +11298,19 @@ musiqplus.main = function() {
 		    }
 		});
 	}
+	var tmp = 0;
 	getUser = function(cb) {
-		if(API.room.isLoggedIn)
+		if(API.room.isLoggedIn() == true) {
 			musiqplus.User = API.room.getUser();
-		cb();
-	}
+			cb();
+			return;
+		}
+		setTimeout(getUser, 1200);
+		if(tmp == 2)
+			API.chat.system('You need to login to use MusiqPlus!');
+		tmp ++;
+	 }
+
 	initialFuncs = function() {
 		feature.loadFonts(([ 'Lobster::latin', "Open+Sans:400,700:latin" ]));
 		initHelpers();
@@ -11302,18 +11320,18 @@ musiqplus.main = function() {
 	$(function() {
 		getUser(function() {
 			API.chat.system('Sucessfully loaded Musiqplus v' + musiqplus.about.version + "!");
+			API.chat.system('Welcome ' + musiqplus.User.un + "!");
 			initialFuncs();
 		})
 	})
 }
-musiqplus.main();
-var lol = require("./resources/css/main.css");
+checkForAPI();
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"./chat":24,"./features":25,"./gui":29,"./resources/css/main.css":31,"./settings":33,"hbsfy/runtime":22,"jquery":23}],31:[function(require,module,exports){
-var css = ".checkboxwrapper {\n  float: right;\n  max-width: 300px;\n  padding-top: 2px;\n  text-align: center;\n  padding-right: 10px;\n}\ninput.mqpluscheckbox {\n  max-height: 0;\n  max-width: 0;\n  opacity: 0;\n}\ninput.mqpluscheckbox + label {\n  display: inline-block;\n  position: relative;\n  box-shadow: inset 0 0 0px 1px #d5d5d5;\n  text-indent: -5000px;\n  height: 30px;\n  width: 50px;\n  border-radius: 15px;\n}\ninput.mqpluscheckbox + label:before {\n  content: \"\";\n  position: absolute;\n  display: block;\n  height: 30px;\n  width: 30px;\n  top: 0;\n  left: 0;\n  border-radius: 15px;\n  background: rgba(19, 191, 17, 0);\n  -moz-transition: .25s ease-in-out;\n  -webkit-transition: .25s ease-in-out;\n  transition: .25s ease-in-out;\n}\ninput.mqpluscheckbox + label:after {\n  content: \"\";\n  position: absolute;\n  display: block;\n  height: 30px;\n  width: 30px;\n  top: 0;\n  left: 0px;\n  border-radius: 15px;\n  background: white;\n  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.2);\n  -moz-transition: .25s ease-in-out;\n  -webkit-transition: .25s ease-in-out;\n  transition: .25s ease-in-out;\n}\ninput.mqpluscheckbox:checked + label:before {\n  width: 50px;\n  background: #13bf11;\n}\ninput.mqpluscheckbox:checked + label:after {\n  left: 20px;\n  box-shadow: inset 0 0 0 1px #13bf11, 0 2px 4px rgba(0, 0, 0, 0.2);\n}\n#mqplussettings {\n  display: none;\n  margin: 0;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  margin-top: -350px;\n  margin-left: -425px;\n  color: #fff;\n  width: 900px;\n  height: 700px;\n  z-index: 100;\n  background-color: rgba(0,0,2,0.96);\n  -webkit-filter: drop-shadow(0px 3px 30px 1px);\n}\n#mqplussettings #mqplushead {\n  background-color: #1C1C1F;\n  height: 60px;\n  border-bottom: 5px solid #6951A9;\n}\n#mqplussettings #mqpluscontent {\n  height: calc(100% - 80px);\n}\n#mqplussettings #mqplusfooter {\n  height: 20px;\n}\n#mqplussettings h1 {\n  display: inline-block;\n  margin: 0;\n  font-family: lobster;\n  font-size: 38px;\n  padding-left: 8px;\n  padding-top: 7px;\n  opacity: .8;\n}\n#mqplussettings h2 {\n  display: inline-block;\n  margin: 0;\n  font-family: 'Open Sans',sans-serif;\n  font-size: 38px;\n  padding-left: 8px;\n  padding-top: 7px;\n  opacity: .8;\n}\n#mqplussettings a {\n  text-decoration: none;\n  color: #A7A7A7;\n}\n#mqplussettings a:hover {\n  color: #fff;\n}\n#mqplussettings h1:hover,\n#mqplussettings h1:hover {\n  opacity: 1;\n}\n.mqplusclose {\n  font-size: 40px;\n  float: right;\n  right: 20px;\n  top: 0;\n  position: absolute;\n  color: #fff;\n  text-shadow: 0 1px 0 #000;\n  opacity: .2;\n}\n#mqplussettings .mqplusclose:hover,\n#mqplussettings .mqplusclose:focus {\n  opacity: 1;\n  color: #fff;\n  cursor: pointer;\n}\n#mqpluscontent.div {\n  display: none;\n}\n#mqpluscontent .mqplusactive {\n  display: block;\n}\n#mqplussettings .mqplusactive {\n  color: #fff;\n}\n#mqplussettings .mqpsetting {\n  padding-left: 10px;\n  padding-bottom: 5px;\n}\n#mqplussettings .mqpsetting:nth-child(2n) {\n  background-color: #6951A9;\n}\n.mqplusinput {\n  float: right;\n  position: relative;\n  top: -30px;\n  right: 10px;\n}\n"; (require("browserify-css").createStyle(css, { "href": "src\\resources\\css\\main.css"})); module.exports = css;
-},{"browserify-css":1}],32:[function(require,module,exports){
+},{"./chat":24,"./features":25,"./gui":30,"./resources/css/main.css":32,"./settings":34,"hbsfy/runtime":22,"jquery":23}],32:[function(require,module,exports){
+var css = ".checkboxwrapper {\n  float: right;\n  max-width: 300px;\n  padding-top: 2px;\n  text-align: center;\n  padding-right: 10px;\n}\ninput.mqpluscheckbox {\n  max-height: 0;\n  max-width: 0;\n  opacity: 0;\n}\ninput.mqpluscheckbox + label {\n  display: inline-block;\n  position: relative;\n  box-shadow: inset 0 0 0px 1px #d5d5d5;\n  text-indent: -5000px;\n  height: 30px;\n  width: 50px;\n  border-radius: 15px;\n}\ninput.mqpluscheckbox + label:before {\n  content: \"\";\n  position: absolute;\n  display: block;\n  height: 30px;\n  width: 30px;\n  top: 0;\n  left: 0;\n  border-radius: 15px;\n  background: rgba(19, 191, 17, 0);\n  -moz-transition: .25s ease-in-out;\n  -webkit-transition: .25s ease-in-out;\n  transition: .25s ease-in-out;\n}\ninput.mqpluscheckbox + label:after {\n  content: \"\";\n  position: absolute;\n  display: block;\n  height: 30px;\n  width: 30px;\n  top: 0;\n  left: 0px;\n  border-radius: 15px;\n  background: white;\n  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.2);\n  -moz-transition: .25s ease-in-out;\n  -webkit-transition: .25s ease-in-out;\n  transition: .25s ease-in-out;\n}\ninput.mqpluscheckbox:checked + label:before {\n  width: 50px;\n  background: #13bf11;\n}\ninput.mqpluscheckbox:checked + label:after {\n  left: 20px;\n  box-shadow: inset 0 0 0 1px #13bf11, 0 2px 4px rgba(0, 0, 0, 0.2);\n}\n#mqplussettings {\n  display: none;\n  margin: 0;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  margin-top: -350px;\n  margin-left: -425px;\n  color: #fff;\n  width: 900px;\n  height: 700px;\n  z-index: 100;\n  background-color: rgba(0,0,2,0.96);\n  -webkit-filter: drop-shadow(0px 3px 30px 1px);\n}\n#mqplussettings #mqplushead {\n  background-color: #1C1C1F;\n  height: 60px;\n  border-bottom: 5px solid #6951A9;\n}\n#mqplussettings #mqpluscontent {\n  height: calc(100% - 80px);\n}\n#mqplussettings #mqplusfooter {\n  height: 20px;\n}\n#mqplussettings h1 {\n  display: inline-block;\n  margin: 0;\n  font-family: lobster;\n  font-size: 38px;\n  padding-left: 8px;\n  padding-top: 4px;\n  opacity: .8;\n}\n#mqplussettings h2 {\n  font-weight: 100;\n  display: inline-block;\n  margin: 0;\n  font-family: 'Open Sans',sans-serif;\n  font-size: 38px;\n  padding-left: 8px;\n  padding-top: 4px;\n  opacity: .8;\n}\n#mqplussettings a {\n  text-decoration: none;\n  color: #A7A7A7;\n}\n#mqplussettings a:hover {\n  color: #fff;\n}\n#mqplussettings h1:hover,\n#mqplussettings h1:hover {\n  opacity: 1;\n}\n.mqplusclose {\n  font-size: 50px;\n  float: right;\n  right: 20px;\n  top: 0;\n  position: absolute;\n  color: #fff;\n  text-shadow: 0 1px 0 #000;\n  opacity: .2;\n}\n#mqplussettings .mqplusclose:hover,\n#mqplussettings .mqplusclose:focus {\n  opacity: 1;\n  color: #fff;\n  cursor: pointer;\n}\n#mqpluscontent.div {\n  display: none;\n}\n#mqpluscontent .mqplusactive {\n  display: block;\n}\n#mqplussettings .mqplusactive {\n  color: #fff;\n}\n#mqplussettings .mqpsetting {\n  padding-left: 10px;\n  padding-bottom: 5px;\n}\n#mqplussettings .mqpsetting:nth-child(2n) {\n  background-color: #6951A9;\n}\n.mqplusinput {\n  float: right;\n  position: relative;\n  top: -30px;\n  right: 10px;\n}\n"; (require("browserify-css").createStyle(css, { "href": "src\\resources\\css\\main.css"})); module.exports = css;
+},{"browserify-css":1}],33:[function(require,module,exports){
 var feature = require('./features');
 module.exports = function (cb) {
   musiqplus.settingsN = 0;
@@ -11348,10 +11366,22 @@ module.exports = function (cb) {
     title: 'AutoJoin',
     description: 'Automatically join the waitlist!',
     type: 'switch',
-    defaultVal: true,
+    defaultVal: false,
     function: function (val) {
       if(val == true) {
         feature.AutoJoin()
+      }
+    },
+  });
+  new Setting({
+    title: 'AutoClear Console',
+    description: 'Clears Console every minute for better Performance',
+    type: 'switch',
+    defaultVal: false,
+    function: function (val) {
+      if(val == true) {
+        console.clear();
+        feature.clearConsole();
       }
     },
   });
@@ -11367,17 +11397,12 @@ module.exports = function (cb) {
     },
   });*/
 
-  /* Emote Menu */
-
-  /* Custom Emotes (serverside) */
-
   /* Double-Click Translation */
 
-  /* Don't show up online */
   cb();
 }
 
-},{"./features":25}],33:[function(require,module,exports){
+},{"./features":25}],34:[function(require,module,exports){
 var cookie = require('cookies-js');
 module.exports = Settings = function() {
 }
@@ -11395,7 +11420,7 @@ Settings.prototype.init = function() {
 Settings.prototype.load = function(data) {
 	musiqplus.current = data;
 	for (var i = 0; i < musiqplus.settingById.length; i++) {
-		musiqplus.settingById[i].func(musiqplus.current.ids[i+1].val);
+		musiqplus.settingById[i].func(musiqplus.current.ids[i].val);
 	}
 	console.debug('Settings Successfuly loaded/created!');
 }
@@ -11416,7 +11441,7 @@ Settings.prototype.create = function() {
 		version: musiqplus.about.version,
 		ids: {}
 	}
-	for (var i = 1; i < musiqplus.settingById.length; i++) {
+	for (var i = 0; i < musiqplus.settingById.length; i++) {
 		SettingsTemplate.ids[i] = {};
 		SettingsTemplate.ids[i].val = musiqplus.settingById[i].defaultVal;
 		SettingsTemplate.ids[i].type = musiqplus.settingById[i].type;
@@ -11441,7 +11466,14 @@ Settings.prototype.upgrade = function() {
 	musiqplus.settings.load(data);
 }
 
-},{"./settings-list":32,"cookies-js":2}],34:[function(require,module,exports){
+},{"./settings-list":33,"cookies-js":2}],35:[function(require,module,exports){
+// hbsfy compiled Handlebars template
+var HandlebarsCompiler = require('hbsfy/runtime');
+module.exports = HandlebarsCompiler.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<div class=\"nav logo-btn-mqlussettings\" onclick=\"musiqplus.toggleSettings()\" data-ng-class=\"{'active' : prop.t == 2}\"\r\n title=\"MQPlusSettings\">\r\n    <i class=\"mdi mdi-plus-box\"></i>\r\n</div>\r\n";
+},"useData":true});
+
+},{"hbsfy/runtime":22}],36:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"1":function(container,depth0,helpers,partials,data) {
@@ -11472,7 +11504,7 @@ module.exports = HandlebarsCompiler.template({"1":function(container,depth0,help
     + "    </div>\r\n		<div id=\"mqpTheme\">\r\n\r\n		</div>\r\n		<div id=\"mqpShortcuts\">\r\n\r\n		</div>\r\n	</div>\r\n	<div id=\"mqplusfooter\"></div>\r\n</div>\r\n";
 },"useData":true});
 
-},{"hbsfy/runtime":22}]},{},[30])
+},{"hbsfy/runtime":22}]},{},[31])
 
 
 //# sourceMappingURL=app.js.map

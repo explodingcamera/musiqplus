@@ -3,36 +3,14 @@ var $ = require('jquery');
 var feature = require("./features");
 var chat = require('./chat');
 var Handlebars = require("hbsfy/runtime");
+require('./resources/css/main.css');
 
-global.$ = $;
 global.musiqplus = {};
 
 musiqplus.about = {
-	version: '0.1.0',
+	version: '0.1.9',
 }
 
-/*Just for testing
-if(typeof API == 'undefined')
-	var API = {
-		chat: {
-			system: function (y) {
-				console.debug(y)
-			},
-			log: function (x ,y) {
-				console.debug(y, x);
-			}
-		},
-		room: {
-			isLoggedIn: function () {
-				return true;
-			},
-			getUser: function () {
-				return "TestUser";
-			}
-		}
-	}
-	global.API = API;
-*/
 musiqplus.settings = new Settings();
 
 musiqplus.main = function() {
@@ -61,11 +39,19 @@ musiqplus.main = function() {
 		    }
 		});
 	}
+	var tmp = 0;
 	getUser = function(cb) {
-		if(API.room.isLoggedIn)
+		if(API.room.isLoggedIn() == true) {
 			musiqplus.User = API.room.getUser();
-		cb();
-	}
+			cb();
+			return;
+		}
+		setTimeout(getUser, 1200);
+		if(tmp == 2)
+			API.chat.system('You need to login to use MusiqPlus!');
+		tmp ++;
+	 }
+
 	initialFuncs = function() {
 		feature.loadFonts(([ 'Lobster::latin', "Open+Sans:400,700:latin" ]));
 		initHelpers();
@@ -75,9 +61,9 @@ musiqplus.main = function() {
 	$(function() {
 		getUser(function() {
 			API.chat.system('Sucessfully loaded Musiqplus v' + musiqplus.about.version + "!");
+			API.chat.system('Welcome ' + musiqplus.User.un + "!");
 			initialFuncs();
 		})
 	})
 }
-musiqplus.main();
-var lol = require("./resources/css/main.css");
+checkForAPI();

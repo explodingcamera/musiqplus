@@ -1,5 +1,5 @@
 function fn() {
-    if(typeof API == "object" && API.room) {
+    if(typeof API == "object" && API.player) {
       var mqplus = document.createElement('script');
       mqplus.type = 'text/javascript';
       mqplus.id = 'musiqplus-loader';

@@ -15,7 +15,7 @@ Settings.prototype.init = function() {
 Settings.prototype.load = function(data) {
 	musiqplus.current = data;
 	for (var i = 0; i < musiqplus.settingById.length; i++) {
-		musiqplus.settingById[i].func(musiqplus.current.ids[i+1].val);
+		musiqplus.settingById[i].func(musiqplus.current.ids[i].val);
 	}
 	console.debug('Settings Successfuly loaded/created!');
 }
@@ -36,7 +36,7 @@ Settings.prototype.create = function() {
 		version: musiqplus.about.version,
 		ids: {}
 	}
-	for (var i = 1; i < musiqplus.settingById.length; i++) {
+	for (var i = 0; i < musiqplus.settingById.length; i++) {
 		SettingsTemplate.ids[i] = {};
 		SettingsTemplate.ids[i].val = musiqplus.settingById[i].defaultVal;
 		SettingsTemplate.ids[i].type = musiqplus.settingById[i].type;

@@ -1,10 +1,12 @@
+var $ = require('jquery');
 var gui = function () {
+  $('.logo-dash').append(require('./templates/icon.hbs'));
   $('body').append(require('./templates/settings.hbs')({
     setting: musiqplus.settingById,
   }));
-  for (var i = 1; i < musiqplus.settingById.length + 1; i++) {
+  for (var i = 0; i < musiqplus.settingById.length; i++) {
     if(musiqplus.current.ids[i].val == true)
-      $("#" + musiqplus.settingById[i-1].titleNoSpaces).prop('checked', true);
+      $("#" + musiqplus.settingById[i].titleNoSpaces).prop('checked', true);
   }
   $('#mqplusnav a').click(function () {
     if(!$(this).hasClass('mqplusactive')) {
@@ -17,10 +19,10 @@ var gui = function () {
   $('.mqpluscheckbox').change(function () {
     if ($(this).is(":checked")) {
       musiqplus.settingByTitle[$(this).attr('id')].func(true);
-      musiqplus.current.ids[musiqplus.settingByTitle[$(this).attr('id')].id + 1].val = true;
+      musiqplus.current.ids[musiqplus.settingByTitle[$(this).attr('id')].id].val = true;
     }
     else
-      musiqplus.current.ids[musiqplus.settingByTitle[$(this).attr('id')].id + 1].val = false;
+      musiqplus.current.ids[musiqplus.settingByTitle[$(this).attr('id')].id].val = false;
     musiqplus.settings.save();
   })
 }

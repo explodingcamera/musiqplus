@@ -32,10 +32,22 @@ module.exports = function (cb) {
     title: 'AutoJoin',
     description: 'Automatically join the waitlist!',
     type: 'switch',
-    defaultVal: true,
+    defaultVal: false,
     function: function (val) {
       if(val == true) {
         feature.AutoJoin()
+      }
+    },
+  });
+  new Setting({
+    title: 'AutoClear Console',
+    description: 'Clears Console every minute for better Performance',
+    type: 'switch',
+    defaultVal: false,
+    function: function (val) {
+      if(val == true) {
+        console.clear();
+        feature.clearConsole();
       }
     },
   });
@@ -51,12 +63,7 @@ module.exports = function (cb) {
     },
   });*/
 
-  /* Emote Menu */
-
-  /* Custom Emotes (serverside) */
-
   /* Double-Click Translation */
 
-  /* Don't show up online */
   cb();
 }
