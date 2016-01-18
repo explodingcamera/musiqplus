@@ -11190,32 +11190,59 @@ module.exports = function (val) {
 
 },{}],27:[function(require,module,exports){
 var $ = require('jquery');
+var id;
 module.exports = function (val) {
-  var timeout = setTimeout(function (){}, 0);
-  var join = function () {
+  var like = function () {
     if($('.btn-join').attr('title') == "Join DJ Queue")
       API.queue.join();
-    timeout = setTimeout(join, 1000)
+    console.log(1);
   }
-  if(val == true)
-    join();
-  else
-    clearTimeout(timeout);
+  if(val == true) {
+    setTimeout(like, 200);
+    if(musiqplus.tmp.autojoin == 0){
+      id = API.on("advance", function(x){
+        if($('.btn-join').attr('title') == "Join DJ Queue")
+          API.queue.join();
+        console.log(1);
+      });
+      musiqplus.tmp.autojoin = 1;
+    }
+  }
+  else if(val == false) {
+    if(id){
+      API.off("advance", id);
+      musiqplus.tmp.autojoin = 0;
+    }
+  }
 }
 
 },{"jquery":23}],28:[function(require,module,exports){
 var $ = require('jquery');
+var id;
 module.exports = function (val) {
-  var timeout = setTimeout(function (){}, 0);
+  console.debug(val + musiqplus.tmp.autolike);
   var like = function () {
     if(!$('.btn-upvote').hasClass('active'))
-      $('.btn-upvote').click()
-    timeout = setTimeout(like, 1000);
+    $('.btn-upvote').click()
+    console.log(1);
   }
-  if(val == true)
-    like();
-  else
-    clearTimeout(timeout);
+  if(val == true) {
+    setTimeout(like, 200);
+    if(musiqplus.tmp.autolike == 0){
+      id = API.on("advance", function(x){
+        if(!$('.btn-upvote').hasClass('active'))
+        $('.btn-upvote').click()
+        console.log(1);
+      });
+      musiqplus.tmp.autolike = 1;
+    }
+  }
+  else if(val == false) {
+    if(id){
+      API.off("advance", id);
+      musiqplus.tmp.autolike = 0;
+    }
+  }
 }
 
 },{"jquery":23}],29:[function(require,module,exports){
@@ -11271,8 +11298,10 @@ var gui = function () {
       musiqplus.settingByTitle[$(this).attr('id')].func(true);
       musiqplus.current.ids[musiqplus.settingByTitle[$(this).attr('id')].id].val = true;
     }
-    else
+    else {
       musiqplus.current.ids[musiqplus.settingByTitle[$(this).attr('id')].id].val = false;
+      musiqplus.settingByTitle[$(this).attr('id')].func(false);
+    }
     musiqplus.settings.save();
   });
   $("#mqpthemeselect").change(function () {
@@ -11299,10 +11328,15 @@ var chat = require('./chat');
 var Handlebars = require("hbsfy/runtime");
 require('./resources/css/main.css');
 
-global.musiqplus = {};
+global.musiqplus = {
+	tmp: {
+		autolike: 0,
+		autojoin: 0
+	}
+};
 
 musiqplus.about = {
-	version: '0.2.4',
+	version: '0.2.5',
 }
 
 musiqplus.settings = new Settings();
@@ -11347,7 +11381,7 @@ musiqplus.main = function() {
 	 }
 
 	var initialFuncs = function() {
-		feature.loadFonts(([ 'Lobster::latin', "Open+Sans:400,700:latin" ]));
+		feature.loadFonts(([ 'Lobster::latin', 'Open+Sans:400,300,700,800,600:latin' ]));
 		initHelpers();
 		musiqplus.settings.init();
 		require('./gui')();
@@ -11421,7 +11455,7 @@ module.exports = function (cb) {
     description: 'Change the looks of MusiqPad',
     type: 'select',
     options: [{
-      name: 'MusiqPlus', //ID 0
+      name: 'MusiqPlus', //ID 0 
       url: 'https://cdn.explodingcamera.com/mqplus.theme.css',
       id: 0
     },
@@ -11435,6 +11469,17 @@ module.exports = function (cb) {
        feature.changeTheme(themeid);
     },
   });
+  /*
+  new Setting({
+    visibility: 'hidden',
+    title: 'Download Button',
+    description: 'Download current song as MP3',
+    type: 'switch',
+    defaultVal: false,
+    function: function (val) {
+      feature.clearConsole(val);
+    },
+  });*/
   /*new Setting({
     title: 'Custom Avatars',
     description: 'Enable Custom Avatars! (<a href="#">how to get one</a>)',

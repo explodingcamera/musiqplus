@@ -1,15 +1,18 @@
+* {
+  font-family: 'Open Sans', sans-serif;
+}
 .ctr {
     background-color: black;
 }
-.controlls {
-  border: none;
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  margin-left: calc(-40%/ 2);
-  height: 40px;
-  width: 40%;
-  background: #1C1C1F;
+.controls {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: calc(-40%/ 2);
+    height: 40px;
+    width: 40%;
+    background: #000000;
+    border-top: 1px solid #000000;
 }
 
 .playback {
@@ -27,14 +30,15 @@
   background-position: center;
   background-color: rgb(0, 0, 0);
   border: none;
-  -webkit-filter: drop-shadow(0px 3px 30px 1px);
+  -webkit-box-shadow: 0 0 60px 20px #000000;
+  box-shadow: 0 0 60px 20px #000000;
 }
 .song-progress {
-  background-color: #6951A9;
+  background-color: white;
 }
 .dash {
-  -webkit-filter: drop-shadow(0px 3px 30px 1px);
-  border: none;
+  -webkit-box-shadow: 0 0 50px 9px #000000;
+  box-shadow: 0 0 50px 9px #000000;  border: none;
   position: absolute;
   top: 0;
   width: 100%;
@@ -53,15 +57,16 @@
 }
 
 #app-right {
-  -webkit-filter: drop-shadow(0px 3px 30px 1px);
-  border: none;
-  position: absolute;
-  z-index: 10;
-  right: 0;
-  background: rgba(10, 10, 10, 0.81);
-  width: 400px;
-  height: calc(100% - 41px);
-  bottom: 0;
+  -webkit-box-shadow: 0 0 50px 9px #000000;
+      box-shadow: 0 0 50px 9px #000000;
+      border: none;
+      position: absolute;
+      z-index: 10;
+      right: 0;
+      background: rgba(10, 10, 10, 0.78);
+      width: 400px;
+      height: calc(100% - 41px);
+      bottom: 0;
 }
 
 #msg-form {
@@ -97,6 +102,31 @@
     background: rgba(10,10,10,0.9);
 }
 
+.logo-dash {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 100%;
+    background: rgba(28, 28, 31, 0);
+    border-right: 1px solid #0a0a0a;
+}
+
 #room-bg {
   background-image: url('https://cdn.explodingcamera.com/mqpbg.jpg') !important;
+}
+
+.left .lable {
+  margin-top: -4px;
+}
+
+.labels {
+  margin: 0px;
+  margin-top: 2px;
+  float: left;
+  text-align: left;
+}
+
+.btn-upvote.active {
+  color: black;
 }

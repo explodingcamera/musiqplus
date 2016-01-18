@@ -26,8 +26,10 @@ var gui = function () {
       musiqplus.settingByTitle[$(this).attr('id')].func(true);
       musiqplus.current.ids[musiqplus.settingByTitle[$(this).attr('id')].id].val = true;
     }
-    else
+    else {
       musiqplus.current.ids[musiqplus.settingByTitle[$(this).attr('id')].id].val = false;
+      musiqplus.settingByTitle[$(this).attr('id')].func(false);
+    }
     musiqplus.settings.save();
   });
   $("#mqpthemeselect").change(function () {

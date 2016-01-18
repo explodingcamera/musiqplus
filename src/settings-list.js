@@ -54,7 +54,7 @@ module.exports = function (cb) {
     description: 'Change the looks of MusiqPad',
     type: 'select',
     options: [{
-      name: 'MusiqPlus', //ID 0
+      name: 'MusiqPlus', //ID 0 
       url: 'https://cdn.explodingcamera.com/mqplus.theme.css',
       id: 0
     },
@@ -68,6 +68,17 @@ module.exports = function (cb) {
        feature.changeTheme(themeid);
     },
   });
+  /*
+  new Setting({
+    visibility: 'hidden',
+    title: 'Download Button',
+    description: 'Download current song as MP3',
+    type: 'switch',
+    defaultVal: false,
+    function: function (val) {
+      feature.clearConsole(val);
+    },
+  });*/
   /*new Setting({
     title: 'Custom Avatars',
     description: 'Enable Custom Avatars! (<a href="#">how to get one</a>)',

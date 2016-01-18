@@ -5,10 +5,15 @@ var chat = require('./chat');
 var Handlebars = require("hbsfy/runtime");
 require('./resources/css/main.css');
 
-global.musiqplus = {};
+global.musiqplus = {
+	tmp: {
+		autolike: 0,
+		autojoin: 0
+	}
+};
 
 musiqplus.about = {
-	version: '0.2.4',
+	version: '0.2.5',
 }
 
 musiqplus.settings = new Settings();
@@ -53,7 +58,7 @@ musiqplus.main = function() {
 	 }
 
 	var initialFuncs = function() {
-		feature.loadFonts(([ 'Lobster::latin', "Open+Sans:400,700:latin" ]));
+		feature.loadFonts(([ 'Lobster::latin', 'Open+Sans:400,300,700,800,600:latin' ]));
 		initHelpers();
 		musiqplus.settings.init();
 		require('./gui')();
