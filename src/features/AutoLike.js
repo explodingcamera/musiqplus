@@ -8,7 +8,7 @@ module.exports = function (val) {
     console.log(1);
   }
   if(val == true) {
-    setTimeout(like, 200);
+    setTimeout(like, 1000);
     if(musiqplus.tmp.autolike == 0){
       id = API.on("advance", function(x){
         if(!$('.btn-upvote').hasClass('active'))

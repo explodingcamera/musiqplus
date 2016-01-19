@@ -38,14 +38,14 @@ module.exports = function (cb) {
       feature.AutoJoin(val)
     },
   });
-  new Setting({
-    visibility: 'visible',
+new Setting({                             //Not supported anymore but I don't want to destroy peoples save data.
+    visibility: 'hidden',
     title: 'AutoClear Console',
-    description: 'Clears Console every minute for better Performance',
+    description: 'Disables Console',
     type: 'switch',
     defaultVal: false,
     function: function (val) {
-      feature.clearConsole(val);
+      //feature.clearConsole(val);
     },
   });
   new Setting({
@@ -54,7 +54,7 @@ module.exports = function (cb) {
     description: 'Change the looks of MusiqPad',
     type: 'select',
     options: [{
-      name: 'MusiqPlus', //ID 0 
+      name: 'MusiqPlus', //ID 0
       url: 'https://cdn.explodingcamera.com/mqplus.theme.css',
       id: 0
     },
@@ -68,28 +68,26 @@ module.exports = function (cb) {
        feature.changeTheme(themeid);
     },
   });
-  /*
   new Setting({
-    visibility: 'hidden',
-    title: 'Download Button',
-    description: 'Download current song as MP3',
-    type: 'switch',
-    defaultVal: false,
-    function: function (val) {
-      feature.clearConsole(val);
-    },
-  });*/
-  /*new Setting({
-    title: 'Custom Avatars',
-    description: 'Enable Custom Avatars! (<a href="#">how to get one</a>)',
-    type: 'switch',
+    visibility: 'visible',
+    title: 'Download Song',
+    description: 'Download current song as MP3. You can also use the <div class="mdi mdi-download"></div> Download Button on the player.',
+    type: 'dlibtn',
     defaultVal: true,
     function: function (val) {
-      if(val == true) {
-
-      }
+      feature.downloadSong();
     },
-  });*/
+  });
+  new Setting({
+    visibility: 'visible',
+    title: 'Custom Background',
+    description: 'Change the Background! Leave clear to use default of theme.',
+    type: 'textinput',
+    defaultVal: '',
+    function: function (val) {
+      feature.customBG();
+    },
+  });
 
   /* Double-Click Translation */
 

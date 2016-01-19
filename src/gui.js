@@ -1,6 +1,7 @@
 var $ = require('jquery');
-
+var feature = require('./features');
 var gui = function () {
+  $('.navbar').append(require('./templates/iconDl.hbs'));
   $('.logo-dash').append(require('./templates/icon.hbs'));
   $('body').append(require('./templates/settings.hbs')({
     setting: musiqplus.settingById
@@ -41,6 +42,15 @@ var gui = function () {
     musiqplus.settings.save();
   })
   $("#mqp"+ musiqplus.settingByTitle["ChangeTheme"].options[musiqplus.current.ids[musiqplus.settingByTitle["ChangeTheme"].id].val].name).attr('selected','selected');
+  $('#mqplusbg').change(function () {
+    if (feature.validDomain($(this)[0].value)) {
+      console.debug(1);
+      musiqplus.current.ids[musiqplus.settingByTitle['CustomBackground'].id].val = $(this)[0].value;
+      feature.customBG();
+      musiqplus.settings.save();
+    }
+  })
+  $('#mqplusbg').val(musiqplus.current.ids[musiqplus.settingByTitle['CustomBackground'].id].val);
 }
 module.exports = gui;
 musiqplus.toggleSettings = function () {

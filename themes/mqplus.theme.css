@@ -121,8 +121,8 @@
 }
 
 .labels {
-  margin: 0px;
-  margin-top: 2px;
+  margin: 0px !important;
+  margin-top: 2px !important;
   float: left;
   text-align: left;
 }

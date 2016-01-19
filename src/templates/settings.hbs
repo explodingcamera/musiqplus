@@ -20,6 +20,16 @@
 	              <label for="{{this.titleNoSpaces}}"></label>
 	            </div>
 	            {{/ifCond}}
+							{{#ifCond this.type '==' 'dlibtn'}}
+							<div class="ui download primary button" onclick="musiqplus.downloadSong();">
+				        Download
+				      </div>
+							{{/ifCond}}
+							{{#ifCond this.type '==' 'textinput'}}
+							<div class="ui input focus">
+					      <input id="mqplusbg" type="text" placeholder="Image URL">
+					    </div>
+							{{/ifCond}}
 	          </div>
 	        </div>
 				{{/if}}

@@ -5,7 +5,7 @@ var chat = require('./chat');
 var Handlebars = require("hbsfy/runtime");
 require('./resources/css/main.css');
 
-global.musiqplus = {
+global.musiqplus = { 
 	tmp: {
 		autolike: 0,
 		autojoin: 0
@@ -13,7 +13,7 @@ global.musiqplus = {
 };
 
 musiqplus.about = {
-	version: '0.2.5',
+	version: '0.3.2',
 }
 
 musiqplus.settings = new Settings();
