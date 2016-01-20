@@ -3,7 +3,7 @@
 // @author     explodingcamera
 // @website    https://github.com/musiqplus
 // @namespace  https://cdn.explodingcamera.com/app.js
-// @version    0.4.4
+// @version    2
 // @description  MusiqPlus is an JS for MusiqPad.com
 // @match      http://*/*
 // @match      https://*/*

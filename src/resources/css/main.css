@@ -205,3 +205,15 @@ input[type=text], input[type=email], input[type=search], input[type=password] {
 	background-repeat: no-repeat;
 	background-size: cover !important;
 }
+
+[data-uid="63"] {
+	-webkit-animation: pulse 6s infinite alternate;
+}
+
+@-webkit-keyframes pulse {
+      0% {color: #519331;}
+     25% {color: #000EC5;}
+     50% {color: #F10034;}
+     75% {color: #FF7400;}
+     100% {color: #C5F700;}
+}

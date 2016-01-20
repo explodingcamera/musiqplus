@@ -5,15 +5,36 @@
 # Musiqplus
 Some nice new Stuff for Musiqpad!
 
+![](https://i.imgur.com/gwNvOXH.png)
 [DOWNLOAD](https://chrome.google.com/webstore/detail/cdllelmnnfgcnkfmbcnnginopojgkoih) the Chrome Extension!
 
-Planned features:
+You can get it in the [Chrome Webstore](https://chrome.google.com/webstore/detail/musiqplus/cdllelmnnfgcnkfmbcnnginopojgkoih) and as [Userscript](http://cdn.explodingcamera.com/mqplus.user.js) (greasemonkey/tampermonkey) now!
+****
 
-- Autolike
-- Autojoin
-- Permanently remove Elements from the Page (Like Banners, Ads, ...)
-- Chat filters
-- Custom Avatars
-- (Twitch)Emotes
-- Custom Themes (You'll be able to upload your own)
-- Cross-Browser Support (Firefox + Chrome Extension, Userscript, via Bookmark)
+**Current Features** (19.01.16)
+
+* Download Song as MP3
+* AutoLike
+* AutoJoin Waitlist
+* AutoClearConsole
+* Custom Themes (currently only one included)
+* Custom Background (Theme default if none)
+
+
+**Planned Features**
+
+* DJ ETA
+* AFK Autoresponder
+* Notifications
+* Real Fullscreen Video
+* Chatfilters
+* Shortcuts
+* more Themes (Plug.dj, Dubtrack, Materialdesign, ...) If you want to, submit a pastebin with your Theme and I'll add it (and credit you of course)
+
+**Changelog**
+
+* **18.01.2016** AutoLike/Join are now fixed and don't spam the server anymore. Song download is implemented but I still need to fix some serverstuff beaucause chrome doesn't want me to use an iframe with a non-ssl site :( . I've also added some new Planned Features.
+
+* **19.01.2016** Song download is now implemented and Custom Backgrounds added.
+
+* **20.01.2016** Userscript extension loader added.

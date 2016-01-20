@@ -64,6 +64,7 @@ musiqplus.main = function() {
 		require('./gui')();
 		API.chat.system('Sucessfully loaded Musiqplus v' + musiqplus.about.version + "!");
 		API.chat.system('Welcome ' + musiqplus.User.un + "!");
+		chat();
 	}
 	$(function() {
 		getUser()
