@@ -1,0 +1,166 @@
+#chat {
+    background-color: #060606;
+}
+* {
+  font-family: 'Open Sans', sans-serif;
+}
+.ctr {
+    background-color: black;
+}
+.controls {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  height: 40px;
+  width: calc(100% - 400px);
+  background: #2D323C;
+  border-top: 1px solid #2D323C;
+}
+
+.playback {
+  position: absolute;
+  margin: 0 auto;
+  width: 854px;
+  height: 480px;
+  z-index: 9;
+  top: 50%;
+  left: 50%;
+  margin-top: calc(-921px/ 2);
+  margin-left: calc(-854px/ 2);
+  background-repeat: no-repeat;
+  background-size: 50%;
+  background-position: center;
+  background-color: rgba(255, 0, 0, 0);;
+  border: none;
+}
+.song-progress {
+  width: calc(100% - 400px);
+  background-color: white;
+  position: fixed;
+}
+.dash {
+  background-color: #1E222A !important;
+  -webkit-box-shadow: 0 0 50px 9px #000000;
+  box-shadow: 0 0 50px 9px #000000;  border: none;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 40px;
+  z-index: 15;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  background: #000000;
+  vertical-align: middle;
+  text-align: center
+}
+
+.tab {
+  color: white;
+}
+
+#app-right {
+  -webkit-box-shadow: 0 0 50px 9px #000000;
+      box-shadow: 0 0 50px 9px #000000;
+      border: none;
+      position: absolute;
+      z-index: 10;
+      right: 0;
+      background: rgba(10, 10, 10, 0.78);
+      width: 400px;
+      height: calc(100% - 41px);
+      bottom: 0;
+}
+
+#msg-form {
+  border: none;
+}
+.btn-upvote.active {
+  height: calc(100% + 1px);
+  color: #1C1C1F;
+  background: #A7CA00;
+  margin-top: -1px;
+}
+
+.nav {
+  color: white;
+}
+
+.navbar {
+  transform: scale(0.7) !important;
+  margin-top: 70px !important;
+  margin-left: 3px !important;
+}
+.icon-info {
+  background-color: white;
+}
+
+.btn-logo {
+  background-color: #393F4B !important;
+  border: none;
+}
+.logo-menu {
+    position: absolute;
+    z-index: 16;
+    top: 40px;
+    left: 0;
+    width: calc(100% - 400px);
+    height: calc(100% - 40px);
+    display: none;
+    background: rgba(10,10,10,0.9);
+}
+
+.logo-dash {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 100%;
+    background: rgba(28, 28, 31, 0);
+    border-right: 1px solid #0a0a0a;
+}
+
+#room-bg {
+  background-image: url('https://i.imgur.com/zSMRtE6.png') !important;
+}
+
+.left .lable {
+  margin-top: -4px;
+}
+
+.labels {
+  margin: 0px !important;
+  margin-top: 2px !important;
+  float: left;
+  text-align: left;
+}
+
+.btn-upvote.active {
+  color: black;
+}
+
+.btn-snooze {
+    color: #A36DFF;
+}
+
+.playback.fullscreen {
+    width: calc(100% - 1px);
+    height: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    margin-top: 0;
+    margin-left: 0;
+    border: none;
+    border: none !important;
+}
+
+.tray .active {
+    border-bottom: none !important;
+    background: rgb(0, 0, 0) !important;
+}
+
+.video {
+    border: 3px solid #6E37FD !important;
+    transform: scale(0.7) !important;
+}

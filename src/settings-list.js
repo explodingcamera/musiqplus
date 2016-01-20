@@ -62,6 +62,11 @@ new Setting({                             //Not supported anymore but I don't wa
       name: 'Classic', //ID 1
       url: 'https://cdn.explodingcamera.com/classic.theme.css',
       id: 1
+    },
+    {
+      name: 'Plug', //ID 2
+      url: 'https://cdn.explodingcamera.com/plug.theme.css',
+      id: 2
     }],
     defaultVal: 1, //Defaut Theme
     function: function (themeid) {
