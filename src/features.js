@@ -6,3 +6,5 @@ exports.changeTheme = require('./features/changeTheme');
 exports.downloadSong = require('./features/downloadSong');
 exports.customBG = require('./features/customBG');
 exports.validDomain = require('./features/validDomain');
+exports.djETA = require('./features/djETA');
+exports.afkResponse = require('./features/afkResponse');

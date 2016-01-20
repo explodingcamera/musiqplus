@@ -8,11 +8,13 @@ Some nice new Stuff for Musiqpad!
 ![](https://i.imgur.com/gwNvOXH.png)
 [DOWNLOAD](https://chrome.google.com/webstore/detail/cdllelmnnfgcnkfmbcnnginopojgkoih) the Chrome Extension!
 
-You can get it in the [Chrome Webstore](https://chrome.google.com/webstore/detail/musiqplus/cdllelmnnfgcnkfmbcnnginopojgkoih) and as [Userscript](http://cdn.explodingcamera.com/mqplus.user.js) (greasemonkey/tampermonkey) now!
+You can get it in the [Chrome Webstore](https://chrome.google.com/webstore/detail/musiqplus/cdllelmnnfgcnkfmbcnnginopojgkoih) and as [Userscript](http://cdn.explodingcamera.com/mqplus.user.js
+) (greasemonkey/tampermonkey) now!
 ****
 
 **Current Features** (19.01.16)
 
+* DJ ETA
 * Download Song as MP3
 * AutoLike
 * AutoJoin Waitlist
@@ -20,10 +22,8 @@ You can get it in the [Chrome Webstore](https://chrome.google.com/webstore/detai
 * Custom Themes (currently only one included)
 * Custom Background (Theme default if none)
 
-
 **Planned Features**
 
-* DJ ETA
 * AFK Autoresponder
 * Notifications
 * Real Fullscreen Video
@@ -37,4 +37,4 @@ You can get it in the [Chrome Webstore](https://chrome.google.com/webstore/detai
 
 * **19.01.2016** Song download is now implemented and Custom Backgrounds added.
 
-* **20.01.2016** Userscript extension loader added.
+* **20.01.2016** Userscript extension loader added, bugs fixed and new Plug theme. I've also added DJ ETA.

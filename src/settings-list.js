@@ -38,7 +38,7 @@ module.exports = function (cb) {
       feature.AutoJoin(val)
     },
   });
-new Setting({                             //Not supported anymore but I don't want to destroy peoples save data.
+  new Setting({                             //Not supported anymore but I don't want to destroy peoples save data.
     visibility: 'hidden',
     title: 'AutoClear Console',
     description: 'Disables Console',
@@ -94,7 +94,37 @@ new Setting({                             //Not supported anymore but I don't wa
     },
   });
 
-  /* Double-Click Translation */
+  new Setting({
+    visibility: 'visible',
+    title: 'DJ ETA',
+    description: 'Estimated wait time, updates after every song.',
+    type: 'switch',
+    defaultVal: true,
+    function: function (val) {
+      feature.djETA(val);
+    },
+  });
+
+  new Setting({                                                                 //TODO---
+    visibility: 'invisible',
+    title: 'AFK Autoresponse',
+    description: 'Aotomaticaly respond to messages after you were afk for x amount of Time.',
+    type: 'autoafk',
+    defaultVal: '',
+    function: function (val) {
+      //feature.afkResponse(val);
+    },
+  });                                                                           //-------
+  new Setting({                                                                 //TODO---
+    visibility: 'invisible',
+    title: 'Import Playlist',
+    description: 'Imports a playlist from YouTube.',
+    type: 'playlistid',
+    defaultVal: '',
+    function: function (val) {
+      //feature.importPlaylist(val);
+    },
+  });
 
   cb();
 }
