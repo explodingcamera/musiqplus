@@ -5,7 +5,7 @@ var chat = require('./chat');
 var Handlebars = require("hbsfy/runtime");
 require('./resources/css/main.css');
 
-global.musiqplus = { 
+global.musiqplus = {
 	tmp: {
 		autolike: 0,
 		autojoin: 0
