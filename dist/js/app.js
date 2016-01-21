@@ -11286,12 +11286,11 @@ var $ = require('jquery');
 var api;
 var waitTime;
 var func = function () {
-  if(API.queue.getInfo().length == API.queue.getPosition() || API.queue.getInfo().length == -1)
-    waitTime = API.queue.getInfo().length * 242.4;
-  else if(API.queue.getPosition() > API.queue.getInfo().length)
-    waitTime = (API.queue.getPosition() * 242.4) - 242.4;
-  else
-    waitTime = API.queue.getInfo().length * 242.4;
+  if(API.queue.getPosition() == -1)                               //Not in waitlist
+    waitTime = (API.queue.getInfo().length * 242.4) + 242.4 ;
+  else if(API.queue.getInfo().length >= API.queue.getPosition())  //in Waitlist
+    waitTime = (API.queue.getPosition() * 242.4);
+
   console.log(waitTime);
   $('#mqpeta').remove();
   $('.dash .left').append('<div class="labels" id="mqpeta"><p class="label now" title="Parisyte - Meteor" data-ng-bind="currentSong">&nbsp;&nbsp; ETA: ' +
@@ -11453,7 +11452,7 @@ global.musiqplus = {
 };
 
 musiqplus.about = {
-	version: '0.4.6',
+	version: '0.4.7',
 }
 
 musiqplus.settings = new Settings();
@@ -11627,7 +11626,7 @@ module.exports = function (cb) {
   new Setting({                                                                 //TODO---
     visibility: 'invisible',
     title: 'AFK Autoresponse',
-    description: 'Aotomaticaly respond to messages after you were afk for x amount of Time.',
+    description: 'Automaticaly respond to messages after you were afk for x amount of Time.',
     type: 'autoafk',
     defaultVal: '',
     function: function (val) {

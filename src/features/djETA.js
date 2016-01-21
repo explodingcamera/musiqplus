@@ -2,12 +2,11 @@ var $ = require('jquery');
 var api;
 var waitTime;
 var func = function () {
-  if(API.queue.getInfo().length == API.queue.getPosition() || API.queue.getInfo().length == -1)
-    waitTime = API.queue.getInfo().length * 242.4;
-  else if(API.queue.getPosition() > API.queue.getInfo().length)
-    waitTime = (API.queue.getPosition() * 242.4) - 242.4;
-  else
-    waitTime = API.queue.getInfo().length * 242.4;
+  if(API.queue.getPosition() == -1)                               //Not in waitlist
+    waitTime = (API.queue.getInfo().length * 242.4) + 242.4 ;
+  else if(API.queue.getInfo().length >= API.queue.getPosition())  //in Waitlist
+    waitTime = (API.queue.getPosition() * 242.4);
+
   console.log(waitTime);
   $('#mqpeta').remove();
   $('.dash .left').append('<div class="labels" id="mqpeta"><p class="label now" title="Parisyte - Meteor" data-ng-bind="currentSong">&nbsp;&nbsp; ETA: ' +

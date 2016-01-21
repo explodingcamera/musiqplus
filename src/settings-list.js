@@ -108,7 +108,7 @@ module.exports = function (cb) {
   new Setting({                                                                 //TODO---
     visibility: 'invisible',
     title: 'AFK Autoresponse',
-    description: 'Aotomaticaly respond to messages after you were afk for x amount of Time.',
+    description: 'Automaticaly respond to messages after you were afk for x amount of Time.',
     type: 'autoafk',
     defaultVal: '',
     function: function (val) {
