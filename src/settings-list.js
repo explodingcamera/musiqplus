@@ -1,3 +1,4 @@
+var $ = require('jquery');
 var feature = require('./features');
 module.exports = function (cb) {
   musiqplus.settingsN = 0;
@@ -105,18 +106,44 @@ module.exports = function (cb) {
     },
   });
 
-  new Setting({                                                                 //TODO---
-    visibility: 'invisible',
+  new Setting({
+    visibility: 'visible',
     title: 'AFK Autoresponse',
     description: 'Automaticaly respond to messages after you were afk for x amount of Time.',
     type: 'autoafk',
     defaultVal: '',
     function: function (val) {
-      //feature.afkResponse(val);
+      feature.afkResponse(val);
+      setTimeout(function () {
+        $('#mqplusafk').val(val);
+        $('#mqplusafk').change(function () {
+          console.log(1);
+          musiqplus.current.ids[musiqplus.settingByTitle['AFKAutoresponse'].id].val = $(this)[0].value;
+          musiqplus.settings.save();
+        })
+      }, 1200)
     },
-  });                                                                           //-------
+  });
+  new Setting({
+    visibility: 'hidden',
+    title: 'mqplusafktime',
+    description: '',
+    type: 'none',
+    defaultVal: '10',
+    function: function (val) {
+      setTimeout(function () {
+        $('#mqplusafktime').val(val);
+        musiqplus.tmp.afk = val * 1000 * 60
+        $('#mqplusafktime').change(function () {
+          musiqplus.current.ids[musiqplus.settingByTitle['mqplusafktime'].id].val = $(this)[0].value;
+          musiqplus.settings.save();
+          musiqplus.tmp.afk = $(this)[0].value * 1000 * 60;
+        })
+      }, 1200);
+    },
+  });
   new Setting({                                                                 //TODO---
-    visibility: 'invisible',
+    visibility: 'hidden',
     title: 'Import Playlist',
     description: 'Imports a playlist from YouTube.',
     type: 'playlistid',
@@ -125,6 +152,5 @@ module.exports = function (cb) {
       //feature.importPlaylist(val);
     },
   });
-
   cb();
 }

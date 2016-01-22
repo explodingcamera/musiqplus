@@ -217,3 +217,11 @@ input[type=text], input[type=email], input[type=search], input[type=password] {
      75% {color: #FF7400;}
      100% {color: #C5F700;}
 }
+
+.hist-sng {
+    width: calc(100% - 30px);
+    height: 69px;
+    margin: 10px;
+    vertical-align: middle;
+    background: rgba(40, 44, 53, 0.68);
+}

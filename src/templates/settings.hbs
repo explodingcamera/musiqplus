@@ -30,6 +30,12 @@
 					      <input id="mqplusbg" type="text" placeholder="Image URL">
 					    </div>
 							{{/ifCond}}
+							{{#ifCond this.type '==' 'autoafk'}}
+							<div class="ui input focus">
+								<input id="mqplusafk" type="text" placeholder="Message">
+								<input id="mqplusafktime" type="number" min="0" max="60">
+							</div>
+							{{/ifCond}}
 	          </div>
 	        </div>
 				{{/if}}

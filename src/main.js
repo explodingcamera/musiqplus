@@ -13,7 +13,7 @@ global.musiqplus = {
 };
 
 musiqplus.about = {
-	version: '0.4.7',
+	version: '0.5.0',
 }
 
 musiqplus.settings = new Settings();

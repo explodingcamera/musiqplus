@@ -1,7 +1,6 @@
 var $ = require('jquery');
 var id;
 module.exports = function (val) {
-  console.debug(val + musiqplus.tmp.autolike);
   var like = function () {
     if(!$('.btn-upvote').hasClass('active'))
     $('.btn-upvote').click()
@@ -13,7 +12,6 @@ module.exports = function (val) {
       id = API.on("advance", function(x){
         if(!$('.btn-upvote').hasClass('active'))
         $('.btn-upvote').click()
-        console.log(1);
       });
       musiqplus.tmp.autolike = 1;
     }

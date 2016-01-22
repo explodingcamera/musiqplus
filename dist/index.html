@@ -13,7 +13,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
   </head>
   <body>
-    <script>API = {
+    <script>
+    API = {
   		chat: {
   			system: function (y) {
   				console.debug(y)
@@ -35,9 +36,18 @@
       },
       off: function (e, w) {
         return 1;
+      },
+      queue: {
+        getPosition: function () {
+          return 1;
+        },
+        getInfo: function () {
+          return 1;
+        }
       }
-  	}</script>
-    <div class="container-fluid">
+    }
+    </script>
+  <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
 			<nav class="navbar navbar-default" role="navigation">
