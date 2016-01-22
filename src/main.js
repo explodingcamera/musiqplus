@@ -56,7 +56,6 @@ musiqplus.main = function() {
 			API.chat.system('You need to login to use MusiqPlus!');
 		tmp ++;
 	 }
-
 	var initialFuncs = function() {
 		feature.loadFonts(([ 'Lobster::latin', 'Open+Sans:400,300,700,800,600:latin' ]));
 		initHelpers();
@@ -65,6 +64,12 @@ musiqplus.main = function() {
 		API.chat.system('Sucessfully loaded Musiqplus v' + musiqplus.about.version + "!");
 		API.chat.system('Welcome ' + musiqplus.User.un + "!");
 		chat();
+		setTimeout(function () {
+			if(API.room.getInfo().name == 'Tastycat')
+				$('head').append("<style>[data-uid='101']{-webkit-animation: pulse 6s infinite alternate;}</style>");
+			else if(API.room.getInfo().name == "Welcome to musiqpad!")
+				$('head').append("<style>[data-uid='63']{-webkit-animation: pulse 6s infinite alternate;}</style>");
+		}, 2000)
 	}
 	$(function() {
 		getUser()

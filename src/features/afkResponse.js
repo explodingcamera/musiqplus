@@ -1,7 +1,7 @@
 var $ = require('jquery');
 var func = function () {
   API.on('chat', function(e) {
-    if(e.message.indexOf(musiqplus.User.un) > -1 && /*e.message.indexOf(musiqplus.User.uid) == -1*/ && musiqplus.isAfk == true && musiqplus.tmp.afk != 0) {
+    if(e.message.indexOf(musiqplus.User.un) > -1 /* && e.message.indexOf(musiqplus.User.uid) == -1*/ && musiqplus.isAfk == true && musiqplus.tmp.afk != 0) {
       var user = API.room.getUser(e.uid).un;
       if(user == "explodingcamera")
         API.chat.send("@" + user + " " + musiqplus.current.ids[musiqplus.settingByTitle['AFKAutoresponse'].id].val);

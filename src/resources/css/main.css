@@ -198,16 +198,13 @@ input[type=text], input[type=email], input[type=search], input[type=password] {
     -webkit-appearance: none;
     -moz-appearance: none;
 }
+
 /* ----------------------------------------------------------------------------- */
 
 #room-bg {
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover !important;
-}
-
-[data-uid="63"] {
-	-webkit-animation: pulse 6s infinite alternate;
 }
 
 @-webkit-keyframes pulse {
@@ -224,4 +221,9 @@ input[type=text], input[type=email], input[type=search], input[type=password] {
     margin: 10px;
     vertical-align: middle;
     background: rgba(40, 44, 53, 0.68);
+}
+
+#mqpChangelog ul {
+  padding-right: 30px;
+  list-style-type: none
 }

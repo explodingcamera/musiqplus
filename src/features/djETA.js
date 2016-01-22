@@ -9,6 +9,8 @@ var func = function () {
   waitTime = Math.round(((waitTime / 60) + 0.00001) * 100) / 100;
   var minutes = Math.floor(waitTime);
   var seconds = Math.floor((waitTime - minutes) * 60);
+  if(minutes < 10)
+    minutes = '0' + minutes.toString();
   $('#mqpeta').remove();
   $('.dash .left').append('<div class="labels" id="mqpeta"><p class="label now" title="Parisyte - Meteor" data-ng-bind="currentSong">&nbsp;&nbsp; ETA: ' +
   minutes + ":" + seconds +

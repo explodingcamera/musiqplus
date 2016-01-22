@@ -59,5 +59,6 @@ var gui = function () {
 }
 module.exports = gui;
 musiqplus.toggleSettings = function () {
-  $('#mqplussettings').slideToggle()
+  $('#mqplussettings').slideToggle();
+  $('.logo-menu').fadeOut();
 }
