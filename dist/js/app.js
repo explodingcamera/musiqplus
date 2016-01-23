@@ -11530,10 +11530,6 @@ musiqplus.main = function() {
 		if(API.room.isLoggedIn() == true) {
 			musiqplus.User = API.room.getUser();
 			initialFuncs();
-			if(API.room.getInfo().name == 'Tastycat')
-				$('head').append("<style>[data-uid='101']{-webkit-animation: pulse 6s infinite alternate;}</style>");
-			else if(API.room.getInfo().name == "Welcome to musiqpad!")
-				$('head').append("<style>[data-uid='63']{-webkit-animation: pulse 6s infinite alternate;}</style>");
 			return;
 		}
 		setTimeout(getUser, 1200);
@@ -11549,6 +11545,12 @@ musiqplus.main = function() {
 		API.chat.system('Sucessfully loaded Musiqplus v' + musiqplus.about.version + "!");
 		API.chat.system('Welcome ' + musiqplus.User.un + "!");
 		chat();
+		setTimeout(function () {
+			if(API.room.getInfo().name == 'Tastycat')
+				$('head').append("<style>[data-uid='101']{-webkit-animation: pulse 6s infinite alternate;}</style>");
+			else if(API.room.getInfo().name == "Welcome to musiqpad!")
+				$('head').append("<style>[data-uid='63']{-webkit-animation: pulse 6s infinite alternate;}</style>");
+		}, 2000)
 	}
 	$(function() {
 		getUser()
@@ -11856,9 +11858,9 @@ module.exports = HandlebarsCompiler.template({"1":function(container,depth0,help
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return "<div id=\"mqplussettings\">\r\n	<div id=\"mqplushead\">\r\n		<h1>Musiqplus</h1>\r\n		<h2 id=\"mqplusnav\">\r\n      <a class=\"mqplusactive\" href=\"#\">Settings</a>\r\n			<a href=\"#\">Changelog</a><!--\r\n      <a href=\"#\">Theme</a> <a href=\"#\">Shortcuts</a>-->\r\n    </h2>\r\n    <span class=\"mqplusclose\" onclick=\"musiqplus.toggleSettings()\">×</span>\r\n	</div>\r\n	<div id=\"mqpluscontent\">\r\n		<div class=\"mqplusactive mqpluscontentpart\" id=\"mqpSettings\">\r\n"
+  return "<div id=\"mqplussettings\">\r\n	<div id=\"mqplushead\">\r\n		<h1>Musiqplus</h1>\r\n		<h2 id=\"mqplusnav\">\r\n      <a class=\"mqplusactive\" href=\"#\">Settings</a>\r\n			<a href=\"#\">Changelog</a>\r\n      <a target=\"_blank\" href=\"https://music.explodingcamera.com/\">About</a>\r\n    </h2>\r\n    <span class=\"mqplusclose\" onclick=\"musiqplus.toggleSettings()\">×</span>\r\n	</div>\r\n	<div id=\"mqpluscontent\">\r\n		<div class=\"mqplusactive mqpluscontentpart\" id=\"mqpSettings\">\r\n"
     + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.setting : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    </div>\r\n		<div id=\"mqpChangelog\" class=\"mqpluscontentpart\">\r\n			<p><strong>Changelog</strong></p>\r\n				<ul>\r\n				<li><p><strong>18.01.2016</strong> AutoLike/Join are now fixed and don't spam the server anymore. Song download is implemented but I still need to fix some serverstuff beaucause chrome doesn't want me to use an iframe with a non-ssl site :( . I've also added some new Planned Features.</p></li>\r\n				<li><p><strong>19.01.2016</strong> Song download is now implemented and Custom Backgrounds added.</p></li>\r\n				<li><p><strong>20.01.2016</strong> Userscript extension loader added, bugs fixed and new Plug theme. I've also added DJ ETA.</p></li>\r\n				<li><p><strong>21.01.2016</strong> ETA fixed</p></li>\r\n				<li><p><strong>22.01.2016</strong> ETA fixed again + added AFK Autoresponse</p></li>\r\n				</ul>\r\n		</div>\r\n		<div id=\"mqpShortcuts\" class=\"mqpluscontentpart\">\r\n\r\n		</div>\r\n	</div>\r\n	<div id=\"mqplusfooter\"></div>\r\n</div>\r\n";
+    + "    </div>\r\n		<div id=\"mqpChangelog\" class=\"mqpluscontentpart\">\r\n			<p><strong>Changelog</strong></p>\r\n				<ul>\r\n				<li><p><strong>18.01.2016</strong> AutoLike/Join are now fixed and don't spam the server anymore. Song download is implemented but I still need to fix some serverstuff beaucause chrome doesn't want me to use an iframe with a non-ssl site :( . I've also added some new Planned Features.</p></li>\r\n				<li><p><strong>19.01.2016</strong> Song download is now implemented and Custom Backgrounds added.</p></li>\r\n				<li><p><strong>20.01.2016</strong> Userscript extension loader added, bugs fixed and new Plug theme. I've also added DJ ETA.</p></li>\r\n				<li><p><strong>21.01.2016</strong> ETA fixed</p></li>\r\n				<li><p><strong>22.01.2016</strong> ETA fixed again + added AFK Autoresponse</p></li>\r\n				</ul>\r\n		</div>\r\n		<div id=\"mqpAbout\" class=\"mqpluscontentpart\">\r\n\r\n		</div>\r\n	</div>\r\n	<div id=\"mqplusfooter\"></div>\r\n</div>\r\n";
 },"useData":true});
 
 },{"hbsfy/runtime":22}]},{},[37])
