@@ -11508,6 +11508,17 @@ musiqplus.about = {
 
 musiqplus.settings = new Settings();
 
+
+musiqplus.fullscreen = function () {
+		var el = $('.video')[0];
+		if (el.requestFullScreen) {
+	  el.requestFullScreen();
+	} else if (el.mozRequestFullScreen) {
+	  el.mozRequestFullScreen();
+	} else if (el.webkitRequestFullScreen) {
+	  el.webkitRequestFullScreen();
+	}
+}
 musiqplus.main = function() {
 	var initHelpers = function () {
 		// Helper by http://stackoverflow.com/a/16315366/4811589
@@ -11804,7 +11815,7 @@ module.exports = HandlebarsCompiler.template({"compiler":[7,">= 4.0.0"],"main":f
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<div class=\"tools left btn-lock\" title=\"Download current Song\" onclick=\"musiqplus.downloadSong()\">\r\n  <div class=\"clickable mdi mdi-download\">\r\n\r\n  </div>\r\n</div>\r\n";
+    return "<div class=\"tools left btn-lock\" title=\"Download current Song\" onclick=\"musiqplus.downloadSong()\">\r\n  <div class=\"clickable mdi mdi-download\">\r\n\r\n  </div>\r\n</div>\r\n<div class=\"tools left btn-lock\" title=\"Real FULLSCREEN\" onclick=\"musiqplus.fullscreen()\">\r\n  <div class=\"clickable mdi mdi-fullscreen-exit\">\r\n\r\n  </div>\r\n</div>\r\n";
 },"useData":true});
 
 },{"hbsfy/runtime":22}],43:[function(require,module,exports){
@@ -11869,7 +11880,7 @@ module.exports = HandlebarsCompiler.template({"1":function(container,depth0,help
 
   return "<div id=\"mqplussettings\">\r\n	<div id=\"mqplushead\">\r\n		<h1>Musiqplus</h1>\r\n		<h2 id=\"mqplusnav\">\r\n      <a class=\"mqplusactive\" href=\"#\">Settings</a>\r\n			<a href=\"#\">Changelog</a>\r\n      <a target=\"_blank\" href=\"https://music.explodingcamera.com/\">About</a>\r\n    </h2>\r\n    <span class=\"mqplusclose\" onclick=\"musiqplus.toggleSettings()\">×</span>\r\n	</div>\r\n	<div id=\"mqpluscontent\">\r\n		<div class=\"mqplusactive mqpluscontentpart\" id=\"mqpSettings\">\r\n"
     + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.setting : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    </div>\r\n		<div id=\"mqpChangelog\" class=\"mqpluscontentpart\">\r\n			<p><strong>Changelog</strong></p>\r\n				<ul>\r\n				<li><p><strong>18.01.2016</strong> AutoLike/Join are now fixed and don't spam the server anymore. Song download is implemented but I still need to fix some serverstuff beaucause chrome doesn't want me to use an iframe with a non-ssl site :( . I've also added some new Planned Features.</p></li>\r\n				<li><p><strong>19.01.2016</strong> Song download is now implemented and Custom Backgrounds added.</p></li>\r\n				<li><p><strong>20.01.2016</strong> Userscript extension loader added, bugs fixed and new Plug theme. I've also added DJ ETA.</p></li>\r\n				<li><p><strong>21.01.2016</strong> ETA fixed</p></li>\r\n				<li><p><strong>22.01.2016</strong> ETA fixed again + added AFK Autoresponse</p></li>\r\n				</ul>\r\n		</div>\r\n		<div id=\"mqpAbout\" class=\"mqpluscontentpart\">\r\n\r\n		</div>\r\n	</div>\r\n	<div id=\"mqplusfooter\"></div>\r\n</div>\r\n";
+    + "    </div>\r\n		<div id=\"mqpChangelog\" class=\"mqpluscontentpart\">\r\n			<p><strong>Changelog</strong></p>\r\n				<ul>\r\n				<li><p><strong>18.01.2016</strong> AutoLike/Join are now fixed and don't spam the server anymore. Song download is implemented but I still need to fix some serverstuff beaucause chrome doesn't want me to use an iframe with a non-ssl site :( . I've also added some new Planned Features.</p></li>\r\n				<li><p><strong>19.01.2016</strong> Song download is now implemented and Custom Backgrounds added.</p></li>\r\n				<li><p><strong>20.01.2016</strong> Userscript extension loader added, bugs fixed and new Plug theme. I've also added DJ ETA.</p></li>\r\n				<li><p><strong>21.01.2016</strong> ETA fixed</p></li>\r\n				<li><p><strong>22.01.2016</strong> ETA fixed again + added AFK Autoresponse</p></li>\r\n				<li><p><strong>24.01.2016</strong> real Fullscreen Video option added (Button is next to the YT Download Button).</p></li>\r\n				</ul>\r\n		</div>\r\n		<div id=\"mqpAbout\" class=\"mqpluscontentpart\">\r\n\r\n		</div>\r\n	</div>\r\n	<div id=\"mqplusfooter\"></div>\r\n</div>\r\n";
 },"useData":true});
 
 },{"hbsfy/runtime":22}]},{},[37])

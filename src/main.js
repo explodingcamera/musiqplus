@@ -18,6 +18,17 @@ musiqplus.about = {
 
 musiqplus.settings = new Settings();
 
+
+musiqplus.fullscreen = function () {
+		var el = $('.video')[0];
+		if (el.requestFullScreen) {
+	  el.requestFullScreen();
+	} else if (el.mozRequestFullScreen) {
+	  el.mozRequestFullScreen();
+	} else if (el.webkitRequestFullScreen) {
+	  el.webkitRequestFullScreen();
+	}
+}
 musiqplus.main = function() {
 	var initHelpers = function () {
 		// Helper by http://stackoverflow.com/a/16315366/4811589
