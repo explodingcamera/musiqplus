@@ -39,14 +39,14 @@ module.exports = function (cb) {
       feature.AutoJoin(val)
     },
   });
-  new Setting({                             //Not supported anymore but I don't want to destroy peoples save data.
-    visibility: 'hidden',
+  new Setting({
+    visibility: 'visible',
     title: 'AutoClear Console',
     description: 'Disables Console',
     type: 'switch',
     defaultVal: false,
     function: function (val) {
-      //feature.clearConsole(val);
+      feature.clearConsole(val);
     },
   });
   new Setting({
