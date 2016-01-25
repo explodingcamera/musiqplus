@@ -11275,6 +11275,9 @@ module.exports = function (val) {
 },{"jquery":23}],29:[function(require,module,exports){
 var $ = require('jquery');
 var func = function () {
+  setTimeout(function () {
+    musiqplus.isAfk = false;
+  }, 2000);
   API.on('chat', function(e) {
     if(e.message.indexOf(musiqplus.User.un) != -1 && musiqplus.isAfk == true && musiqplus.tmp.afk != 0) {
       var user = API.room.getUser(e.uid).un;
@@ -11284,31 +11287,32 @@ var func = function () {
   });
 }
 
-var log = function () {return;};
 
 var checkIfAfk = function () {
   var debugtmp = 0;
   setInterval(function () {
-    log(musiqplus.isAfk + " : " + debugtmp);
+    //console.log(musiqplus.isAfk + " : " + debugtmp);
     debugtmp -= 1;
   }, 1000);
   var tmp = 0;
   var timeout;
   var reset = function () {
     debugtmp = musiqplus.tmp.afk / 1000;
-    log('RESET!')
     clearTimeout(timeout);
     musiqplus.isAfk = false;
-    var timeout = setTimeout(function () {
+    timeout = setTimeout(function () {
       musiqplus.isAfk = true;
     }, musiqplus.tmp.afk);
   }
   $('html').mousemove(function(){
     tmp++;
-    if(tmp >= 90) {
+    if(tmp >= 20) {
         reset();
         tmp = 0;
     }
+  });
+  $('html').click(function(){
+      reset();
   });
   reset();
 }
@@ -11349,8 +11353,8 @@ var func = function () {
   waitTime = Math.round(((waitTime / 60) + 0.00001) * 100) / 100;
   var minutes = Math.floor(waitTime);
   var seconds = Math.floor((waitTime - minutes) * 60);
-  if(minutes < 10)
-    minutes = '0' + minutes.toString();
+  if(seconds < 10)
+    seconds = '0' + seconds.toString();
   $('#mqpeta').remove();
   $('.dash .left').append('<div class="labels" id="mqpeta"><p class="label now" title="Parisyte - Meteor" data-ng-bind="currentSong">&nbsp;&nbsp; ETA: ' +
   minutes + ":" + seconds +
@@ -11635,13 +11639,13 @@ module.exports = function (cb) {
     },
   });
   new Setting({
-    visibility: 'visible',
+    visibility: 'hidden',
     title: 'AutoClear Console',
     description: 'Disables Console',
     type: 'switch',
     defaultVal: false,
     function: function (val) {
-      feature.clearConsole(val);
+      //feature.clearConsole(val);
     },
   });
   new Setting({

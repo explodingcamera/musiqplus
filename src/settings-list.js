@@ -40,13 +40,13 @@ module.exports = function (cb) {
     },
   });
   new Setting({
-    visibility: 'visible',
+    visibility: 'hidden',
     title: 'AutoClear Console',
     description: 'Disables Console',
     type: 'switch',
     defaultVal: false,
     function: function (val) {
-      feature.clearConsole(val);
+      //feature.clearConsole(val);
     },
   });
   new Setting({
