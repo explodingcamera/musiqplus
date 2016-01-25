@@ -9,7 +9,8 @@ global.musiqplus = {
 	tmp: {
 		autolike: 0,
 		autojoin: 0
-	}
+	},
+	isAfk: false
 };
 
 musiqplus.about = {

@@ -11265,13 +11265,11 @@ module.exports = function (val) {
 var $ = require('jquery');
 var func = function () {
   API.on('chat', function(e) {
-    if(e.message.indexOf(musiqplus.User.un) > -1 && musiqplus.isAfk == true && musiqplus.tmp.afk != 0) {
+    if(e.message.indexOf(musiqplus.User.un) != -1 && musiqplus.isAfk == true && musiqplus.tmp.afk != 0) {
       var user = API.room.getUser(e.uid).un;
-      if(user == "explodingcamera")
+      if(user != musiqplus.User.un)
         API.chat.send("@" + user + " " + musiqplus.current.ids[musiqplus.settingByTitle['AFKAutoresponse'].id].val);
     }
-    if(e.message.indexOf(musiqplus.User.uid) == -1)
-      musiqplus.isAfk = false;
   });
 }
 
@@ -11499,7 +11497,8 @@ global.musiqplus = {
 	tmp: {
 		autolike: 0,
 		autojoin: 0
-	}
+	},
+	isAfk: false
 };
 
 musiqplus.about = {
