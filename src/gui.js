@@ -43,11 +43,11 @@ var gui = function () {
   })
   $("#mqp"+ musiqplus.settingByTitle["ChangeTheme"].options[musiqplus.current.ids[musiqplus.settingByTitle["ChangeTheme"].id].val].name).attr('selected','selected');
   $('#mqplusbg').change(function () {
-    if (feature.validDomain($(this)[0].value == true)) {
-      console.debug(1);
+    console.debug(feature.validDomain($(this)[0].value));
+    if (feature.validDomain($(this)[0].value)) {
       musiqplus.current.ids[musiqplus.settingByTitle['CustomBackground'].id].val = $(this)[0].value;
-      feature.customBG();
       musiqplus.settings.save();
+      feature.customBG();
     }
     else {
       $('#room-bg').removeAttr("style");

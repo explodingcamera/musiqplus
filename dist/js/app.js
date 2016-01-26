@@ -11338,7 +11338,7 @@ var $ = require('jquery');
 module.exports = function () {
   console.debug('Selected Background:'+musiqplus.current.ids[musiqplus.settingByTitle['CustomBackground'].id].val);
   if(musiqplus.current.ids[musiqplus.settingByTitle['CustomBackground'].id].val != "")
-  $('#room-bg').css('cssText', 'background-image: url(' + musiqplus.current.ids[musiqplus.settingByTitle['CustomBackground'].id].val + ") !important")
+    $('#room-bg').css('cssText', 'background-image: url(' + musiqplus.current.ids[musiqplus.settingByTitle['CustomBackground'].id].val + ") !important");
 }
 
 },{"jquery":23}],32:[function(require,module,exports){
@@ -11479,11 +11479,11 @@ var gui = function () {
   })
   $("#mqp"+ musiqplus.settingByTitle["ChangeTheme"].options[musiqplus.current.ids[musiqplus.settingByTitle["ChangeTheme"].id].val].name).attr('selected','selected');
   $('#mqplusbg').change(function () {
-    if (feature.validDomain($(this)[0].value == true)) {
-      console.debug(1);
+    console.debug(feature.validDomain($(this)[0].value));
+    if (feature.validDomain($(this)[0].value)) {
       musiqplus.current.ids[musiqplus.settingByTitle['CustomBackground'].id].val = $(this)[0].value;
-      feature.customBG();
       musiqplus.settings.save();
+      feature.customBG();
     }
     else {
       $('#room-bg').removeAttr("style");

@@ -16,19 +16,19 @@ var func = function () {
 var checkIfAfk = function () {
   var debugtmp = 0;
   setInterval(function () {
-    console.log(musiqplus.isAfk + " : " + debugtmp);
+    //console.log(musiqplus.isAfk + " : " + debugtmp);
     debugtmp -= 1;
   }, 1000);
   var tmp = 0;
   var timeout;
   var reset = function () {
     debugtmp = musiqplus.tmp.afk / 1000;
-    //clearTimeout(timeout);
-    //musiqplus.isAfk = false;
-    /*timeout = setTimeout(function () {
+    clearTimeout(timeout);
+    musiqplus.isAfk = false;
+    timeout = setTimeout(function () {
       musiqplus.isAfk = true;
     }, musiqplus.tmp.afk);
-  */}
+  }
   $('html').mousemove(function(){
     tmp++;
     if(tmp >= 20) {
