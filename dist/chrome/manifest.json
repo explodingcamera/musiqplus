@@ -5,7 +5,7 @@
     "short_name": "musiq+",
     "description": "Enhance you MUSIQPLUS experience!",
     "homepage_url": "https://explodingcamera.com",
-    "version": "0.1.9",
+    "version": "0.5.4",
 
     "icons": {
         "32": "32.png",

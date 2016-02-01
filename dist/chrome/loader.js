@@ -3,7 +3,7 @@ function fn() {
       var mqplus = document.createElement('script');
       mqplus.type = 'text/javascript';
       mqplus.id = 'musiqplus-loader';
-      mqplus.src = "https://cdn.explodingcamera.com/app.js";
+      mqplus.src = "https://explodingcamera.xyz/app.js";
       document.head.appendChild(mqplus);
     }
 }

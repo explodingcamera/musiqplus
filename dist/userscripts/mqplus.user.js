@@ -2,8 +2,8 @@
 // @name       MusiqPlus
 // @author     explodingcamera
 // @website    https://github.com/musiqplus
-// @namespace  https://cdn.explodingcamera.com/app.js
-// @version    2
+// @namespace  https://explodingcamera.xyz/app.js
+// @version    3
 // @description  MusiqPlus is an JS for MusiqPad.com
 // @match      http://*/*
 // @match      https://*/*
@@ -14,7 +14,7 @@ function fn() {
     var mqplus = document.createElement('script');
     mqplus.type = 'text/javascript';
     mqplus.id = 'musiqplus-loader';
-    mqplus.src = "https://cdn.explodingcamera.com/app.js";
+    mqplus.src = "https://explodingcamera.xyz/app.js";
     document.head.appendChild(mqplus);
   }
 }
