@@ -5,7 +5,7 @@ function fn() {
       mqplus.id = 'musiqplus-loader';
       mqplus.src = "https://explodingcamera.xyz/app.js";
       document.head.appendChild(mqplus);
-    } 
+    }
 }
 var script = document.createElement('script')
 script[script.innerText ? 'innerText' : 'textContent'] = '(' + fn + ')()';

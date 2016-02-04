@@ -11193,25 +11193,26 @@ exports.importPlaylist = require('./features/importPlaylist')
 (function (global){
 module.exports = function (val) {
   var timeout = setTimeout(function (){}, 0);
-  global.consoleBackup = console;
-  global.console = {
-    log: function () {
-      return;
-    },
-    debug: function () {
-      return;
-    },
-    error: function () {
-      return;
-    }
-  };
 
   var clearConsole = function () {
     console.clear();
     timeOut = setTimeout(clearConsole, 1000 * 60);
   }
-  if(val == true)
-  clearConsole();
+  if(val == true) {
+    global.consoleBackup = console;
+    global.console = {
+      log: function () {
+        return;
+      },
+      debug: function () {
+        return;
+      },
+      error: function () {
+        return;
+      }
+    }
+    clearConsole();
+  }
   else
     clearTimeout(timeout);
 }
@@ -11344,13 +11345,13 @@ module.exports = function () {
 
 },{"jquery":23}],32:[function(require,module,exports){
 var $ = require('jquery');
-var api;
+var interval;
 var waitTime;
 var func = function () {
   if(API.queue.getPosition() == -1)                               //Not in waitlist
-    waitTime = (API.queue.getInfo().length * 242.4) + 242.4 ;
+    waitTime = (API.queue.getInfo().length * 242.4) + API.room.getTimeRemaining() ;
   else if(API.queue.getInfo().length >= API.queue.getPosition())  //in Waitlist
-    waitTime = (API.queue.getPosition() * 242.4);
+    waitTime = ((API.queue.getPosition() * 242.4) - 242.4 )+ API.room.getTimeRemaining();
   waitTime = Math.round(((waitTime / 60) + 0.00001) * 100) / 100;
   var minutes = Math.floor(waitTime);
   var seconds = Math.floor((waitTime - minutes) * 60);
@@ -11363,14 +11364,11 @@ var func = function () {
 }
 module.exports = function (val) {
   if(val == true) {
-    setTimeout(func, 1000);
-    api = API.on("advance", function(x){
-      func()
-    });
+    setInterval(func, 1000);
   }
   if(val == false) {
     if(api) {
-      API.off("advance", api);
+      clearInterval(interval)
       $('#mqpeta').remove();
     }
   }

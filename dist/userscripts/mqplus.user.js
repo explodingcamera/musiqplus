@@ -10,13 +10,8 @@
 // @copyright  (C) 2016 Henry Gressmann
 // ==/UserScript==
 function fn() {
-  if(typeof API == "object") {
-    var mqplus = document.createElement('script');
-    mqplus.type = 'text/javascript';
-    mqplus.id = 'musiqplus-loader';
-    mqplus.src = "https://explodingcamera.xyz/app.js";
-    document.head.appendChild(mqplus);
-  }
+  if(typeof API != "undefined" && typeof API.DATA == "object")
+    $.getScript('https://cdn.explodingcamera.com/app.js');
 }
 (function () {
     var scriptElement = document.createElement( "script" );
