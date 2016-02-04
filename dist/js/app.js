@@ -11187,8 +11187,9 @@ exports.customBG = require('./features/customBG');
 exports.validDomain = require('./features/validDomain');
 exports.djETA = require('./features/djETA');
 exports.afkResponse = require('./features/afkResponse');
+exports.importPlaylist = require('./features/importPlaylist')
 
-},{"./features/AutoClear":26,"./features/AutoJoin":27,"./features/AutoLike":28,"./features/afkResponse":29,"./features/changeTheme":30,"./features/customBG":31,"./features/djETA":32,"./features/downloadSong":33,"./features/loadFonts":34,"./features/validDomain":35}],26:[function(require,module,exports){
+},{"./features/AutoClear":26,"./features/AutoJoin":27,"./features/AutoLike":28,"./features/afkResponse":29,"./features/changeTheme":30,"./features/customBG":31,"./features/djETA":32,"./features/downloadSong":33,"./features/importPlaylist":34,"./features/loadFonts":35,"./features/validDomain":36}],26:[function(require,module,exports){
 (function (global){
 module.exports = function (val) {
   var timeout = setTimeout(function (){}, 0);
@@ -11412,6 +11413,34 @@ module.exports = function () {
 }
 
 },{}],34:[function(require,module,exports){
+(function (global){
+var $ = require('jquery');
+module.exports = function () {
+  global.musiqplus.importPlaylist = function (playlist) {
+    if(playlist) {
+      var playlist = $('mqplusplaylist')[0].value;
+      if(playlist.length > 34) {
+        var reg = new RegExp("[&?]list=([a-z0-9_]+)","i");
+        var match = reg.exec(playlist);
+        playlist = match[1];
+      }
+      API.playlist.import(playlist);
+    }
+    $('#mqplusplaylistbtn').click(function () {
+      var playlist = $('#mqplusplaylist')[0].value;
+      if(playlist.length > 34) {
+        var reg = new RegExp("[&?]list=([a-z0-9_]+)","i");
+        var match = reg.exec(playlist);
+        playlist = match[1];
+      }
+      API.playlist.import(playlist);
+    })
+  }
+}
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+
+},{"jquery":23}],35:[function(require,module,exports){
 module.exports = function (fonts) {
   WebFontConfig = {
     google: { families: fonts }
@@ -11427,13 +11456,13 @@ module.exports = function (fonts) {
   })();
 }
 
-},{}],35:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 module.exports = function (str) {
   var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
   return regexp.test(str);
 }
 
-},{}],36:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 var $ = require('jquery');
 var feature = require('./features');
 var gui = function () {
@@ -11499,7 +11528,7 @@ musiqplus.toggleSettings = function () {
   $('.logo-menu').fadeOut();
 }
 
-},{"./features":25,"./templates/icon.hbs":41,"./templates/iconDl.hbs":42,"./templates/select.hbs":43,"./templates/settings.hbs":44,"jquery":23}],37:[function(require,module,exports){
+},{"./features":25,"./templates/icon.hbs":42,"./templates/iconDl.hbs":43,"./templates/select.hbs":44,"./templates/settings.hbs":45,"jquery":23}],38:[function(require,module,exports){
 (function (global){
 var settings = require('./settings');
 var $ = require('jquery');
@@ -11517,7 +11546,7 @@ global.musiqplus = {
 };
 
 musiqplus.about = {
-	version: '0.5.0',
+	version: '0.6.0',
 }
 
 musiqplus.settings = new Settings();
@@ -11594,9 +11623,9 @@ musiqplus.main();
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"./chat":24,"./features":25,"./gui":36,"./resources/css/main.css":38,"./settings":40,"hbsfy/runtime":22,"jquery":23}],38:[function(require,module,exports){
+},{"./chat":24,"./features":25,"./gui":37,"./resources/css/main.css":39,"./settings":41,"hbsfy/runtime":22,"jquery":23}],39:[function(require,module,exports){
 var css = ".checkboxwrapper {\n  float: right;\n  max-width: 300px;\n  padding-top: 2px;\n  text-align: center;\n  padding-right: 10px;\n}\ninput.mqpluscheckbox {\n  max-height: 0;\n  max-width: 0;\n  opacity: 0;\n}\ninput.mqpluscheckbox + label {\n  display: inline-block;\n  position: relative;\n  box-shadow: inset 0 0 0px 1px #d5d5d5;\n  text-indent: -5000px;\n  height: 30px;\n  width: 50px;\n  border-radius: 15px;\n}\ninput.mqpluscheckbox + label:before {\n  content: \"\";\n  position: absolute;\n  display: block;\n  height: 30px;\n  width: 30px;\n  top: 0;\n  left: 0;\n  border-radius: 15px;\n  background: rgba(19, 191, 17, 0);\n  -moz-transition: .25s ease-in-out;\n  -webkit-transition: .25s ease-in-out;\n  transition: .25s ease-in-out;\n}\ninput.mqpluscheckbox + label:after {\n  content: \"\";\n  position: absolute;\n  display: block;\n  height: 30px;\n  width: 30px;\n  top: 0;\n  left: 0px;\n  border-radius: 15px;\n  background: white;\n  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.2);\n  -moz-transition: .25s ease-in-out;\n  -webkit-transition: .25s ease-in-out;\n  transition: .25s ease-in-out;\n}\ninput.mqpluscheckbox:checked + label:before {\n  width: 50px;\n  background: #13bf11;\n}\ninput.mqpluscheckbox:checked + label:after {\n  left: 20px;\n  box-shadow: inset 0 0 0 1px #13bf11, 0 2px 4px rgba(0, 0, 0, 0.2);\n}\n#mqplussettings select,\n#mqplussettings button {\n  color: black;\n  font-family: 'Open Sans';\n  font-size: 2em;\n  margin-right: 2px;\n}\n#mqplussettings {\n  display: none;\n  margin: 0;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  margin-top: -350px;\n  margin-left: -425px;\n  color: #fff;\n  width: 900px;\n  height: 700px;\n  z-index: 100;\n  background-color: rgba(0,0,2,0.96);\n  -webkit-filter: drop-shadow(0px 3px 30px 1px);\n}\n#mqplussettings #mqplushead {\n  background-color: #1C1C1F;\n  height: 60px;\n  border-bottom: 5px solid #6951A9;\n}\n#mqplussettings #mqpluscontent {\n  overflow: auto;\n  height: calc(100% - 80px);\n}\n#mqplussettings #mqplusfooter {\n  height: 20px;\n}\n#mqplussettings h1 {\n  display: inline-block;\n  margin: 0;\n  font-family: lobster;\n  font-size: 38px;\n  padding-left: 8px;\n  padding-top: 4px;\n  opacity: .8;\n}\n#mqplussettings h2 {\n  font-weight: 100;\n  display: inline-block;\n  margin: 0;\n  font-family: 'Open Sans',sans-serif;\n  font-size: 38px;\n  padding-left: 8px;\n  padding-top: 4px;\n  opacity: .8;\n}\n#mqplussettings a {\n  text-decoration: none;\n  color: #A7A7A7;\n}\n#mqplussettings a:hover {\n  color: #fff;\n}\n#mqplussettings h1:hover,\n#mqplussettings h1:hover {\n  opacity: 1;\n}\n.mqplusclose {\n  font-size: 50px;\n  float: right;\n  right: 20px;\n  top: 0;\n  position: absolute;\n  color: #fff;\n  text-shadow: 0 1px 0 #000;\n  opacity: .2;\n}\n.mqplusmp3close {\n  font-size: 50px;\n  float: right;\n  right: 0px;\n  top: -17px;\n  position: absolute;\n  color: #000;\n  text-shadow: 0 1px 0 #000;\n  opacity: 1;\n  cursor: pointer;\n}\n#mqplussettings .mqplusclose:hover,\n#mqplussettings .mqplusclose:focus {\n  opacity: 1;\n  color: #fff;\n  cursor: pointer;\n}\n#mqpluscontent .mqpluscontentpart {\n  display: none;\n}\n#mqpluscontent .mqplusactive {\n  display: block !important;\n}\n#mqplussettings .mqplusactive {\n  color: #fff;\n}\n#mqplussettings .mqpsetting {\n  padding-left: 10px;\n  padding-bottom: 5px;\n}\n#mqplussettings .mqpsetting:nth-child(2n) {\n  background-color: #6951A9;\n}\n.mqplusinput {\n  float: right;\n  position: relative;\n  top: -30px;\n  right: 10px;\n}\n#mqplussettings p {\n  font-weight: 100;\n  display: inline-block;\n  margin: 0;\n  font-family: 'Open Sans',sans-serif;\n  font-size: 30px;\n  padding-left: 8px;\n  padding-top: 4px;\n}\n/* btn by Semantic UI----------------------------------------------------------- */\n.ui.primary.button {\n  box-shadow: 0 0 0 0 rgba(34,36,38,.15) inset;\n}\n.ui.primary.button,\n.ui.primary.buttons .button {\n  background-color: #2185d0;\n  color: #fff;\n  text-shadow: none;\n  background-image: none;\n}\n.ui.button,\n.ui.buttons .button,\n.ui.buttons .or {\n  font-size: 1rem;\n}\n.ui.button {\n  cursor: pointer;\n  display: inline-block;\n  outline: 0;\n  border: none;\n  vertical-align: baseline;\n  background: #e0e1e2;\n  color: rgba(0,0,0,.6);\n  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;\n  margin: 0 .25em 0 0;\n  padding: .78571429em 1.5em;\n  text-transform: none;\n  text-shadow: none;\n  font-weight: 700;\n  font-style: normal;\n  text-align: center;\n  text-decoration: none;\n  border-radius: .28571429rem;\n  box-shadow: 0 0 0 1px transparent inset,0 0 0 0 rgba(34,36,38,.15) inset;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  -webkit-transition: opacity .1s ease,background-color .1s ease,color .1s ease,box-shadow .1s ease,background .1s ease;\n  transition: opacity .1s ease,background-color .1s ease,color .1s ease,box-shadow .1s ease,background .1s ease;\n  will-change: '';\n  -webkit-tap-highlight-color: transparent;\n}\n.ui.input input:focus,\n.ui.input.focus input {\n  border-color: #85b7d9;\n  background: #fff;\n  color: rgba(0,0,0,.8);\n  box-shadow: none;\n}\n.ui.input input {\n  margin: 0;\n  max-width: 100%;\n  -webkit-box-flex: 1;\n  -webkit-flex: 1 0 auto;\n  -ms-flex: 1 0 auto;\n  flex: 1 0 auto;\n  outline: 0;\n  -webkit-tap-highlight-color: rgba(255,255,255,0);\n  text-align: left;\n  line-height: 1.2142em;\n  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;\n  padding: .67861429em 1em;\n  background: #fff;\n  border: 1px solid rgba(34,36,38,.15);\n  color: rgba(0,0,0,.87);\n  border-radius: .28571429rem;\n  -webkit-transition: box-shadow .1s ease,border-color .1s ease;\n  transition: box-shadow .1s ease,border-color .1s ease;\n  box-shadow: none;\n}\ninput[type=text],\ninput[type=email],\ninput[type=search],\ninput[type=password] {\n  -webkit-appearance: none;\n  -moz-appearance: none;\n}\n/* ----------------------------------------------------------------------------- */\n#room-bg {\n  background-position: center;\n  background-repeat: no-repeat;\n  background-size: cover !important;\n}\n@-webkit-keyframes pulse {\n  0% {\n    color: #519331;\n  }\n\n  25% {\n    color: #000EC5;\n  }\n\n  50% {\n    color: #F10034;\n  }\n\n  75% {\n    color: #FF7400;\n  }\n\n  100% {\n    color: #C5F700;\n  }\n}\n.hist-sng {\n  width: calc(100% - 30px);\n  height: 69px;\n  margin: 10px;\n  vertical-align: middle;\n  background: rgba(40, 44, 53, 0.68);\n}\n#mqpChangelog ul {\n  padding-right: 30px;\n  list-style-type: none;\n}\n"; (require("browserify-css").createStyle(css, { "href": "src\\resources\\css\\main.css"})); module.exports = css;
-},{"browserify-css":1}],39:[function(require,module,exports){
+},{"browserify-css":1}],40:[function(require,module,exports){
 var $ = require('jquery');
 var feature = require('./features');
 module.exports = function (cb) {
@@ -11639,13 +11668,13 @@ module.exports = function (cb) {
     },
   });
   new Setting({
-    visibility: 'hidden',
+    visibility: 'visible',
     title: 'AutoClear Console',
     description: 'Disables Console',
     type: 'switch',
     defaultVal: false,
     function: function (val) {
-      //feature.clearConsole(val);
+      feature.clearConsole(val);
     },
   });
   new Setting({
@@ -11667,6 +11696,11 @@ module.exports = function (cb) {
       name: 'Plug', //ID 2
       url: 'https://cdn.explodingcamera.com/plug.theme.css',
       id: 2
+    },
+    {
+      name: 'NCS Theme by bentenz5', //ID 3
+      url: 'https://cdn.rawgit.com/bentenz5/NCS/master/NCSTheme.css',
+      id: 3
     }],
     defaultVal: 1, //Defaut Theme
     function: function (themeid) {
@@ -11742,19 +11776,19 @@ module.exports = function (cb) {
     },
   });
   new Setting({                                                                 //TODO---
-    visibility: 'hidden',
+    visibility: 'visible',
     title: 'Import Playlist',
-    description: 'Imports a playlist from YouTube.',
-    type: 'playlistid',
+    description: 'Imports a playlist from YouTube. You need to reload your Page to see the new Playlist in your Settings.',
+    type: 'importPlaylist',
     defaultVal: '',
     function: function (val) {
-      //feature.importPlaylist(val);
+      feature.importPlaylist();
     },
   });
   cb();
 }
 
-},{"./features":25,"jquery":23}],40:[function(require,module,exports){
+},{"./features":25,"jquery":23}],41:[function(require,module,exports){
 var cookie = require('cookies-js');
 module.exports = Settings = function() {
 }
@@ -11818,21 +11852,21 @@ Settings.prototype.upgrade = function() {
 	musiqplus.settings.load(data);
 }
 
-},{"./settings-list":39,"cookies-js":2}],41:[function(require,module,exports){
+},{"./settings-list":40,"cookies-js":2}],42:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<div class=\"nav logo-btn-mqlussettings\" onclick=\"musiqplus.toggleSettings()\" data-ng-class=\"{'active' : prop.t == 2}\"\r\n title=\"MQPlusSettings\">\r\n    <i class=\"mdi mdi-plus-box\"></i>\r\n</div>\r\n";
 },"useData":true});
 
-},{"hbsfy/runtime":22}],42:[function(require,module,exports){
+},{"hbsfy/runtime":22}],43:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<div class=\"tools left btn-lock\" title=\"Download current Song\" onclick=\"musiqplus.downloadSong()\">\r\n  <div class=\"clickable mdi mdi-download\">\r\n\r\n  </div>\r\n</div>\r\n<div class=\"tools left btn-lock\" title=\"Real FULLSCREEN\" onclick=\"musiqplus.fullscreen()\">\r\n  <div class=\"clickable mdi mdi-fullscreen-exit\">\r\n\r\n  </div>\r\n</div>\r\n";
 },"useData":true});
 
-},{"hbsfy/runtime":22}],43:[function(require,module,exports){
+},{"hbsfy/runtime":22}],44:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"1":function(container,depth0,helpers,partials,data) {
@@ -11853,7 +11887,7 @@ module.exports = HandlebarsCompiler.template({"1":function(container,depth0,help
     + "</select>\r\n";
 },"useData":true});
 
-},{"hbsfy/runtime":22}],44:[function(require,module,exports){
+},{"hbsfy/runtime":22}],45:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"1":function(container,depth0,helpers,partials,data) {
@@ -11874,6 +11908,7 @@ module.exports = HandlebarsCompiler.template({"1":function(container,depth0,help
     + ((stack1 = (helpers.ifCond || (depth0 && depth0.ifCond) || alias4).call(alias3,(depth0 != null ? depth0.type : depth0),"==","dlibtn",{"name":"ifCond","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ((stack1 = (helpers.ifCond || (depth0 && depth0.ifCond) || alias4).call(alias3,(depth0 != null ? depth0.type : depth0),"==","textinput",{"name":"ifCond","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ((stack1 = (helpers.ifCond || (depth0 && depth0.ifCond) || alias4).call(alias3,(depth0 != null ? depth0.type : depth0),"==","autoafk",{"name":"ifCond","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = (helpers.ifCond || (depth0 && depth0.ifCond) || alias4).call(alias3,(depth0 != null ? depth0.type : depth0),"==","importPlaylist",{"name":"ifCond","hash":{},"fn":container.program(11, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "	          </div>\r\n	        </div>\r\n";
 },"3":function(container,depth0,helpers,partials,data) {
     var alias1=container.lambda, alias2=container.escapeExpression;
@@ -11889,15 +11924,17 @@ module.exports = HandlebarsCompiler.template({"1":function(container,depth0,help
     return "							<div class=\"ui input focus\">\r\n					      <input id=\"mqplusbg\" type=\"text\" placeholder=\"Image URL\">\r\n					    </div>\r\n";
 },"9":function(container,depth0,helpers,partials,data) {
     return "							<div class=\"ui input focus\">\r\n								<input id=\"mqplusafk\" type=\"text\" placeholder=\"Message\">\r\n								<input id=\"mqplusafktime\" type=\"number\" min=\"0\" max=\"60\">\r\n							</div>\r\n";
+},"11":function(container,depth0,helpers,partials,data) {
+    return "							<div style=\"display:-webkit-box\">\r\n								<div class=\"ui input focus\" style=\"padding-right:5px;\">\r\n									<input id=\"mqplusplaylist\" type=\"text\" placeholder=\"YouTube Playlist ID/Link\">\r\n								</div>\r\n								<div id=\"mqplusplaylistbtn\" class=\"ui download primary button\" onclick=\"musiqplus.importPlaylist();\">\r\n									Import\r\n								</div>\r\n							</div>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
   return "<div id=\"mqplussettings\">\r\n	<div id=\"mqplushead\">\r\n		<h1>Musiqplus</h1>\r\n		<h2 id=\"mqplusnav\">\r\n      <a class=\"mqplusactive\" href=\"#\">Settings</a>\r\n			<a href=\"#\">Changelog</a>\r\n      <a target=\"_blank\" href=\"https://music.explodingcamera.com/\">About</a>\r\n    </h2>\r\n    <span class=\"mqplusclose\" onclick=\"musiqplus.toggleSettings()\">×</span>\r\n	</div>\r\n	<div id=\"mqpluscontent\">\r\n		<div class=\"mqplusactive mqpluscontentpart\" id=\"mqpSettings\">\r\n"
     + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.setting : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    </div>\r\n		<div id=\"mqpChangelog\" class=\"mqpluscontentpart\">\r\n			<p><strong>Changelog</strong></p>\r\n				<ul>\r\n				<li><p><strong>18.01.2016</strong> AutoLike/Join are now fixed and don't spam the server anymore. Song download is implemented but I still need to fix some serverstuff beaucause chrome doesn't want me to use an iframe with a non-ssl site :( . I've also added some new Planned Features.</p></li>\r\n				<li><p><strong>19.01.2016</strong> Song download is now implemented and Custom Backgrounds added.</p></li>\r\n				<li><p><strong>20.01.2016</strong> Userscript extension loader added, bugs fixed and new Plug theme. I've also added DJ ETA.</p></li>\r\n				<li><p><strong>21.01.2016</strong> ETA fixed</p></li>\r\n				<li><p><strong>22.01.2016</strong> ETA fixed again + added AFK Autoresponse</p></li>\r\n				<li><p><strong>24.01.2016</strong> real Fullscreen Video option added (Button is next to the YT Download Button).</p></li>\r\n				</ul>\r\n		</div>\r\n		<div id=\"mqpAbout\" class=\"mqpluscontentpart\">\r\n\r\n		</div>\r\n	</div>\r\n	<div id=\"mqplusfooter\"></div>\r\n</div>\r\n";
+    + "    </div>\r\n		<div id=\"mqpChangelog\" class=\"mqpluscontentpart\">\r\n			<p><strong>Changelog</strong></p>\r\n				<ul>\r\n				<li><p><strong>18.01.2016</strong> AutoLike/Join are now fixed and don't spam the server anymore. Song download is implemented but I still need to fix some serverstuff beaucause chrome doesn't want me to use an iframe with a non-ssl site :( . I've also added some new Planned Features.</p></li>\r\n				<li><p><strong>19.01.2016</strong> Song download is now implemented and Custom Backgrounds added.</p></li>\r\n				<li><p><strong>20.01.2016</strong> Userscript extension loader added, bugs fixed and new Plug theme. I've also added DJ ETA.</p></li>\r\n				<li><p><strong>21.01.2016</strong> ETA fixed</p></li>\r\n				<li><p><strong>22.01.2016</strong> ETA fixed again + added AFK Autoresponse</p></li>\r\n				<li><p><strong>24.01.2016</strong> real Fullscreen Video option added (Button is next to the YT Download Button).</p></li>\r\n				<li><p><strong>04.02.2016</strong> You can now import Playlists and I added a way to load the NCS Theme bc the way I'm loading themes overides theirs. Clear Console is also back and I'm working on Notifications</p></li>\r\n				</ul>\r\n		</div>\r\n		<div id=\"mqpAbout\" class=\"mqpluscontentpart\">\r\n\r\n		</div>\r\n	</div>\r\n	<div id=\"mqplusfooter\"></div>\r\n</div>\r\n";
 },"useData":true});
 
-},{"hbsfy/runtime":22}]},{},[37])
+},{"hbsfy/runtime":22}]},{},[38])
 
 
 //# sourceMappingURL=app.js.map

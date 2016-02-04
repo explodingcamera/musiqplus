@@ -8,3 +8,4 @@ exports.customBG = require('./features/customBG');
 exports.validDomain = require('./features/validDomain');
 exports.djETA = require('./features/djETA');
 exports.afkResponse = require('./features/afkResponse');
+exports.importPlaylist = require('./features/importPlaylist')

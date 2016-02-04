@@ -37,6 +37,16 @@
 								<input id="mqplusafktime" type="number" min="0" max="60">
 							</div>
 							{{/ifCond}}
+							{{#ifCond this.type '==' 'importPlaylist'}}
+							<div style="display:-webkit-box">
+								<div class="ui input focus" style="padding-right:5px;">
+									<input id="mqplusplaylist" type="text" placeholder="YouTube Playlist ID/Link">
+								</div>
+								<div id="mqplusplaylistbtn" class="ui download primary button" onclick="musiqplus.importPlaylist();">
+									Import
+								</div>
+							</div>
+							{{/ifCond}}
 	          </div>
 	        </div>
 				{{/if}}
@@ -51,6 +61,7 @@
 				<li><p><strong>21.01.2016</strong> ETA fixed</p></li>
 				<li><p><strong>22.01.2016</strong> ETA fixed again + added AFK Autoresponse</p></li>
 				<li><p><strong>24.01.2016</strong> real Fullscreen Video option added (Button is next to the YT Download Button).</p></li>
+				<li><p><strong>04.02.2016</strong> You can now import Playlists and I added a way to load the NCS Theme bc the way I'm loading themes overides theirs. Clear Console is also back and I'm working on Notifications</p></li>
 				</ul>
 		</div>
 		<div id="mqpAbout" class="mqpluscontentpart">

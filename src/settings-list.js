@@ -40,13 +40,13 @@ module.exports = function (cb) {
     },
   });
   new Setting({
-    visibility: 'hidden',
+    visibility: 'visible',
     title: 'AutoClear Console',
     description: 'Disables Console',
     type: 'switch',
     defaultVal: false,
     function: function (val) {
-      //feature.clearConsole(val);
+      feature.clearConsole(val);
     },
   });
   new Setting({
@@ -68,6 +68,11 @@ module.exports = function (cb) {
       name: 'Plug', //ID 2
       url: 'https://cdn.explodingcamera.com/plug.theme.css',
       id: 2
+    },
+    {
+      name: 'NCS Theme by bentenz5', //ID 3
+      url: 'https://cdn.rawgit.com/bentenz5/NCS/master/NCSTheme.css',
+      id: 3
     }],
     defaultVal: 1, //Defaut Theme
     function: function (themeid) {
@@ -143,13 +148,13 @@ module.exports = function (cb) {
     },
   });
   new Setting({                                                                 //TODO---
-    visibility: 'hidden',
+    visibility: 'visible',
     title: 'Import Playlist',
-    description: 'Imports a playlist from YouTube.',
-    type: 'playlistid',
+    description: 'Imports a playlist from YouTube. You need to reload your Page to see the new Playlist in your Settings.',
+    type: 'importPlaylist',
     defaultVal: '',
     function: function (val) {
-      //feature.importPlaylist(val);
+      feature.importPlaylist();
     },
   });
   cb();
