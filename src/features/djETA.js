@@ -11,6 +11,10 @@ var func = function () {
   var seconds = Math.floor((waitTime - minutes) * 60);
   if(seconds < 10)
     seconds = '0' + seconds.toString();
+  if(minutes < 0 && seconsd < 0) {
+    minutes = 0;
+    seconds = 0;
+  }
   $('#mqpeta').remove();
   $('.dash .left').append('<div class="labels" id="mqpeta"><p class="label now" title="Parisyte - Meteor" data-ng-bind="currentSong">&nbsp;&nbsp; ETA: ' +
   minutes + ":" + seconds +
@@ -18,11 +22,12 @@ var func = function () {
 }
 module.exports = function (val) {
   if(val == true) {
+    clearInterval(interval);
     setInterval(func, 1000);
   }
   if(val == false) {
     if(api) {
-      clearInterval(interval)
+      clearInterval(interval);
       $('#mqpeta').remove();
     }
   }

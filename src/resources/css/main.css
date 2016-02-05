@@ -1,5 +1,6 @@
 @import url(./inputs.css);
 #mqplussettings {
+	font-family: 'open sans';
 	display: none;
 	margin: 0;
 	position: absolute;
@@ -15,6 +16,10 @@
 	-webkit-filter: drop-shadow(0px 3px 30px 1px);
 }
 
+#mqplussettings span {
+	width: 500px;
+	display: inline-block;
+}
 #mqplussettings #mqplushead {
 	background-color: #1C1C1F;
 	height: 60px;
@@ -65,6 +70,7 @@
 }
 
 .mqplusclose {
+  width: inherit !important;
 	font-size: 50px;
 	float: right;
 	right: 20px;
