@@ -165,9 +165,8 @@ module.exports = function (cb) {
     description: '',
     type: 'switch',
     defaultVal: 'false',
-    function: function (val) {
-      if(val == true)
-        require('./notify.js')();
+    function: function () {
+      require('./notify.js')();
     },
   });
   new Setting({
@@ -178,6 +177,15 @@ module.exports = function (cb) {
     defaultVal: 'false',
     function: function (val) {
       require('./notify/userIsNextDj.js')(val);
+    },
+  });
+  new Setting({
+    visibility: 'visible',
+    title: 'Custom Mention/Notification Sound',
+    description: "Only works with the Chrome Extensions because of UserScript restrictions! Just paste in a URL to a MP3!",
+    type: 'msound',
+    defaultVal: '',
+    function: function (val) {
     },
   })
   cb();

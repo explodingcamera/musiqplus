@@ -56,6 +56,23 @@ var gui = function () {
     }
   })
   $('#mqplusbg').val(musiqplus.current.ids[musiqplus.settingByTitle['CustomBackground'].id].val);
+
+  //Custom Mention Sound --------------------------------------
+  $('#mqplussound').change(function () {
+    console.debug(feature.validDomain($(this)[0].value));
+    if (feature.validDomain($(this)[0].value)) {
+      musiqplus.current.ids[musiqplus.settingByTitle['CustomMention/NotificationSound'].id].val = $(this)[0].value;
+      musiqplus.settings.save();
+      MPmentionSound.src = $(this)[0].value;
+    }
+    else {
+      MPmentionSound.src = "https://explodingcamera.xyz/plop.mp3";
+      musiqplus.current.ids[musiqplus.settingByTitle['CustomMention/NotificationSound'].id].val = $(this)[0].value;
+      musiqplus.settings.save();
+    }
+  })
+  $('#mqplussound').val(musiqplus.current.ids[musiqplus.settingByTitle['CustomMention/NotificationSound'].id].val);
+  // ------------------------------------------------------------
 }
 module.exports = gui;
 musiqplus.toggleSettings = function () {

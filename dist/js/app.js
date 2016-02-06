@@ -11195,7 +11195,7 @@ module.exports = function (val) {
   var timeout = setTimeout(function (){}, 0);
 
   var clearConsole = function () {
-    console.clear();
+    consoleBackup.clear();
     timeOut = setTimeout(clearConsole, 1000 * 60);
   }
   if(val == true) {
@@ -11369,7 +11369,7 @@ var func = function () {
 module.exports = function (val) {
   if(val == true) {
     clearInterval(interval);
-    setInterval(func, 1000);
+    setInterval(func, 900);
   }
   if(val == false) {
     if(api) {
@@ -11524,6 +11524,23 @@ var gui = function () {
     }
   })
   $('#mqplusbg').val(musiqplus.current.ids[musiqplus.settingByTitle['CustomBackground'].id].val);
+
+  //Custom Mention Sound --------------------------------------
+  $('#mqplussound').change(function () {
+    console.debug(feature.validDomain($(this)[0].value));
+    if (feature.validDomain($(this)[0].value)) {
+      musiqplus.current.ids[musiqplus.settingByTitle['CustomMention/NotificationSound'].id].val = $(this)[0].value;
+      musiqplus.settings.save();
+      MPmentionSound.src = $(this)[0].value;
+    }
+    else {
+      MPmentionSound.src = "https://explodingcamera.xyz/plop.mp3";
+      musiqplus.current.ids[musiqplus.settingByTitle['CustomMention/NotificationSound'].id].val = $(this)[0].value;
+      musiqplus.settings.save();
+    }
+  })
+  $('#mqplussound').val(musiqplus.current.ids[musiqplus.settingByTitle['CustomMention/NotificationSound'].id].val);
+  // ------------------------------------------------------------
 }
 module.exports = gui;
 musiqplus.toggleSettings = function () {
@@ -11549,7 +11566,7 @@ global.musiqplus = {
 };
 
 musiqplus.about = {
-	version: '0.7.2',
+	version: '0.8.2',
 }
 
 musiqplus.settings = new Settings();
@@ -11604,6 +11621,12 @@ musiqplus.main = function() {
 		tmp ++;
 	 }
 	var initialFuncs = function() {
+		if(typeof MPmentionSound != 'undefined') {
+		  global.Audio = global.AudioBackup;
+		}
+		else {
+		  global.MPmentionSound = new Audio('https://explodingcamera.xyz/plop.mp3');
+		}
 		feature.loadFonts(([ 'Lobster::latin', 'Open+Sans:400,300,700,800,600:latin' ]));
 		initHelpers();
 		musiqplus.settings.init();
@@ -11611,6 +11634,7 @@ musiqplus.main = function() {
 		API.chat.system('Sucessfully loaded Musiqplus v' + musiqplus.about.version + "!");
 		API.chat.system('Welcome ' + musiqplus.User.un + "!");
 		chat();
+		MPmentionSound.src = musiqplus.current.ids[musiqplus.settingByTitle['CustomMention/NotificationSound'].id].val;
 		setTimeout(function () {
 			if(API.room.getInfo().name == 'Tastycat')
 				$('head').append("<style>[data-uid='101']{-webkit-animation: pulse 6s infinite alternate;}</style>");
@@ -11627,9 +11651,6 @@ musiqplus.main();
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
 },{"./chat":24,"./features":25,"./gui":37,"./resources/css/main.css":41,"./settings":43,"hbsfy/runtime":22,"jquery":23}],39:[function(require,module,exports){
-// just temporary, you'll be able to change it later ;D
-var audio = new Audio('https://explodingcamera.xyz/plop.mp3');
-
 module.exports = function () {
   checkForPermission();
   musiqplus.notify = function (body, title) {
@@ -11639,7 +11660,7 @@ module.exports = function () {
           icon: 'https://explodingcamera.xyz/128.png'
       }
       var n = new Notification(title, options);
-      audio.play();
+      MPmentionSound.play();
       setTimeout(n.close.bind(n), 15000);
     }
   }
@@ -11847,9 +11868,8 @@ module.exports = function (cb) {
     description: '',
     type: 'switch',
     defaultVal: 'false',
-    function: function (val) {
-      if(val == true)
-        require('./notify.js')();
+    function: function () {
+      require('./notify.js')();
     },
   });
   new Setting({
@@ -11860,6 +11880,15 @@ module.exports = function (cb) {
     defaultVal: 'false',
     function: function (val) {
       require('./notify/userIsNextDj.js')(val);
+    },
+  });
+  new Setting({
+    visibility: 'visible',
+    title: 'Custom Mention/Notification Sound',
+    description: "Only works with the Chrome Extensions because of UserScript restrictions! Just paste in a URL to a MP3!",
+    type: 'msound',
+    defaultVal: '',
+    function: function (val) {
     },
   })
   cb();
@@ -11984,8 +12013,9 @@ module.exports = HandlebarsCompiler.template({"1":function(container,depth0,help
     + ((stack1 = (helpers.ifCond || (depth0 && depth0.ifCond) || alias4).call(alias3,(depth0 != null ? depth0.type : depth0),"==","switch",{"name":"ifCond","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ((stack1 = (helpers.ifCond || (depth0 && depth0.ifCond) || alias4).call(alias3,(depth0 != null ? depth0.type : depth0),"==","dlibtn",{"name":"ifCond","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ((stack1 = (helpers.ifCond || (depth0 && depth0.ifCond) || alias4).call(alias3,(depth0 != null ? depth0.type : depth0),"==","textinput",{"name":"ifCond","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = (helpers.ifCond || (depth0 && depth0.ifCond) || alias4).call(alias3,(depth0 != null ? depth0.type : depth0),"==","autoafk",{"name":"ifCond","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = (helpers.ifCond || (depth0 && depth0.ifCond) || alias4).call(alias3,(depth0 != null ? depth0.type : depth0),"==","importPlaylist",{"name":"ifCond","hash":{},"fn":container.program(11, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = (helpers.ifCond || (depth0 && depth0.ifCond) || alias4).call(alias3,(depth0 != null ? depth0.type : depth0),"==","msound",{"name":"ifCond","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = (helpers.ifCond || (depth0 && depth0.ifCond) || alias4).call(alias3,(depth0 != null ? depth0.type : depth0),"==","autoafk",{"name":"ifCond","hash":{},"fn":container.program(11, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = (helpers.ifCond || (depth0 && depth0.ifCond) || alias4).call(alias3,(depth0 != null ? depth0.type : depth0),"==","importPlaylist",{"name":"ifCond","hash":{},"fn":container.program(13, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "	          </div>\r\n	        </div>\r\n";
 },"3":function(container,depth0,helpers,partials,data) {
     var alias1=container.lambda, alias2=container.escapeExpression;
@@ -12000,14 +12030,16 @@ module.exports = HandlebarsCompiler.template({"1":function(container,depth0,help
 },"7":function(container,depth0,helpers,partials,data) {
     return "							<div class=\"ui input focus\">\r\n					      <input id=\"mqplusbg\" type=\"text\" placeholder=\"Image URL\">\r\n					    </div>\r\n";
 },"9":function(container,depth0,helpers,partials,data) {
-    return "							<div class=\"ui input focus\">\r\n								<input id=\"mqplusafk\" type=\"text\" placeholder=\"Message\">\r\n								<input id=\"mqplusafktime\" type=\"number\" min=\"0\" max=\"60\">\r\n							</div>\r\n";
+    return "							<div class=\"ui input focus\">\r\n								<input id=\"mqplussound\" type=\"text\" placeholder=\"Sound URL\">\r\n							</div>\r\n";
 },"11":function(container,depth0,helpers,partials,data) {
-    return "							<div style=\"display:-webkit-box\">\r\n								<div class=\"ui input focus\" style=\"padding-right:5px;\">\r\n									<input id=\"mqplusplaylist\" type=\"text\" placeholder=\"YouTube Playlist ID/Link\">\r\n								</div>\r\n								<div id=\"mqplusplaylistbtn\" class=\"ui download primary button\" onclick=\"musiqplus.importPlaylist();\">\r\n									Import\r\n								</div>\r\n							</div>\r\n";
+    return "							<div class=\"ui input focus\">\r\n								<input id=\"mqplusafk\" type=\"text\" placeholder=\"Message\">\r\n								<input id=\"mqplusafktime\" type=\"number\" min=\"0\" max=\"60\">\r\n							</div>\r\n";
 },"13":function(container,depth0,helpers,partials,data) {
+    return "							<div style=\"display:-webkit-box\">\r\n								<div class=\"ui input focus\" style=\"padding-right:5px;\">\r\n									<input id=\"mqplusplaylist\" type=\"text\" placeholder=\"YouTube Playlist ID/Link\">\r\n								</div>\r\n								<div id=\"mqplusplaylistbtn\" class=\"ui download primary button\" onclick=\"musiqplus.importPlaylist();\">\r\n									Import\r\n								</div>\r\n							</div>\r\n";
+},"15":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return ((stack1 = helpers["if"].call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.isNotify : depth0),{"name":"if","hash":{},"fn":container.program(14, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
-},"14":function(container,depth0,helpers,partials,data) {
+  return ((stack1 = helpers["if"].call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.isNotify : depth0),{"name":"if","hash":{},"fn":container.program(16, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+},"16":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression;
 
   return "	        <div class=\"mqpsetting notification-mqp"
@@ -12025,7 +12057,7 @@ module.exports = HandlebarsCompiler.template({"1":function(container,depth0,help
   return "<div id=\"mqplussettings\">\r\n	<div id=\"mqplushead\">\r\n		<h1>Musiqplus</h1>\r\n		<h2 id=\"mqplusnav\">\r\n      <a class=\"mqplusactive\" href=\"#\">Settings</a>\r\n			<a href=\"#\">Changelog</a>\r\n      <a href=\"#\">Notification</a>\r\n    </h2>\r\n    <span class=\"mqplusclose\" onclick=\"musiqplus.toggleSettings()\">×</span>\r\n	</div>\r\n	<div id=\"mqpluscontent\">\r\n		<div class=\"mqplusactive mqpluscontentpart\" id=\"mqpSettings\">\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.setting : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "    </div>\r\n		<div id=\"mqpChangelog\" class=\"mqpluscontentpart\">\r\n			<p><strong>Changelog</strong></p>\r\n				<ul>\r\n				<li><p><strong>18.01.2016</strong> AutoLike/Join are now fixed and don't spam the server anymore. Song download is implemented but I still need to fix some serverstuff beaucause chrome doesn't want me to use an iframe with a non-ssl site :( . I've also added some new Planned Features.</p></li>\r\n				<li><p><strong>19.01.2016</strong> Song download is now implemented and Custom Backgrounds added.</p></li>\r\n				<li><p><strong>20.01.2016</strong> Userscript extension loader added, bugs fixed and new Plug theme. I've also added DJ ETA.</p></li>\r\n				<li><p><strong>21.01.2016</strong> ETA fixed</p></li>\r\n				<li><p><strong>22.01.2016</strong> ETA fixed again + added AFK Autoresponse</p></li>\r\n				<li><p><strong>24.01.2016</strong> real Fullscreen Video option added (Button is next to the YT Download Button).</p></li>\r\n				<li><p><strong>04.02.2016</strong> You can now import Playlists and I added a way to load the NCS Theme bc the way I'm loading themes overides theirs. Clear Console is also back and I'm working on Notifications</p></li>\r\n				<li><p><strong>06.02.2016</strong> Bugfixes + foundations for Notifications + User is next DJ Notification!</p></li>\r\n				</ul>\r\n		</div>\r\n		<div id=\"mqpNotification\" class=\"mqpluscontentpart\">\r\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.setting : depth0),{"name":"each","hash":{},"fn":container.program(13, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.setting : depth0),{"name":"each","hash":{},"fn":container.program(15, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "		</div>\r\n	</div>\r\n	<div id=\"mqplusfooter\"></div>\r\n</div>\r\n";
 },"useData":true});
 

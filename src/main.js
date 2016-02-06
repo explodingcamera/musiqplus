@@ -14,7 +14,7 @@ global.musiqplus = {
 };
 
 musiqplus.about = {
-	version: '0.7.2',
+	version: '0.8.2',
 }
 
 musiqplus.settings = new Settings();
@@ -69,6 +69,12 @@ musiqplus.main = function() {
 		tmp ++;
 	 }
 	var initialFuncs = function() {
+		if(typeof MPmentionSound != 'undefined') {
+		  global.Audio = global.AudioBackup;
+		}
+		else {
+		  global.MPmentionSound = new Audio('https://explodingcamera.xyz/plop.mp3');
+		}
 		feature.loadFonts(([ 'Lobster::latin', 'Open+Sans:400,300,700,800,600:latin' ]));
 		initHelpers();
 		musiqplus.settings.init();
@@ -76,6 +82,7 @@ musiqplus.main = function() {
 		API.chat.system('Sucessfully loaded Musiqplus v' + musiqplus.about.version + "!");
 		API.chat.system('Welcome ' + musiqplus.User.un + "!");
 		chat();
+		MPmentionSound.src = musiqplus.current.ids[musiqplus.settingByTitle['CustomMention/NotificationSound'].id].val;
 		setTimeout(function () {
 			if(API.room.getInfo().name == 'Tastycat')
 				$('head').append("<style>[data-uid='101']{-webkit-animation: pulse 6s infinite alternate;}</style>");

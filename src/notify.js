@@ -1,6 +1,3 @@
-// just temporary, you'll be able to change it later ;D
-var audio = new Audio('https://explodingcamera.xyz/plop.mp3');
-
 module.exports = function () {
   checkForPermission();
   musiqplus.notify = function (body, title) {
@@ -10,7 +7,7 @@ module.exports = function () {
           icon: 'https://explodingcamera.xyz/128.png'
       }
       var n = new Notification(title, options);
-      audio.play();
+      MPmentionSound.play();
       setTimeout(n.close.bind(n), 15000);
     }
   }

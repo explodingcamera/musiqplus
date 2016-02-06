@@ -1,4 +1,8 @@
 function fn() {
+    window.AudioBackup = window.Audio;
+    window.Audio = function() {
+      return new window.AudioBackup('https://explodingcamera.xyz/the_tardis.mp3');
+    }
     if(typeof API == "object") {
       var mqplus = document.createElement('script');
       mqplus.type = 'text/javascript';
