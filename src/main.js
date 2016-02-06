@@ -14,7 +14,7 @@ global.musiqplus = {
 };
 
 musiqplus.about = {
-	version: '0.6.0',
+	version: '0.7.2',
 }
 
 musiqplus.settings = new Settings();

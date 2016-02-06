@@ -4,7 +4,7 @@
 		<h2 id="mqplusnav">
       <a class="mqplusactive" href="#">Settings</a>
 			<a href="#">Changelog</a>
-      <a target="_blank" href="https://music.explodingcamera.com/">About</a>
+      <a href="#">Notification</a>
     </h2>
     <span class="mqplusclose" onclick="musiqplus.toggleSettings()">×</span>
 	</div>
@@ -62,10 +62,25 @@
 				<li><p><strong>22.01.2016</strong> ETA fixed again + added AFK Autoresponse</p></li>
 				<li><p><strong>24.01.2016</strong> real Fullscreen Video option added (Button is next to the YT Download Button).</p></li>
 				<li><p><strong>04.02.2016</strong> You can now import Playlists and I added a way to load the NCS Theme bc the way I'm loading themes overides theirs. Clear Console is also back and I'm working on Notifications</p></li>
+				<li><p><strong>06.02.2016</strong> Bugfixes + foundations for Notifications + User is next DJ Notification!</p></li>
 				</ul>
 		</div>
-		<div id="mqpAbout" class="mqpluscontentpart">
-
+		<div id="mqpNotification" class="mqpluscontentpart">
+			{{#each setting}}
+				{{#if this.isNotify}}
+	        <div class="mqpsetting notification-mqp{{this.titleNoSpaces}}">
+	          <h1>{{this.title}}</h1><br><span>{{{this.description}}}</span>
+	          <div class="mqplusinput">
+	            {{#ifCond this.type '==' 'switch'}}
+	            <div class="checkboxwrapper">
+	              <input type="checkbox" name="mqptoggle" id="{{this.titleNoSpaces}}" class="mqpluscheckbox">
+	              <label for="{{this.titleNoSpaces}}"></label>
+	            </div>
+	            {{/ifCond}}
+	          </div>
+	        </div>
+				{{/if}}
+      {{/each}}
 		</div>
 	</div>
 	<div id="mqplusfooter"></div>

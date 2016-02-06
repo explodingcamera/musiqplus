@@ -11,7 +11,7 @@ var func = function () {
   var seconds = Math.floor((waitTime - minutes) * 60);
   if(seconds < 10)
     seconds = '0' + seconds.toString();
-  if(minutes < 0 && seconsd < 0) {
+  if(minutes < 0 && seconds < 0) {
     minutes = 0;
     seconds = 0;
   }

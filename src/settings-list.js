@@ -17,6 +17,8 @@ module.exports = function (cb) {
     this.defaultVal = data.defaultVal;
     if(data.visibility == 'visible')
       this.visible = true;
+    if(data.visibility == 'notify')
+      this.isNotify = true;
     musiqplus.settingsN += 1;
   }
   new Setting({
@@ -56,22 +58,22 @@ module.exports = function (cb) {
     type: 'select',
     options: [{
       name: 'MusiqPlus', //ID 0
-      url: 'https://cdn.explodingcamera.com/mqplus.theme.css',
+      url: 'https://explodingcamera.xyz/mqplus.theme.css',
       id: 0
     },
     {
       name: 'Classic', //ID 1
-      url: 'https://cdn.explodingcamera.com/classic.theme.css',
+      url: 'https://explodingcamera.xyz/classic.theme.css',
       id: 1
     },
     {
       name: 'Plug', //ID 2
-      url: 'https://cdn.explodingcamera.com/plug.theme.css',
+      url: 'https://explodingcamera.xyz/plug.theme.css',
       id: 2
     },
     {
       name: 'NCS Theme by bentenz5', //ID 3
-      url: 'https://cdn.rawgit.com/bentenz5/NCS/master/NCSTheme.css',
+      url: 'https://rawgit.com/bentenz5/NCS/master/NCSTheme.css',
       id: 3
     }],
     defaultVal: 1, //Defaut Theme
@@ -147,7 +149,7 @@ module.exports = function (cb) {
       }, 1200);
     },
   });
-  new Setting({                                                                 //TODO---
+  new Setting({
     visibility: 'visible',
     title: 'Import Playlist',
     description: 'Imports a playlist from YouTube. You need to reload your Page to see the new Playlist in your Settings.',
@@ -157,5 +159,26 @@ module.exports = function (cb) {
       feature.importPlaylist();
     },
   });
+  new Setting({
+    visibility: 'visible',
+    title: 'Enable Notifications',
+    description: '',
+    type: 'switch',
+    defaultVal: 'false',
+    function: function (val) {
+      if(val == true)
+        require('./notify.js')();
+    },
+  });
+  new Setting({
+    visibility: 'notify',
+    title: '1st in the queue',
+    description: "Get a notification if you're the 1st in the queue!",
+    type: 'switch',
+    defaultVal: 'false',
+    function: function (val) {
+      require('./notify/userIsNextDj.js')(val);
+    },
+  })
   cb();
 }
