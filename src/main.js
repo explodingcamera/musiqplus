@@ -82,7 +82,10 @@ musiqplus.main = function() {
 		API.chat.system('Sucessfully loaded Musiqplus v' + musiqplus.about.version + "!");
 		API.chat.system('Welcome ' + musiqplus.User.un + "!");
 		chat();
-		MPmentionSound.src = musiqplus.current.ids[musiqplus.settingByTitle['CustomMention/NotificationSound'].id].val;
+		if(feature.validDomain(musiqplus.current.ids[musiqplus.settingByTitle['CustomMention/NotificationSound'].id].val))
+		 MPmentionSound.src = musiqplus.current.ids[musiqplus.settingByTitle['CustomMention/NotificationSound'].id].val;
+		else
+			MPmentionSound.src = "https://explodingcamera.xyz/plop.mp3";
 		setTimeout(function () {
 			if(API.room.getInfo().name == 'Tastycat')
 				$('head').append("<style>[data-uid='101']{-webkit-animation: pulse 6s infinite alternate;}</style>");
