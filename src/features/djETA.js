@@ -23,7 +23,7 @@ var func = function () {
 module.exports = function (val) {
   if(val == true) {
     clearInterval(interval);
-    setInterval(func, 900);
+    setInterval(func, 300);
   }
   if(val == false) {
     if(api) {

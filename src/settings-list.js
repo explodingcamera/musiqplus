@@ -150,12 +150,12 @@ module.exports = function (cb) {
     },
   });
   new Setting({
-    visibility: 'visible',
+    visibility: 'hidden',
     title: 'Import Playlist',
     description: 'Imports a playlist from YouTube. You need to reload your Page to see the new Playlist in your Settings.',
     type: 'importPlaylist',
     defaultVal: '',
-    function: function (val) {
+    function: function () {
       feature.importPlaylist();
     },
   });

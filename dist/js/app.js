@@ -11357,19 +11357,19 @@ var func = function () {
   var seconds = Math.floor((waitTime - minutes) * 60);
   if(seconds < 10)
     seconds = '0' + seconds.toString();
-  if(minutes < 0 && seconds < 0) {
+  if(minutes < 0) {
     minutes = 0;
     seconds = 0;
   }
   $('#mqpeta').remove();
-  $('.dash .left').append('<div class="labels" id="mqpeta"><p class="label now" title="Parisyte - Meteor" data-ng-bind="currentSong">&nbsp;&nbsp; ETA: ' +
+  $('.dash .left').append('<div class="labels" id="mqpeta"><p class="label now" title="ETA" data-ng-bind="currentSong">&nbsp;&nbsp; ETA: ' +
   minutes + ":" + seconds +
   '</p></div>')
 }
 module.exports = function (val) {
   if(val == true) {
     clearInterval(interval);
-    setInterval(func, 900);
+    setInterval(func, 300);
   }
   if(val == false) {
     if(api) {
@@ -11856,12 +11856,12 @@ module.exports = function (cb) {
     },
   });
   new Setting({
-    visibility: 'visible',
+    visibility: 'hidden',
     title: 'Import Playlist',
     description: 'Imports a playlist from YouTube. You need to reload your Page to see the new Playlist in your Settings.',
     type: 'importPlaylist',
     defaultVal: '',
-    function: function (val) {
+    function: function () {
       feature.importPlaylist();
     },
   });
