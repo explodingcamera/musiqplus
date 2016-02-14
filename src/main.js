@@ -3,6 +3,7 @@ var $ = require('jquery');
 var feature = require("./features");
 var chat = require('./chat');
 var Handlebars = require("hbsfy/runtime");
+var config = require('../package.json');
 require('./resources/css/main.css');
 
 global.musiqplus = {
@@ -14,7 +15,7 @@ global.musiqplus = {
 };
 
 musiqplus.about = {
-	version: '0.9.3',
+	version: config.version,
 }
 
 musiqplus.settings = new Settings();

@@ -1,14 +1,10 @@
 function fn() {
-    window.AudioBackup = window.Audio;
-    window.Audio = function() {
-      return new window.AudioBackup('https://explodingcamera.xyz/the_tardis.mp3');
-    }
     if(typeof API == "object") {
-      var mqplus = document.createElement('script');
-      mqplus.type = 'text/javascript';
-      mqplus.id = 'musiqplus-loader';
-      mqplus.src = "https://explodingcamera.xyz/app.js";
-      document.head.appendChild(mqplus);
+      $.getJSON( "https://explodingcamera.xyz/musiqplus/version.json", function( data ) {
+        if(typeof data.version != 'undefined') {
+          $.getScript('https://cdn.explodingcamera.com/musiqplus/app-'+data.version+'.js');
+        }
+      });
     }
 }
 var script = document.createElement('script')

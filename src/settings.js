@@ -124,3 +124,4 @@ Settings.prototype.upgrade = function() {
 	musiqplus.settings.save();
 	musiqplus.settings.load(data);
 }
+*/

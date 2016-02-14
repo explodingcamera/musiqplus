@@ -11,7 +11,11 @@
 // ==/UserScript==
 function fn() {
   if(typeof API != "undefined" && typeof API.DATA == "object")
-    $.getScript('https://cdn.explodingcamera.com/app.js');
+  $.getJSON( "https://explodingcamera.xyz/musiqplus/version.json", function( data ) {
+    if(typeof data.version != 'undefined') {
+      $.getScript('https://cdn.explodingcamera.com/musiqplus/app-'+data.version+'.js');
+    }
+  });
 }
 (function () {
     var scriptElement = document.createElement( "script" );
