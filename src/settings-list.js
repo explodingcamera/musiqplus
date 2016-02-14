@@ -187,6 +187,16 @@ module.exports = function (cb) {
     defaultVal: '',
     function: function (val) {
     },
-  })
+  });
+  new Setting({
+    visibility: 'notify',
+    title: 'Someone mentions you',
+    description: "Get a notification if someone mentions you in chat!",
+    type: 'switch',
+    defaultVal: 'false',
+    function: function (val) {
+      require('./notify/mention.js')(val);
+    },
+  });
   cb();
 }
