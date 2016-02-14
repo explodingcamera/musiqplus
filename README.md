@@ -2,10 +2,7 @@
 [![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)
 [![forthebadge](http://forthebadge.com/images/badges/compatibility-club-penguin.svg)](http://forthebadge.com)
 [![forthebadge](http://forthebadge.com/images/badges/uses-badges.svg)](http://forthebadge.com)
-# Musiqplus
-Some nice new Stuff for Musiqpad!
 
-![](https://i.imgur.com/gwNvOXH.png)
 [DOWNLOAD](https://chrome.google.com/webstore/detail/cdllelmnnfgcnkfmbcnnginopojgkoih) the Chrome Extension!
 
 You can get it in the [Chrome Webstore](https://chrome.google.com/webstore/detail/musiqplus/cdllelmnnfgcnkfmbcnnginopojgkoih) and as [Userscript](http://cdn.explodingcamera.com/mqplus.user.js
