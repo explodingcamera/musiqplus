@@ -4,7 +4,6 @@ module.exports = function (val) {
   var like = function () {
     if(!$('.btn-upvote').hasClass('active'))
     $('.btn-upvote').click()
-    console.log(1);
   }
   if(val == true) {
     setTimeout(like, 1000);
