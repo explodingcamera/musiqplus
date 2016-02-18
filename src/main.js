@@ -89,9 +89,9 @@ musiqplus.main = function() {
 			MPmentionSound.src = "https://explodingcamera.xyz/plop.mp3";
 		setTimeout(function () {
 			if(API.room.getInfo().name == 'Tastycat')
-				$('head').append("<style>[data-uid='101']{-webkit-animation: pulse 6s infinite alternate;}</style>");
+				$('head').append("<style>[data-uid='101']{color: green}</style>");
 			else if(API.room.getInfo().name == "Welcome to musiqpad!")
-				$('head').append("<style>[data-uid='63']{-webkit-animation: pulse 6s infinite alternate;}</style>");
+				$('head').append("<style>[data-uid='63']{color: green}</style>");
 		}, 2000)
 	}
 	$(function() {
