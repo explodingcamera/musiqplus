@@ -1,5 +1,5 @@
 function fn() {
-  if (typeof document.body.dataset.ngApp != 'undefined' && document.body.dataset.ngApp == 'MusiqPad') {
+  if (typeof API === 'object' && typeof API.DATA !== 'undefined') {
     window.AudioBackup = window.Audio;
     window.Audio = function () {
       window.MPmentionSound = new window.AudioBackup('https://explodingcamera.xyz/plop.mp3');

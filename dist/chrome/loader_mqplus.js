@@ -1,13 +1,14 @@
 function fn() {
-    if(typeof API == "object") {
-      $.getJSON( "https://explodingcamera.xyz/musiqplus/version.json", function( data ) {
-        if(typeof data.version != 'undefined') {
-          $.getScript('https://cdn.explodingcamera.com/musiqplus/app-'+data.version+'.js');
+  if (typeof API === 'object' && typeof API.DATA !== 'undefined') {
+    $.getJSON('https://explodingcamera.xyz/musiqplus/version.json', function (data) {
+        if (typeof data.version != 'undefined') {
+          $.getScript('https://cdn.explodingcamera.com/musiqplus/app-' + data.version + '.js');
         }
       });
-    }
+  }
 }
-var script = document.createElement('script')
+
+var script = document.createElement('script');
 script[script.innerText ? 'innerText' : 'textContent'] = '(' + fn + ')()';
 (document.head || document.documentElement).appendChild(script);
 script.parentNode.removeChild(script);
