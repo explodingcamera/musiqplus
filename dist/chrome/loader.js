@@ -1,5 +1,5 @@
 function fn() {
-    if(typeof API == "object") {
+    if(typeof document.body.dataset.ngApp != "undefined" && document.body.dataset.ngApp == "MusiqPad") {
       var mqplus = document.createElement('script');
       mqplus.type = 'text/javascript';
       mqplus.id = 'musiqplus-loader';
