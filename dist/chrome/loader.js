@@ -1,13 +1,15 @@
 function fn() {
-    if(typeof document.body.dataset.ngApp != "undefined" && document.body.dataset.ngApp == "MusiqPad") {
-      var mqplus = document.createElement('script');
-      mqplus.type = 'text/javascript';
-      mqplus.id = 'musiqplus-loader';
-      mqplus.src = "https://explodingcamera.xyz/app.js";
-      document.head.appendChild(mqplus);
-    }
+  if (typeof document.body.dataset.ngApp != 'undefined' &&
+   document.body.dataset.ngApp == 'MusiqPad') {
+    var mqplus = document.createElement('script');
+    mqplus.type = 'text/javascript';
+    mqplus.id = 'musiqplus-loader';
+    mqplus.src = 'https://explodingcamera.xyz/app.js';
+    document.head.appendChild(mqplus);
+  }
 }
-var script = document.createElement('script')
+
+var script = document.createElement('script');
 script[script.innerText ? 'innerText' : 'textContent'] = '(' + fn + ')()';
 (document.head || document.documentElement).appendChild(script);
 script.parentNode.removeChild(script);

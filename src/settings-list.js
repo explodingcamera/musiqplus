@@ -15,12 +15,13 @@ module.exports = function (cb) {
     musiqplus.settingById[this.id] = this;
     this.func = data.function;
     this.defaultVal = data.defaultVal;
-    if(data.visibility == 'visible')
+    if (data.visibility == 'visible')
       this.visible = true;
-    if(data.visibility == 'notify')
+    if (data.visibility == 'notify')
       this.isNotify = true;
     musiqplus.settingsN += 1;
-  }
+  };
+
   new Setting({
     visibility: 'visible',
     title: 'AutoLike',
@@ -38,7 +39,7 @@ module.exports = function (cb) {
     type: 'switch',
     defaultVal: false,
     function: function (val) {
-      feature.AutoJoin(val)
+      feature.AutoJoin(val);
     },
   });
   new Setting({
@@ -59,26 +60,27 @@ module.exports = function (cb) {
     options: [{
       name: 'MusiqPlus', //ID 0
       url: 'https://explodingcamera.xyz/mqplus.theme.css',
-      id: 0
+      id: 0,
     },
     {
       name: 'Classic', //ID 1
       url: 'https://explodingcamera.xyz/classic.theme.css',
-      id: 1
+      id: 1,
     },
     {
       name: 'Plug', //ID 2
       url: 'https://explodingcamera.xyz/plug.theme.css',
-      id: 2
+      id: 2,
     },
     {
       name: 'NCS Theme by bentenz5', //ID 3
       url: 'https://rawgit.com/bentenz5/NCS/master/NCSTheme.css',
-      id: 3
-    }],
+      id: 3,
+    },
+    ],
     defaultVal: 1, //Defaut Theme
     function: function (themeid) {
-       feature.changeTheme(themeid);
+      feature.changeTheme(themeid);
     },
   });
   new Setting({
@@ -127,8 +129,8 @@ module.exports = function (cb) {
           console.log(1);
           musiqplus.current.ids[musiqplus.settingByTitle['AFKAutoresponse'].id].val = $(this)[0].value;
           musiqplus.settings.save();
-        })
-      }, 1200)
+        });
+      }, 1200);
     },
   });
   new Setting({
@@ -140,12 +142,12 @@ module.exports = function (cb) {
     function: function (val) {
       setTimeout(function () {
         $('#mqplusafktime').val(val);
-        musiqplus.tmp.afk = val * 1000 * 60
+        musiqplus.tmp.afk = val * 1000 * 60;
         $('#mqplusafktime').change(function () {
           musiqplus.current.ids[musiqplus.settingByTitle['mqplusafktime'].id].val = $(this)[0].value;
           musiqplus.settings.save();
           musiqplus.tmp.afk = $(this)[0].value * 1000 * 60;
-        })
+        });
       }, 1200);
     },
   });
@@ -182,7 +184,7 @@ module.exports = function (cb) {
   new Setting({
     visibility: 'visible',
     title: 'Custom Mention/Notification Sound',
-    description: "Only works with the Chrome Extensions because of UserScript restrictions! Just paste in a URL to a MP3!",
+    description: 'Only works with the Chrome Extensions because of UserScript restrictions! Just paste in a URL to a MP3!',
     type: 'msound',
     defaultVal: '',
     function: function (val) {
@@ -191,7 +193,7 @@ module.exports = function (cb) {
   new Setting({
     visibility: 'notify',
     title: 'Someone mentions you',
-    description: "Get a notification if someone mentions you in chat!",
+    description: 'Get a notification if someone mentions you in chat!',
     type: 'switch',
     defaultVal: 'false',
     function: function (val) {
@@ -199,4 +201,4 @@ module.exports = function (cb) {
     },
   });
   cb();
-}
+};

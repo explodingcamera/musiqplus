@@ -1,10 +1,10 @@
 function fn() {
-  if(typeof document.body.dataset.ngApp != "undefined" && document.body.dataset.ngApp == "MusiqPad") {
+  if (typeof document.body.dataset.ngApp != 'undefined' && document.body.dataset.ngApp == 'MusiqPad') {
     window.AudioBackup = window.Audio;
-    window.Audio = function() {
+    window.Audio = function () {
       window.MPmentionSound = new window.AudioBackup('https://explodingcamera.xyz/plop.mp3');
       return window.MPmentionSound;
-    }
+    };
     /*window.WebSocketBackup = window.WebSocket;
     var sockets = 0;
     var i = 0;
@@ -16,7 +16,8 @@ function fn() {
     }*/
   }
 }
-var script = document.createElement('script')
+
+var script = document.createElement('script');
 script[script.innerText ? 'innerText' : 'textContent'] = '(' + fn + ')()';
 (document.head || document.documentElement).appendChild(script);
 script.parentNode.removeChild(script);

@@ -10,17 +10,18 @@
 // @copyright  (C) 2016 Henry Gressmann
 // ==/UserScript==
 function fn() {
-  if(typeof API != "undefined" && typeof API.DATA == "object")
-  $.getJSON( "https://explodingcamera.xyz/musiqplus/version.json", function( data ) {
-    if(typeof data.version != 'undefined') {
-      $.getScript('https://cdn.explodingcamera.com/musiqplus/app-'+data.version+'.js');
+  if (typeof API != 'undefined' && typeof API.DATA == 'object')
+  $.getJSON('https://explodingcamera.xyz/musiqplus/version.json', function (data) {
+    if (typeof data.version != 'undefined') {
+      $.getScript('https://cdn.explodingcamera.com/musiqplus/app-' + data.version + '.js');
     }
   });
 }
+
 (function () {
-    var scriptElement = document.createElement( "script" );
-    scriptElement.type = "text/javascript";
-    scriptElement[scriptElement.innerText ? 'innerText' : 'textContent'] = '(' + fn + ')()';
-    document.body.appendChild( scriptElement );
-    scriptElement.parentNode.removeChild(scriptElement);
+  var scriptElement = document.createElement('script');
+  scriptElement.type = 'text/javascript';
+  scriptElement[scriptElement.innerText ? 'innerText' : 'textContent'] = '(' + fn + ')()';
+  document.body.appendChild(scriptElement);
+  scriptElement.parentNode.removeChild(scriptElement);
 })();

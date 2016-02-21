@@ -31,6 +31,7 @@ musiqplus.fullscreen = function () {
 	  el.webkitRequestFullScreen();
 	}
 }
+
 musiqplus.main = function() {
 	var initHelpers = function () {
 		// Helper by http://stackoverflow.com/a/16315366/4811589
