@@ -78,7 +78,7 @@ module.exports = function (cb) {
       id: 3,
     },
     ],
-    defaultVal: 1, //Defaut Theme
+    defaultVal: 0, //Defaut Theme
     function: function (themeid) {
       feature.changeTheme(themeid);
     },
