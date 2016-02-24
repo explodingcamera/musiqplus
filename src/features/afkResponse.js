@@ -7,7 +7,7 @@ var func = function () {
   API.on('chat', function (e) {
     if (e.message.indexOf(musiqplus.User.un) != -1 && musiqplus.isAfk == true && musiqplus.tmp.afk != 0) {
       var user = API.room.getUser(e.uid).un;
-      if (user != musiqplus.User.un)
+      if (user != musiqplus.User.un && musiqplus.current.ids[musiqplus.settingByTitle['AFKAutoresponse'].id].val != '')
         API.chat.send('@' + user + ' ' + musiqplus.current.ids[musiqplus.settingByTitle['AFKAutoresponse'].id].val);
     }
   });
