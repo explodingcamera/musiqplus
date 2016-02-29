@@ -60,7 +60,7 @@ You can get it in the [Chrome Webstore](https://chrome.google.com/webstore/detai
 Please use this repository's Github [issues](https://github.com/explodingcamera/musiqplus/issues) to report a bug report, feature request or enhancement.
 
 ### Developer(s)
-* [Henry 'HenryMaxxx/Explodingcamera' Gressmann](https://github.com/henr-y)
+* [Henr-y / explodingcamera](https://github.com/henr-y)
 
 ### Translations
 
