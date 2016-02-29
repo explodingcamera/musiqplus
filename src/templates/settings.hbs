@@ -2,9 +2,9 @@
 	<div id="mqplushead">
 		<h1>Musiqplus</h1>
 		<h2 id="mqplusnav">
-      <a class="mqplusactive" href="#">Settings</a>
-			<a href="#">Changelog</a>
-      <a href="#">Notification</a>
+      <a class="mqplusactive" data="mqpSettings" href="#">{{l10n 'titles.settings'}}</a>
+			<a href="#" data="mqpChangelog" >{{l10n 'titles.changelog'}}</a>
+      <a href="#" data="mqpNotification" >{{l10n 'titles.notifications'}}</a>
     </h2>
     <span class="mqplusclose" onclick="musiqplus.toggleSettings()">×</span>
 	</div>
@@ -13,7 +13,7 @@
       {{#each setting}}
 				{{#if this.visible}}
 	        <div class="mqpsetting option-mqp{{this.titleNoSpaces}}">
-	          <h1>{{this.title}}</h1><br><span>{{{this.description}}}</span>
+	          <h1>{{this.title}}</h1><br><span>{{l10n this.description}}</span>
 	          <div class="mqplusinput">
 	            {{#ifCond this.type '==' 'switch'}}
 	            <div class="checkboxwrapper">
@@ -58,7 +58,7 @@
       {{/each}}
     </div>
 		<div id="mqpChangelog" class="mqpluscontentpart">
-			<p><strong>Changelog</strong></p>
+			<p><strong>{{l10n 'titles.changelog'}}</strong></p>
 				<ul>
 				<li><p><strong>14.02.2016</strong> mention notification added.</p></li>
 				<li><p><strong>06.02.2016</strong> Bugfixes + foundations for Notifications + User is next DJ Notification!</p></li>
@@ -75,7 +75,7 @@
 			{{#each setting}}
 				{{#if this.isNotify}}
 	        <div class="mqpsetting notification-mqp{{this.titleNoSpaces}}">
-	          <h1>{{this.title}}</h1><br><span>{{{this.description}}}</span>
+	          <h1>{{this.title}}</h1><br><span>{{l10n this.description}}</span>
 	          <div class="mqplusinput">
 	            {{#ifCond this.type '==' 'switch'}}
 	            <div class="checkboxwrapper">

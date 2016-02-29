@@ -9,16 +9,21 @@ module.exports = function (cb) {
     this.title = data.title;
     this.id = musiqplus.settingsN;
     this.type = data.type;
-    this.description = data.description;
     this.titleNoSpaces = this.title.replace(/\s+/g, '');
     musiqplus.settingByTitle[this.title.replace(/\s+/g, '')] = this;
     musiqplus.settingById[this.id] = this;
     this.func = data.function;
     this.defaultVal = data.defaultVal;
-    if (data.visibility == 'visible')
+    this.description = 'settings.description.' + this.titleNoSpaces;
+    if (data.visibility == 'visible') {
       this.visible = true;
-    if (data.visibility == 'notify')
+    };
+
+    if (data.visibility == 'notify') {
       this.isNotify = true;
+      this.description = 'notifications.description.' + this.titleNoSpaces;
+    };
+
     musiqplus.settingsN += 1;
   };
 
@@ -195,6 +200,16 @@ module.exports = function (cb) {
     defaultVal: 'false',
     function: function (val) {
       require('./notify/mention.js')(val);
+    },
+  });
+  new Setting({
+    visibility: 'notify',
+    title: 'Next Song',
+    description: 'Get a notification everytime a new Song starts!',
+    type: 'switch',
+    defaultVal: 'false',
+    function: function (val) {
+      require('./notify/newSong.js')(val);
     },
   });
   cb();

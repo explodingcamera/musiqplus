@@ -1,0 +1,58 @@
+{
+  "de": {
+    "titles": {
+      "settings": "Optionen",
+      "notifications": "Benachrichtigungen",
+      "changelog": "Changelog",
+    },
+    "settings": {
+      "description": {
+        "AutoLike": "Like automatisch jedes Lied!",
+        "AutoJoin": "Trete automatisch der Warteschlange bei!",
+        "AutoClearConsole": "Deaktiviere die Konsole",
+        "ChangeTheme": "Ändere das Aussehen von MusiqPad",
+        "DownloadSong": "Download current song as MP3. You can also use the Download Button on the player.",
+        "CustomBackground": "Change the Background! Leave clear to use default of theme.",
+        "DJETA": "Estimated wait time, updates after every song.",
+        "AFKAutoresponse": "Automaticaly respond to messages after you were afk for x amount of Time.",
+        "EnableNotifications": " ",
+        "CustomMention/NotificationSound": "Only works with the Chrome Extensions because of UserScript restrictions! Just paste in a URL to a MP3!"
+      }
+    },
+    "notifications": {
+      "description": {
+        "1stinthequeue": "Get a notification if you're the 1st in the queue!",
+        "Someonementionsyou": "Get a notification if someone mentions you in chat!",
+        "NextSong": "Get a notification everytime a new Song starts!"
+      }
+    }
+  },
+  "en": {
+    "titles": {
+      "settings": "Settings",
+      "notifications": "Notifications",
+      "changelog": "Changelog",
+    },
+    "settings": {
+      "description": {
+        "AutoLike": "Automatically like every Song!",
+        "AutoJoin": "Automatically join the waitlist!",
+        "AutoClearConsole": "Disables Console",
+        "ChangeTheme": "Change the looks of MusiqPad",
+        "DownloadSong": "Download current song as MP3. You can also use the Download Button on the player.",
+        "CustomBackground": "Change the Background! Leave clear to use default of theme.",
+        "DJETA": "Estimated wait time, updates after every song.",
+        "AFKAutoresponse": "Automaticaly respond to messages after you were afk for x amount of Time.",
+        "EnableNotifications": " ",
+        "CustomMention/NotificationSound": "Only works with the Chrome Extensions because of UserScript restrictions! Just paste in a URL to a MP3!"
+      }
+    },
+    "notifications": {
+      "description": {
+        "1stinthequeue": "Get a notification if you're the 1st in the queue!",
+        "Someonementionsyou": "Get a notification if someone mentions you in chat!",
+        "NextSong": "Get a notification everytime a new Song starts!"
+      }
+    }
+  }
+}

@@ -1,9 +1,9 @@
-var settings = require('./settings');
-var $ = require('jquery');
-var feature = require('./features');
-var chat = require('./chat');
-var Handlebars = require('hbsfy/runtime');
-var config = require('../package.json');
+const settings = require('./settings');
+const $ = require('jquery');
+const feature = require('./features');
+const chat = require('./chat');
+const Handlebars = require('hbsfy/runtime');
+const config = require('../package.json');
 require('./resources/css/main.css');
 
 global.musiqplus = {
@@ -12,6 +12,7 @@ global.musiqplus = {
     autojoin: 0,
   },
   isAfk: false,
+  locale: require('./lang.json'),
 };
 
 musiqplus.about = {
@@ -55,6 +56,33 @@ musiqplus.main = function () {
         default:
           return options.inverse(this);
       }
+    });
+
+    global.targetTest = [];
+    Handlebars.registerHelper('l10n', function (keyword) {
+      var lang = (navigator.language) ? navigator.language : navigator.userLanguage;
+      lang.split('_');
+      if (lang.length > 2)
+        lang = lang[0];
+      var locale = window.musiqplus.locale[lang] || window.musiqplus.locale.en || window.musiqplus.locale || false;
+      if (!locale) return target;
+      var target = locale;
+      var key = keyword.split('.');
+      for (var i in key) {
+        target = target[key[i]];
+      }
+
+      if (!target) {
+        var target = window.musiqplus.locale.en;
+        var key = keyword.split('.');
+        for (var i in key) {
+          target = target[key[i]];
+        }
+      }
+
+      console.log(target);
+      target = target || keyword;
+      return target;
     });
   };
 

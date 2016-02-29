@@ -20,7 +20,7 @@ var gui = function () {
       $('#mqpluscontent .mqplusactive').fadeOut(300);
       $('.mqplusactive').delay(600).toggleClass('mqplusactive');
       $(this).delay(300).toggleClass('mqplusactive');
-      $('#mqp' + $(this).html()).toggleClass('mqplusactive').delay(300).fadeIn();
+      $('#' + $(this).attr('data')).toggleClass('mqplusactive').delay(300).fadeIn();
     }
   });
 
