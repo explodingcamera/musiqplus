@@ -3,7 +3,7 @@ var id;
 module.exports = function (val) {
   var like = function () {
     if (!$('.btn-upvote').hasClass('active'))
-    $('.btn-upvote').click();
+      $('.btn-upvote').click();
   };
 
   if (val == true) {
@@ -11,7 +11,7 @@ module.exports = function (val) {
     if (musiqplus.tmp.autolike == 0) {
       id = API.on('advance', function (x) {
         if (!$('.btn-upvote').hasClass('active'))
-        $('.btn-upvote').click();
+          $('.btn-upvote').click();
       });
 
       musiqplus.tmp.autolike = 1;

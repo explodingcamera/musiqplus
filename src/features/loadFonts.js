@@ -1,6 +1,8 @@
 module.exports = function (fonts) {
   WebFontConfig = {
-    google: { families: fonts },
+    google: {
+      families: fonts,
+    },
   };
   (function () {
     var wf = document.createElement('script');

@@ -57,26 +57,24 @@ module.exports = function (cb) {
     title: 'Change Theme',
     description: 'Change the looks of MusiqPad',
     type: 'select',
-    options: [{
-      name: 'MusiqPlus', //ID 0
-      url: 'https://explodingcamera.xyz/mqplus.theme.css',
-      id: 0,
-    },
-    {
-      name: 'Classic', //ID 1
-      url: 'https://explodingcamera.xyz/classic.theme.css',
-      id: 1,
-    },
-    {
-      name: 'Plug', //ID 2
-      url: 'https://explodingcamera.xyz/plug.theme.css',
-      id: 2,
-    },
-    {
-      name: 'NCS Theme by bentenz5', //ID 3
-      url: 'https://rawgit.com/bentenz5/NCS/master/NCSTheme.css',
-      id: 3,
-    },
+    options: [
+      {
+        name: 'MusiqPlus', //ID 0
+        url: 'https://explodingcamera.xyz/mqplus.theme.css',
+        id: 0,
+      }, {
+        name: 'Classic', //ID 1
+        url: 'https://explodingcamera.xyz/classic.theme.css',
+        id: 1,
+      }, {
+        name: 'Plug', //ID 2
+        url: 'https://explodingcamera.xyz/plug.theme.css',
+        id: 2,
+      }, {
+        name: 'NCS Theme by bentenz5', //ID 3
+        url: 'https://rawgit.com/bentenz5/NCS/master/NCSTheme.css',
+        id: 3,
+      },
     ],
     defaultVal: 0, //Defaut Theme
     function: function (themeid) {
@@ -187,8 +185,7 @@ module.exports = function (cb) {
     description: 'Only works with the Chrome Extensions because of UserScript restrictions! Just paste in a URL to a MP3!',
     type: 'msound',
     defaultVal: '',
-    function: function (val) {
-    },
+    function: function (val) {},
   });
   new Setting({
     visibility: 'notify',
