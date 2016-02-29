@@ -1,6 +1,6 @@
 ![musiqpad](https://i.imgur.com/fkiOUOM.png)
 
-[![codestyle](https://img.shields.io/badge/code%20style-airbnb-orange.svg)]() [![Maintenance](https://img.shields.io/maintenance/yes/2016.svg)]() [![Twitter Follow](https://img.shields.io/twitter/follow/shields_io.svg?style=social)](https://twitter.com/ExplodingCamera)
+![codestyle](https://img.shields.io/badge/code%20style-airbnb-orange.svg) ![Maintenance](https://img.shields.io/maintenance/yes/2016.svg) [![Twitter Follow](https://img.shields.io/twitter/follow/shields_io.svg?style=social)](https://twitter.com/ExplodingCamera)
 
 [DOWNLOAD](https://chrome.google.com/webstore/detail/cdllelmnnfgcnkfmbcnnginopojgkoih) the Chrome Extension!
 
