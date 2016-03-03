@@ -1,5 +1,5 @@
 function fn() {
-  if (typeof API === 'object' && typeof API.DATA !== 'undefined') {
+  if (typeof API === 'object' && typeof API.DATA !== 'undefined' && typeof PadPlus == 'undefined') {
     window.AudioBackup = window.Audio;
     window.Audio = function () {
       window.MPmentionSound = new window.AudioBackup('https://explodingcamera.xyz/plop.mp3');

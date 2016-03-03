@@ -131,4 +131,5 @@ musiqplus.main = function () {
   });
 };
 
+API.chat.system('Theres currently a bug on MusiqPad that makes it impossible to unsubscribe from events, so please reload your page if you change Settings.');
 musiqplus.main();
