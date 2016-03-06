@@ -1,5 +1,5 @@
 function fn() {
-  if (typeof API === 'object' && typeof API.DATA !== 'undefined' && typeof PadPlus == 'undefined') {
+  if (typeof API === 'object' && typeof API.DATA !== 'undefined' && typeof musiqplus == 'undefined') {
     $.getJSON('https://explodingcamera.xyz/musiqplus/version.json', function (data) {
         if (typeof data.version != 'undefined') {
           $.getScript('https://cdn.explodingcamera.com/musiqplus/app-' + data.version + '.js');
