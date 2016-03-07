@@ -90,7 +90,7 @@ musiqplus.main = function () {
   var getUser = function () {
     if (API.room.isLoggedIn() == true) {
       musiqplus.User = API.room.getUser();
-      initialFuncs();
+      setTimeout(initialFuncs, 1000);
       return;
     }
 
@@ -128,5 +128,4 @@ musiqplus.main = function () {
   });
 };
 
-API.chat.system('Theres currently a bug on MusiqPad that makes it impossible to unsubscribe from events, so please reload your page if you change Settings.');
 musiqplus.main();
