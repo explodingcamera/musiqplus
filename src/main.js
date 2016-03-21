@@ -86,18 +86,14 @@ musiqplus.main = function () {
     });
   };
 
-  var tmp = 0;
   var getUser = function () {
     if (API.room.isLoggedIn() == true) {
       musiqplus.User = API.room.getUser();
-      setTimeout(initialFuncs, 1000);
+      API.chat.system('Welcome ' + musiqplus.User.un + '!');
       return;
+    } else {
+      setTimeout(getUser, 200);
     }
-
-    setTimeout(getUser, 1200);
-    if (tmp == 2)
-      API.chat.system('You need to login to use MusiqPlus!');
-    tmp++;
   };
 
   var initialFuncs = function () {
@@ -112,7 +108,7 @@ musiqplus.main = function () {
     musiqplus.settings.init();
     require('./gui')();
     API.chat.system('Sucessfully loaded Musiqplus v' + musiqplus.about.version + '!');
-    API.chat.system('Welcome ' + musiqplus.User.un + '!');
+    API.chat.system('If your community needs a Pad, I can host it for free and/or code custom stuff for a small fee. Discord: #5289');
     chat();
     if (feature.validDomain(musiqplus.current.ids[musiqplus.settingByTitle['CustomMention/NotificationSound'].id].val))
       MPmentionSound.src = musiqplus.current.ids[musiqplus.settingByTitle['CustomMention/NotificationSound'].id].val;
@@ -125,6 +121,7 @@ musiqplus.main = function () {
 
   $(function () {
     getUser();
+    initialFuncs();
   });
 };
 
