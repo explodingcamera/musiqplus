@@ -67,7 +67,6 @@
       z-index: 10;
       right: 0;
       background: rgba(10, 10, 10, 0.78);
-      width: 400px;
       height: calc(100% - 41px);
       bottom: 0;
 }
