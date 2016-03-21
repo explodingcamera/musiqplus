@@ -108,11 +108,11 @@
     width: 40px;
     height: 100%;
     background: rgba(28, 28, 31, 0);
-    border-right: 1px solid #0a0a0a;
+    border-right: none;
 }
 
 #room-bg {
-  background-image: url('https://explodingcamera.xyz/mqpbg.jpg') !important;
+  background-image: url('https://explodingcamera.xyz/background2.jpg') !important;
 }
 
 .left .lable {
@@ -129,3 +129,32 @@
 .btn-upvote.active {
   color: black;
 }
+.lib-sng-search, .lib-history-search, .lib-fdr-search {
+	border: none !important;
+}
+.modal-controls, .settings .btn, .set-check, .set-text, .set-text-longer {
+   border: none !important;
+ }
+ .popover {
+     -webkit-box-shadow: 0 0 50px 9px #000000;
+     box-shadow: 0 0 50px 9px #000000;
+     margin-left: 2px;
+     border: none !important;
+     color: #FDFFFE;
+     background: #1C1C1F;
+     border-radius: 0;
+     border: 1px solid #444A59;
+     padding: 0;
+     min-width: 300px;
+ }
+ .lib-fdr-search {
+     border: none !important;
+     width: calc(100% - 30px);
+     height: 40px;
+     margin: 10px 10px 0;
+     border: 1px solid #444A59;
+     cursor: pointer;
+     vertical-align: middle;
+     line-height: 40px;
+     background: #222326;
+ }
