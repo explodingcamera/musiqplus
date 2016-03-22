@@ -192,3 +192,13 @@
      line-height: 40px;
      background: #222326;
  }
+ .user-menu {
+   -webkit-box-shadow: 0 0 50px 9px #000000;
+   box-shadow: 0 0 50px 9px #000000;
+     margin-top: 3px;
+     border: none !important;
+     position: absolute;
+     z-index: 100;
+     background: #070707;
+     border: 1px solid #444A59;
+ }
