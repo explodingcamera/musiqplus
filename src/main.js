@@ -1,3 +1,5 @@
+// I'll probably redo most of this code someday...
+
 const settings = require('./settings');
 const $ = require('jquery');
 const feature = require('./features');
@@ -114,15 +116,11 @@ musiqplus.main = function () {
       MPmentionSound.src = musiqplus.current.ids[musiqplus.settingByTitle['CustomMention/NotificationSound'].id].val;
     else
       MPmentionSound.src = 'https://explodingcamera.xyz/plop.mp3';
-    setTimeout(function () {
-      $('head').append("<style>[data-uid='7'],[data-uid='10']{-webkit-animation: pulse 6s infinite alternate;}</style>");
-    }, 2000);
+    $('head').append("<style>[data-uid='7'],[data-uid='10']{-webkit-animation: pulse 6s infinite alternate;}</style>");
   };
 
-  $(function () {
-    getUser();
-    initialFuncs();
-  });
+  getUser();
+  initialFuncs();
 };
 
 musiqplus.main();
