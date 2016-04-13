@@ -95,8 +95,6 @@
     z-index: 16;
     top: 40px;
     left: 0;
-    width: calc(100% - 400px);
-    height: calc(100% - 40px);
     display: none;
     background: rgba(10,10,10,0.9);
 }
