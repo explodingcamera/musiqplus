@@ -1,7 +1,4 @@
 @import url(./inputs.css);
-/*CHANGES: Fix for  going off the screen on 1366x768 screens with browser maximized. This HAS NOT been tested on larger screens.
-On #mqplussettings top has been set to 400px instead of 50% and height has been set to 80% instead of 700px.
-This fixes the popup menu from going above the screen on 1366x768 screens. It should work on larger screens, but I cannot test that.*/
 #mqplussettings {
 	font-family: 'open sans';
 	display: none;
@@ -9,14 +6,14 @@ This fixes the popup menu from going above the screen on 1366x768 screens. It sh
 	position: absolute;
 	top: 400px;
 	left: 50%;
-	margin-top: -350px;
+	margin-top: -270px;
 	margin-left: -475px;
 	color: #fff;
 	width: 950px;
-	height: 80%;
+	height: 70%;
 	z-index: 100;
 	background-color: rgba(0,0,2,0.96);
-	-webkit-filter: drop-shadow(0px 3px 30px 1px);
+  -webkit-filter: drop-shadow(3px 2px 30px);
 }
 
 #mqplussettings span {
@@ -31,11 +28,7 @@ This fixes the popup menu from going above the screen on 1366x768 screens. It sh
 
 #mqplussettings #mqpluscontent {
 	overflow: auto;
-	height: calc(100% - 80px);
-}
-
-#mqplussettings #mqplusfooter {
-	height: 20px;
+	height: calc(100% - 60px);
 }
 
 #mqplussettings h1 {

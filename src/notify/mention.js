@@ -1,10 +1,13 @@
 var api;
 module.exports = function (val) {
   if (val == true) {
-    api = API.on('advance', function (data) {
-      musiqplus.notify('Last Song: ' + data.last.song.title + '\n Next Song: ' + data.next.song.title, 'Musiqplus');
+    api = API.on('chat', function (e) {
+      if (e.message.indexOf(musiqplus.User.un) != -1) {
+        var user = API.room.getUser(e.uid).un;
+        musiqplus.notify(e.message, '@' + user + ' mentioned you:');
+      }
     });
   } else {
-    API.off('advance', api);
+    API.off('chat', api);
   }
 };

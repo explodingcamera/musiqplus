@@ -1,6 +1,6 @@
 module.exports = function () {
-  checkForPermission();
   musiqplus.notify = function (body, title) {
+    musiqplus.checkForPermission();
     if (checkForPermission() == true) {
       var options = {
         body: body,
@@ -13,7 +13,7 @@ module.exports = function () {
   };
 };
 
-var checkForPermission = function () {
+musiqplus.checkForPermission = function () {
   if (!('Notification' in window))
     alert('This browser does not support system notifications');
   else if (Notification.permission === 'granted')

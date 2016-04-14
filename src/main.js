@@ -3,7 +3,6 @@
 const settings = require('./settings');
 const $ = require('jquery');
 const feature = require('./features');
-const chat = require('./chat');
 const Handlebars = require('hbsfy/runtime');
 const config = require('../package.json');
 require('./resources/css/main.css');
@@ -109,12 +108,10 @@ musiqplus.main = function () {
     require('./gui')();
     API.chat.system('Sucessfully loaded Musiqplus v' + musiqplus.about.version + '!');
     API.chat.system('If your community needs a Pad, I can host it for free and/or code custom stuff for a small fee. Discord: mail@explodingcamera.com');
-    chat();
     if (feature.validDomain(musiqplus.current.ids[musiqplus.settingByTitle['CustomMention/NotificationSound'].id].val))
       MPmentionSound.src = musiqplus.current.ids[musiqplus.settingByTitle['CustomMention/NotificationSound'].id].val;
     else
       MPmentionSound.src = 'https://explodingcamera.xyz/plop.mp3';
-    $('head').append("<style>[data-uid='7'],[data-uid='10']{-webkit-animation: pulse 6s infinite alternate;}</style>");
   };
 
   getUser();
