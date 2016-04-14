@@ -81,8 +81,6 @@ musiqplus.main = function () {
           target = target[key[i]];
         }
       }
-
-      console.log(target);
       target = target || keyword;
       return target;
     });
