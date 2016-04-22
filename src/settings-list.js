@@ -165,7 +165,7 @@ module.exports = function (cb) {
     },
   });
   new Setting({
-    visibility: 'visible',
+    visibility: 'hidden',
     title: 'Enable Notifications',
     description: '',
     type: 'switch',

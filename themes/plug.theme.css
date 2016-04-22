@@ -4,6 +4,11 @@
 * {
   font-family: 'Open Sans', sans-serif;
 }
+.tab.btn-mentions {
+    flex: 1 !important;
+    -webkit-flex: 1 !important;
+    -ms-flex: 1 !important;
+}
 .ctr {
     background-color: black;
 }
@@ -18,18 +23,6 @@
 }
 
 .playback {
-  position: absolute;
-  margin: 0 auto;
-  width: 854px;
-  height: 480px;
-  z-index: 9;
-  top: 50%;
-  left: 50%;
-  margin-top: calc(-921px/ 2);
-  margin-left: calc(-854px/ 2);
-  background-repeat: no-repeat;
-  background-size: 50%;
-  background-position: center;
   background-color: rgba(255, 0, 0, 0);;
   border: none;
 }
