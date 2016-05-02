@@ -10,7 +10,7 @@ Bookmark: javascript:($.getScript('<https://explodingcamera.xyz/musiqplus/bm.js>
 
 --------------------------------------------------------------------------------
 
-DISCLAIMER: I do not plan to add any features in the future, only Bugfixes. If anyone is interested in working on this Project, contact me.
+DISCLAIMER: I do not plan to add any features in the future, only Bugfixes. If anyone is interested in working on this Project, contact me. (Might add the settings to the musiqpad settings some day though)
 
 **Current Features** (14.04.16)
 
