@@ -1,0 +1,37 @@
+{
+    "manifest_version": 2,
+    "author": "explodingcamera",
+    "name": "MusiqPlus",
+    "short_name": "musiq+",
+    "description": "Enhance you MUSIQPLUS experience!",
+    "homepage_url": "https://explodingcamera.com",
+    "version": "5.0.0",
+
+    "icons": {
+        "32": "32.png",
+        "64": "64.png",
+        "128": "128.png"
+    },
+
+    "content_scripts": [{
+        "matches": ["<all_urls>"],
+        "js": ["loader_notify.js"],
+        "exclude_matches": ["http://localhost:3000/",  "https://localhost/"],
+        "run_at": "document_start"
+    },
+    {
+        "matches": ["<all_urls>"],
+        "js": ["loader_mqplus.js"],
+        "exclude_matches": ["http://localhost:3000/",  "https://localhost/"]
+    }],
+
+    "permissions": [
+        "<all_urls>",
+        "webRequest",
+        "webRequestBlocking"
+    ],
+    "background": {
+      "scripts": ["background.js"],
+      "persistent": true
+    }
+}

@@ -1,0 +1,8 @@
+/*TODO: Add important vanilla CSS to overide pad theme*/
+@media screen {
+  .tab.btn-mentions {
+      flex: 1 !important;
+      -webkit-flex: 1 !important;
+      -ms-flex: 1 !important;
+  }
+}

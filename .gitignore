@@ -1,0 +1,7 @@
+node_modules
+todo.md
+npm-debug.log
+chrome.pem
+app_beta.js
+dist/js
+index.html
