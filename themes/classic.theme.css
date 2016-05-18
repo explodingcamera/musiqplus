@@ -1,8 +1,0 @@
-/*TODO: Add all vanilla CSS*/
-@media screen {
-  .tab.btn-mentions {
-      flex: 1 !important;
-      -webkit-flex: 1 !important;
-      -ms-flex: 1 !important;
-  }
-}
