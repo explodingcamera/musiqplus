@@ -16,7 +16,7 @@ WIP 3.x.x:
 
 - Soon!
 
-## Features
+## Planned Features
 
 - AFK Autoresponder
 - DJ ETA
@@ -28,6 +28,8 @@ WIP 3.x.x:
 - Hide Video (Sound only)
 - Custom notification sound (Chrome only)
 - Cross-pad settings (musiqpad + musiqplus settings) (Chrome only, maybe Userscripts in the future)
+- See who liked/disliked a video
+- create your own color themes
 
 # Issues / Feature Requests
 
