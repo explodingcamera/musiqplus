@@ -30,6 +30,7 @@ WIP 3.x.x:
 - Cross-pad settings (musiqpad + musiqplus settings) (Chrome only, maybe Userscripts in the future)
 - See who liked/disliked a video
 - create your own color themes
+- XP System
 
 # Issues / Feature Requests
 
