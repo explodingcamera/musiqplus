@@ -12,7 +12,12 @@
     "browserify-shim": "^3.8.12",
     "stringify": "^5.1.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-eslint": "^6.0.4",
+    "eslint": "^2.11.1",
+    "eslint-config-airbnb-base": "^3.0.1",
+    "eslint-plugin-import": "^1.8.1"
+  },
   "scripts": {
     "start": "browserify ./app/main.js -d -p [minifyify --map bundle.js.map --output ./dist/js/musiqplus.js.map] > ./dist/js/musiqplus.min.js"
   },
@@ -27,11 +32,20 @@
   "homepage": "https://github.com/explodingcamera/musiqplus#readme",
   "browserify-shim": {
     "jquery": "global:$",
-    "api": "global:API"
+    "api": "global:API",
+    "xdlocalstorage": "./bower_components/xdLocalStorage/dist/scripts/xdLocalStorage.min"
   },
   "browserify": {
     "transform": [
-      ["babelify", { "presets": ["es2015", "stage-1"] }],
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015",
+            "stage-1"
+          ]
+        }
+      ],
       "browserify-shim",
       "stringify"
     ]

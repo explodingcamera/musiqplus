@@ -5,3 +5,4 @@ chrome.pem
 app_beta.js
 dist/js
 index.html
+bower_components

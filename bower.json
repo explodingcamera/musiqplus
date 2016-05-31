@@ -1,0 +1,21 @@
+{
+  "name": "musiqplus",
+  "description": "![musiqpad](https://i.imgur.com/fkiOUOM.png)",
+  "main": "./app/main.js",
+  "authors": [
+    "Henry Gressmann"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/explodingcamera/musiqplus",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "xdLocalStorage": "^2.0.1"
+  }
+}
