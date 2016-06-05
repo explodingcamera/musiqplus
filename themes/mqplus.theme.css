@@ -84,11 +84,6 @@
   border: none;
 }
 .logo-menu {
-    position: absolute;
-    z-index: 16;
-    top: 40px;
-    left: 0;
-    display: none;
     background: rgba(10,10,10,0.9);
 }
 
