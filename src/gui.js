@@ -84,5 +84,4 @@ var gui = function () {
 module.exports = gui;
 musiqplus.toggleSettings = function () {
   $('#mqplussettings').slideToggle();
-  $('.logo-menu').fadeOut();
 };
