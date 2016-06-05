@@ -3,6 +3,7 @@
 ## About
 
 MusiqPlus is an extension that adds a lot of usefull features to musiqpad. Its is currently being rewritten, to check the code of the current version, switch to the 2.0.x branch.
+Until the new version is finished, I'll continue to provide bugfix updates for 2.0.x
 
 ## Downloads
 
